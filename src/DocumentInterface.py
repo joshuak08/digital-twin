@@ -11,19 +11,20 @@ to the collection of Elements from all categories)
 
 This will generate a DocumentInterface for you with all the relevant information from the document, including:
 - A dictionary of element type names to lists of ElementInterfaces
-- ElementInterface s that contain the useful information from an element (including a dictionary of parameters)
-- ParamterInterfaces provide easy access to a certain parameter of a certain element
+- ElementInterface-s that contain the useful information from an element (including a dictionary of parameters)
+- ParameterInterface-s provide easy access to a certain parameter of a certain element
 
 Each interface has some basic getting commands at the moment, but can be expanded as needed.
 Each Interface stores it's underlying Revit object for the sake of direct document access for modifying the
 document or making another query.
 """
 
+
 class DocumentInterface:
     elementDict = {}
     underlyingDocument = None
 
-    def __init__(self, collector, categories, document):
+    def __init__(self, document, collector, categories):
         self.underlyingDocument = document
 
         newcollector = collector.WhereElementIsNotElementType()
