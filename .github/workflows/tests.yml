@@ -36,7 +36,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run Tests
         run: |
-          python -m unittest /src/DocumnetInterfaceTest.DocumentInterfaceTests
+          cd /src
+          python -m unittest DocumentInterfaceTest.DocumentInterfaceTests
           
         
 
