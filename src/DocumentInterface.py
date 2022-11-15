@@ -1,4 +1,4 @@
-import Autodesk.Revit.DB as DB
+#import Autodesk.Revit.DB as DB
 
 """
 Set of classes for interfacing with a Revit document
@@ -21,13 +21,12 @@ document or making another query.
 
 
 class DocumentInterface:
-    elementDict = {}
-    underlyingDocument = None
 
     def __init__(self, document, collector, categories):
         self.underlyingDocument = document
-
+        self.elementDict = {}
         newcollector = collector.WhereElementIsNotElementType()
+
         elements = None
         if len(categories) != 0:
             for i in categories:
@@ -35,7 +34,8 @@ class DocumentInterface:
                     elements = newcollector.OfCategory(i)
                 else:
                     elements = elements.UnionWith(newcollector.OfCategory(i))
-
+        else:
+            elements = newcollector
         for i in elements:
             if i.Name in self.elementDict:
                 self.elementDict[i.Name].append(ElementInterface(i))
@@ -50,15 +50,12 @@ class DocumentInterface:
 
 
 class ElementInterface:
-    name = ""
-    elementID = None
-    underlyingElement = None
-    parameters = {}
 
     def __init__(self, element):
         self.name = element.Name
         self.elementID = element.Id
         self.underlyingElement = element
+        self.parameters = {}
         for i in element.Parameters:
             if i.HasValue:
                 self.parameters[i.Definition.Name] = ParameterInterface(i)
@@ -74,10 +71,6 @@ class ElementInterface:
 
 
 class ParameterInterface:
-    name = ""
-    underlyingParameter = None
-    stringValue = None
-    numericalValue = 0.0
 
     def __init__(self, parameter):
         self.name = parameter.Definition.Name

@@ -3,26 +3,26 @@ import DocumentInterface
 
 
 class TestDocument:
-    elementList = []
 
     def __init__(self, elements):
+        self.elementList = []
         for i in elements:
             self.elementList.append(i)
 
 
 class TestCollector:
-    filteredElements = []
-
     def __init__(self, elements):
+        self.filteredElements = []
         for i in elements:
             self.filteredElements.append(i)
+    def __iter__(self):
+        return TestCollectorIterator(self)
 
     def WhereElementIsNotElementType(self):
         newElements = []
         for i in self.filteredElements:
             if not i.isElementType:
                 newElements.append(i)
-
         return TestCollector(newElements)
 
     def OfCategory(self, category):
@@ -35,33 +35,45 @@ class TestCollector:
 
     def UnionWith(self, collector):
         newElements = []
-        newElements.extend(self.filteredElements)
-        newElements.extend(collector.filteredElements)
+        for i in self.filteredElements:
+            if i not in newElements:
+                newElements.append(i)
+        for i in collector.filteredElements:
+            if i not in newElements:
+                newElements.append(i)
+
         return TestCollector(newElements)
+
+class TestCollectorIterator:
+    def __init__(self, collector):
+        self.collector = collector
+        self.index = 0
+
+    def next(self):
+        if self.index < len(self.collector.filteredElements):
+            result = self.collector.filteredElements[self.index]
+            self.index += 1
+            return result
+        raise StopIteration
 
 
 class TestElement:
-    isElementType = None
-    category = None
-    Id = None
-    Parameters = []
 
-    def __init__(self, iselementtype, category, elementid, parameters):
+    def __init__(self, iselementtype, category, elementid, parameters, name):
         self.isElementType = iselementtype
         self.category = category
         self.Id = elementid
         self.Parameters = parameters
+        self.Name = name
 
 
 class TestParameter:
-    Definition = None
-    stringVal = None
-    doubleVal = None
 
     def __init__(self, name, string, double):
         self.Definition = TestDefinition(name)
         self.stringVal = string
         self.doubleVal = double
+        self.HasValue = True
 
     def AsValueString(self):
         return self.stringVal
@@ -71,18 +83,17 @@ class TestParameter:
 
 
 class TestDefinition:
-    Name = None
 
     def __init__(self, name):
         self.Name = name
 
 
 def element_type_element(elementId):
-    return TestElement(True, "Generic", elementId, [])
+    return TestElement(True, "Generic", elementId, [], "Generic")
 
 
 def element_of_category(category, elementId):
-    return TestElement(False, category, elementId, [])
+    return TestElement(False, category, elementId, [], category)
 
 
 def generic_3_cat_document(cat1, cat2, cat3):
@@ -128,12 +139,12 @@ class DocumentInterfaceTests(unittest.TestCase):
         self.assertEqual(len(interface.elementDict), 3)
 
     def test_has_parameter(self):
-        element = TestElement(False, "Generic", 0, [TestParameter("Height", None, 10)])
+        element = TestElement(False, "Generic", 0, [TestParameter("Height", None, 10)], "generic")
         interface = DocumentInterface.ElementInterface(element)
         self.assertTrue(interface.has_parameter("Height"))
 
     def test_parameter_has_right_value(self):
-        element = TestElement(False, "Generic", 0, [TestParameter("Height", None, 10), TestParameter("Material", "Steel", None)])
+        element = TestElement(False, "Generic", 0, [TestParameter("Height", None, 10), TestParameter("Material", "Steel", None)], "generic")
         interface = DocumentInterface.ElementInterface(element)
         parameter1 = interface.get_parameter("Height")
         parameter2 = interface.get_parameter("Material")
