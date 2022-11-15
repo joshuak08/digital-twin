@@ -36,7 +36,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run Tests
         run: |
-          python -m unitest ./.github/src/DocumentInterfaceTest.DocumentInterfaceTests
+          python -m unittest /src/DocumnetInterfaceTest.DocumentInterfaceTests
           
         
 
