@@ -1,4 +1,4 @@
-#import Autodesk.Revit.DB as DB
+# import Autodesk.Revit.DB as DB
 
 """
 Set of classes for interfacing with a Revit document
@@ -21,30 +21,40 @@ document or making another query.
 
 
 class DocumentInterface:
-
+    # DocumentInterface initilisation, takes in a document, collector, and list of categories
     def __init__(self, document, collector, categories):
-        self.underlyingDocument = document
-        self.elementDict = {}
-        newcollector = collector.WhereElementIsNotElementType()
+        self.underlyingDocument = document  # saves the actual revit document in the object
+        self.elementDict = {}  # initialises the dictionary to store elements
+        newcollector = collector.WhereElementIsNotElementType()  # removes element types from the collector (I don't think we'll ever need to work with these, can be changed)
 
         elements = None
+        # If categories have been specified, union together all elements from specified categories
         if len(categories) != 0:
             for i in categories:
                 if elements is None:
                     elements = newcollector.OfCategory(i)
                 else:
                     elements = elements.UnionWith(newcollector.OfCategory(i))
+        # If not then the collector is unmodified (all elements passed through)
         else:
             elements = newcollector
+        # At this point the collector should contain all elements belonging to specified categories
+        # if categories are specified, otherwise should have all elements
+        # Then goes through all of these elements, and adds them to the dictionary
         for i in elements:
+            # If the name of the element is already a key in the dictionary - add it to the list of elements with that
+            # name (before being added, the elements are converted into ElementInterfaces
             if i.Name in self.elementDict:
                 self.elementDict[i.Name].append(ElementInterface(i))
+            # Otherwise make a new list to store elements of this name
             else:
                 self.elementDict[i.Name] = [ElementInterface(i)]
 
+    # Method to get all names of elements that have been put into the interface
     def get_element_names(self):
         return self.elementDict.keys()
 
+    # Method to get a list of all elements of a certain name
     def get_elements_of_name(self, name):
         return self.elementDict[name]
 
