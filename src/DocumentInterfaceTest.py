@@ -111,7 +111,17 @@ class DocumentInterfaceTests(unittest.TestCase):
         collector = TestCollector(document.elementList)
         interface = DocumentInterface.DocumentInterface(document, collector, [cat1, cat2])
         self.assertEqual(len(interface.elementDict), 2)
-        #do some more assertions (correct list lengths)
+        self.assertEqual(len(interface.elementDict[cat1]), 3)
+        self.assertEqual(len(interface.elementDict[cat2]), 2)
+
+    def test_empty_categories(self):
+        cat1 = "Category1"
+        cat2 = "Category2"
+        cat3 = "Category3"
+        document = generic3CatDocument(cat1, cat2, cat3)
+        collector = TestCollector(document.elementList)
+        interface = DocumentInterface.DocumentInterface(document, collector, [])
+        self.assertEqual(len(interface.elementDict), 3)
 
 
 
