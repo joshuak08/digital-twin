@@ -1,31 +1,48 @@
-# water-twin-env
+## Getting Started with Django
 
-## Getting Started
+Prerequisites: **Python 3**
 
-Follow [this](https://docs.python.org/3/tutorial/venv.html) tutorial to start a python venv.
+Follow [this](https://docs.djangoproject.com/en/4.1/topics/install/#install-the-django-code) official guide to install
+Django:
 
-Or
+1. Clone the directory and cd into `django`
+1. Make sure pip is installed by running `pip --version`
+2. Create a virtual environment (or just install Django with `python -m pip install Django`)
+3. Run the server by changing directory into the `watertreatment` project and running `python3 manage.py runserver`
 
----
-Create a virtual environment, decide upon a directory (a common place is .venv) where you want it, and run:
+Follow [this](https://docs.python.org/3/tutorial/venv.html) tutorial to start a Python virtual environment.
 
-`python3 -m venv tutorial-env`
+**Or**
 
----
+Follow the following guide to set up a virtual environment.
+
+--- 
+**Create a virtual environment** by running.
+
+`python3 -m venv django-env`
+
+> You can name the environment anything you want - I named mine `django-env`.
 
 To activate the virtual environment.
 
-On Windows, run:
+On Windows, **run**:
 
 `django-env\Scripts\activate.bat`
 
-On Unix or MacOS, run:
+On Unix or MacOS, **run**:
 
 `source django-env/bin/activate`
 
-Install necessary packages with (in your env):
+Install necessary packages with:
 
 `python -m pip install -r requirements.txt`
+
+> Do this in your activated environment. It should show `$ (django-env)` in your shell.
+
+The **venv** and **src** files should be **separate**:
+
+`django-env  README.md  requirements.txt  watertreatment
+`
 
 ---
 
@@ -41,13 +58,10 @@ To deactivate a virtual environment, type:
 
 --- 
 
-Don't push your env to Github. You want to [freeze](https://docs.python.org/3/tutorial/venv.html#managing-packages-with-pip) your dependencies to requirements.txt and push that. 
+Don't push your virtual environment to Github. \
+You want to [freeze](https://docs.python.org/3/tutorial/venv.html#managing-packages-with-pip) your dependencies to
+a requirements.txt and push that.
 
-**TODO**
+You can do this by running
 
-- Deploy to some host
-- Write some tests
-- Configure database to store component attributes
-- Interface with the Django backend
-- CI/CD  
-
+`python -m pip freeze > requirements.txt`
