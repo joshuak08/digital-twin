@@ -5,7 +5,8 @@
 - [Planning](#planning)
 - [Stakeholders](#stakeholders)
 - [User stories](#user-stories)
-- [Setup and Gantt Chart](#setup)
+- [Setup](#setup), [Kanban](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/projects/1), [Gantt Chart](https://uob-my.sharepoint.com/:x:/g/personal/ij21409_bristol_ac_uk/EX73IxO8MzxJpIT4n8v2akIBD4Ke-R7LHc50kl0CKyK-Aw?e=IhAzEd)
+
 ---
 ## Overview
 > _Nijhuis Saur Industries provides solid and adaptive solutions for sustainable and resilient water use, energy and resource recovery around the world._ - [Nijhuis Industries](https://www.nijhuisindustries.com/)
@@ -44,7 +45,6 @@ Main planned features include:
   
  ## Setup
  [Starting the Frontend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/django-ui/django/README.md) \
- [Gantt Chart](https://uob-my.sharepoint.com/:x:/g/personal/ij21409_bristol_ac_uk/EX73IxO8MzxJpIT4n8v2akIBD4Ke-R7LHc50kl0CKyK-Aw?e=IhAzEd)
-
+ [Starting the Backend]()
 
 <p align="right">[<a href="#index">Top</a>]</p>
