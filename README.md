@@ -10,8 +10,8 @@
 ## Overview
 > _Nijhuis Saur Industries provides solid and adaptive solutions for sustainable and resilient water use, energy and resource recovery around the world._ - [Nijhuis Industries](https://www.nijhuisindustries.com/)
 
-Water treatment plants need a tool which can help improve the planning, design, contruction and operation of their plants. \
-A digital twin of a water system will provide accurate and reliable data of that can used to make informed decisions throughout \
+Water treatment plants need a tool which can help improve the planning, design, contruction and operation of their plants. 
+A digital twin of a water system will provide accurate and reliable data of that can used to make informed decisions throughout 
 the lifecycle of that water system. \
 This will consist of: 
   - A front-end in Django. 
