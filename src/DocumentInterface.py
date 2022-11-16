@@ -15,7 +15,7 @@ This will generate a DocumentInterface for you with all the relevant information
 - ParameterInterface-s provide easy access to a certain parameter of a certain element
 
 Each interface has some basic getting commands at the moment, but can be expanded as needed.
-Each Interface stores it's underlying Revit object for the sake of direct document access for modifying the
+Each Interface stores its underlying Revit object for the sake of direct document access for modifying the
 document or making another query.
 """
 
@@ -25,8 +25,7 @@ class DocumentInterface:
     def __init__(self, document, collector, categories):
         self.underlyingDocument = document  # saves the actual revit document in the object
         self.elementDict = {}  # initialises the dictionary to store elements
-        newcollector = collector.WhereElementIsNotElementType()  # removes element types from the collector (I don't think we'll ever need to work with these, can be changed)
-
+        newcollector = collector.WhereElementIsNotElementType()  # removes element types from the collector
         elements = None
         # If categories have been specified, union together all elements from specified categories
         if len(categories) != 0:
@@ -59,20 +58,26 @@ class DocumentInterface:
         return self.elementDict[name]
 
 
+# Interface for dealing with individual elements from a Revit document
 class ElementInterface:
-
+    # Initialisation - takes in a revit element, produces an Interface
     def __init__(self, element):
+        # Basically just copying info from the element (can be expanded on if there's anything extra we want)
         self.name = element.Name
         self.elementID = element.Id
         self.underlyingElement = element
         self.parameters = {}
+        # Dealing with parameters - formatting them into a dictionary
         for i in element.Parameters:
+            # Excludes parameters that don't have values, this can be removed if needed
             if i.HasValue:
                 self.parameters[i.Definition.Name] = ParameterInterface(i)
 
+    # Whether the element has a parameter of a certain name
     def has_parameter(self, parametername):
         return parametername in self.parameters
 
+    # Retrieving a parameter of a certain name
     def get_parameter(self, parametername):
         if self.has_parameter(parametername):
             return self.parameters[parametername]
@@ -80,10 +85,17 @@ class ElementInterface:
             return "No such parameter"
 
 
+# Interface for storing parameters, strips away a bunch of the extra unused data
 class ParameterInterface:
 
+    # To create a ParameterInterface you pass in a revit parameter
     def __init__(self, parameter):
+        # Mostly just copying data from the revit parameter
+        # Metadata about a parameter is mostly stored in it's .Definition
         self.name = parameter.Definition.Name
         self.underlyingParameter = parameter
+        # Revit parameters have 4 possible data types - Ints, Doubles, Strings, ValueStrings
+        # It seems that all parameters have either a Double value or ValueString defined, so storing the others isn't
+        # necessary, can be changed if needed
         self.stringValue = parameter.AsValueString()
         self.numericalValue = parameter.AsDouble()
