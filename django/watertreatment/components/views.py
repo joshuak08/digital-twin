@@ -1,39 +1,31 @@
 # from curses.ascii import HT
 from django.shortcuts import render
 
+# Objects data we want to display
 posts = [
     {
         'name': 'firstComponent',
         'source': 'pyRevit',
-        'width': 'w',
-        'height': 'h',
-        'length': 'l',
+        'params':
+            {
+                'Width': 'w',
+                'Height': 'h',
+                'Length': 'l',
+            },
         'content': 'first content',
     },
     {
         'name': 'secondComponent',
         'source': 'pyRevit',
-        'width': '3',
-        'height': '4',
-        'length': '8',
-        'content': 'second content',
-    },
-    {
-        'name': 'thirdComponent',
-        'source': 'pyRevit',
-        'width': '3',
-        'height': '4',
-        'length': '8',
-        'content': 'third content',
-    },
-    {
-        'name': 'foruthComponent',
-        'source': 'pyRevit',
-        'width': '3',
-        'height': '4',
-        'length': '8',
-        'content': 'fourth content',
+        'params':
+            {
+                'Width': 1,
+                'Height': 2,
+                'Length': 3,
+            },
+        'content': 'first content',
     }
+
 ]
 
 

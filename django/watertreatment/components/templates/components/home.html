@@ -1,14 +1,16 @@
 {% extends "components/base.html" %}
 
 {% block content %}
-    {% for post in posts %}
-        <h2>{{ post.name }}</h2>
-        <p>{{ post.content }}</p>
-        <p>
-            Height: {{ post.height }} <br>
-            Width: {{ post.width }} <br>
-            Length: {{ post.length }} <br>
-        </p>
+
+{% for post in posts %}
+<h2>
+    {{ post.name }}
+</h2>
+    {% for key, value in post.params.items %}
+        <p>{{ key }} : {{ value }}</p>
     {% endfor %}
+{% endfor %}
+
+
 {% endblock content %}
 	
