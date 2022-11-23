@@ -3,11 +3,7 @@
     height: 20%;
 }
 
-.grid-container {
-    display: grid;
-}
-
-.your-grid {
+.horizontal-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 8px;

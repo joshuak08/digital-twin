@@ -9,10 +9,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'components/home.css' %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# Set title if passed as an argument in views #}
     {% if title %}
-        <title>Components - {{ title }}</title>
+        <title>{{ title }}</title>
     {% else %}
-        <title>Water Treatment Components</title>
+        <title>Water Treatment Digital Twin</title>
     {% endif %}
 
 </head>

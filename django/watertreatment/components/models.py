@@ -1,20 +1,14 @@
 from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
 
 
-# One to many. Each Document has many Elem objects.
-# Each object has parameters.
+# Each Post has parameters.
 # Create your models here.
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    elementID = models.IntegerField()
     content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    params = models.JSONField()
 
+    # Return post name when querying using SQL
     def __str__(self):
-        return self.title
-
-
-class Lead(models.Model):
-    message = models.JSONField()
+        return self.name
