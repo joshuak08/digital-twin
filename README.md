@@ -1,4 +1,4 @@
-# 1. Water Treatment Digital Twin 💧
+# 1. Water Treatment Digital Twin 
 ## 1.1 Index
 - [Overview](#12-overview)
 - [Planning](#13-planning)
