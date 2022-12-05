@@ -1,7 +1,6 @@
 {% extends "components/base.html" %}
 {% block content %}
-	<h2>Element with ID: {{elementID}}</h2>
-    <h3>Parameters</h3>
+	<h2>Element {{elementID}}</h2>
     <table>
         <tr><td>Parameter</td><td>Value</td></tr>
         {% for k, v in params.items %}

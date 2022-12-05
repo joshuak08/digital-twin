@@ -5,9 +5,32 @@
 
     <h2>Components:</h2>
     <div class="horizontal-grid">
-        <div>HELLO</div>
-        <a href = "elements/">ELEMENTS</a>
-        <a href = "revit-model/">3D MODEL</a>
+        {% for post in posts %}
+            <div class="grid-element">
+                <h3>{{ post.name }}</h3>
+                <p>
+                    Content: {{ post.content }} <br>
+                    Element ID: {{ post.elementID }} <br>
+                </p>
+                <p1>
+                    {% for key, value in post.params.items %}
+                        {{ key }} : {{ value }} <br>
+                    {% endfor %}
+                </p1>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class='modelo-wrapper'>
+        <div style="width: 100%; padding-bottom: 56.25%; position:
+    relative">
+            <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+                <iframe src="
+    https://app.modelo.io/embedded/1595378716450172928?viewport=true&autoplay=true&autorotate=true&hideTools=false&showBIM=true&showBBoxSize=true&showKooRender=false&showSettings=true"
+                        style="width:100%;height:100%;" frameborder="0" mozallowfullscreen webkitallowfullscreen
+                        allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 
 {% endblock content %}

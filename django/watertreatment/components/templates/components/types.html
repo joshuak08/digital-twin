@@ -1,11 +1,10 @@
 {% extends "components/base.html" %}
 {% block content %}
-	<h2>List of all elements</h2>
-    <div>{{elements}}</div>
+	<h2>Element Types</h2>
     <table>
         <tr><td>Type</td><td>Quantity</td></tr>
         {% for k, v in types.items %}
-            <tr><td><a href = {{k}}/>{{k}}</a></td><td>{{v}}</td></tr>
+        <tr><td><a href = {{k}}/>{{k}}</a></td><td>{{v}}</td></tr>
         {% endfor %}
     </table>
 {% endblock content %}	

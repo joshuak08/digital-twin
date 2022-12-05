@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Post
-
+import json
 """
 Works in a MVC Pattern 
 Model - models.py
@@ -18,21 +18,28 @@ def about(request):
     return render(request, 'components/about.html', {'title': 'About'})
 
 def elements(request):
-    types = {"pipe": 33, "sandfilter": 4, "electrics": 7}
-    context = {'elements': "Wazaaa", 'title': "Elements", "types": types}
+    elements = Post.objects.all() 
+    types = {}
 
-    return render(request, 'components/elements.html', context)
+    for i in elements:
+        if i.name not in types:
+            types[i.name] = 1 
+        else:
+            types[i.name] = types[i.name] + 1
+    
+    context = {'types' : types, 'title' : "Types"}
+    return render(request, 'components/types.html' , context)
 
 def elementsOfType(request, type):
-    elements = {"pipe": ["12", "445", "354"], "sandfilter": ["55"], "electrics" : ["49"]}
-    context = {"type": type, "elements": elements[type]}
+    elements = Post.objects.filter(name=type)
+    ids = []
+    for i in elements:
+        ids.append(i.elementID)
+    context = {'elements' : ids, 'title' : "Elements of type " + type, 'type': type}
     return render(request, 'components/elements-of-type.html', context)
 
-def element(request, type, elementID):
-    params = {"name": "default", "height": 12, "volume": 23}
-    context = {"elementID": elementID, "params": params, "type": type}
+def element(request, type, ID):
+    element = Post.objects.get(elementID = ID)
+    params = element.params
+    context = {'elementID' : ID, "params" : params}
     return render(request, 'components/element.html', context)
-
-def revitModel(request):
-    return render(request, 'components/revit-model.html')
-
