@@ -1,0 +1,10 @@
+{% extends "components/base.html" %}
+{% block content %}
+	<h2>List of all elements of type {{type}}</h2>
+    <table>
+        <tr><td>Element ID</td></tr>
+        {% for i in elements %}
+            <tr><td><a href = {{i}}/>{{i}}</a></td></tr>
+        {% endfor %}
+    </table>
+{% endblock content %}	
