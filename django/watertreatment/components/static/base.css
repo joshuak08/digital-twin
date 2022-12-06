@@ -13,11 +13,27 @@ th, td {
     border-collapse: collapse;
 }
 
+.logo {
+    float: left;
+    height: 80px;
+    object-fit: cover;
+}
+
 .image {
     float: left;
-    width: 20%;
-    height: 20%;
-    object-fit: cover;
+    width: 40%;
+    display: grid;
+    /*height: 20%;*/
+    /*object-fit: cover;*/
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
 }
 
 .horizontal-grid {
@@ -44,7 +60,7 @@ body {
     text-align: center;
     padding: 20px 20px;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 /* Change the color of links on hover */
@@ -65,5 +81,5 @@ body {
 }
 
 #title {
-    font-size: 25px;
+    font-size: 35px;
 }

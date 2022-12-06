@@ -1,7 +1,7 @@
 {% extends "components/base.html" %}
 {% block content %}
 	<h2>Element {{elementID}}</h2>
-    <div><a href = /types/{{type}}/>BACK</a></div>
+    <div><button onclick="history.back()">Go Back</button></div>
     <table>
         <tr><th>Parameter</th><th>Value</th></tr>
         {% for k, v in params.items %}
