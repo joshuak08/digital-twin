@@ -1,8 +1,9 @@
 {% extends "components/base.html" %}
 {% block content %}
 	<h2>Element {{elementID}}</h2>
+    <div><a href = /types/{{type}}/>BACK</a></div>
     <table>
-        <tr><td>Parameter</td><td>Value</td></tr>
+        <tr><th>Parameter</th><th>Value</th></tr>
         {% for k, v in params.items %}
             <tr><td>{{k}}</td><td>{{v}}</td></tr>
         {% endfor %}

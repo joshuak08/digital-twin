@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'components/home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,11 +19,13 @@
 
 </head>
 <body>
-<a href="{% url 'components-home' %}">Home</a>
-<a href="{% url 'components-about' %}">About</a>
 <header>
     <h1>Water Treatment Digital Twin</h1>
 </header>
+<a href="{% url 'components-home' %}">Home</a>
+<a href="{% url 'components-about' %}">About</a>
+<a href="{% url 'components-types' %}">Elements</a>
+<a href="{% url 'components-revit-model' %}">Model</a>
 {% block content %}
 {% endblock %}
 </body>

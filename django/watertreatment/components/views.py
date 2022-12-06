@@ -41,5 +41,8 @@ def elementsOfType(request, type):
 def element(request, type, ID):
     element = Post.objects.get(elementID = ID)
     params = element.params
-    context = {'elementID' : ID, "params" : params}
+    context = {'elementID' : ID, "params" : params, 'type': type}
     return render(request, 'components/element.html', context)
+
+def revitModel(request):
+    return render(request, 'components/revit-model.html', {'title': "Revit Model"})
