@@ -5,8 +5,7 @@
 - [Stakeholders](#14-stakeholders)
 - [User stories](#15-user-stories)
 - [Setup](#16-setup)
-- [Kanban, Gantt Chart](#17-kanban-and-gantt-chart)
-
+- [Links](#17-kanban-and-gantt-chart) to Kanban Board, Gantt Chart and Site Preview 
 ---
 ## 1.2 Overview
 > _Nijhuis Saur Industries provides solid and adaptive solutions for sustainable and resilient water use, energy and resource recovery around the world._ - [Nijhuis Industries](https://www.nijhuisindustries.com/)
@@ -49,6 +48,7 @@ Main planned features include:
  
   ## 1.7 Kanban and Gantt Chart
   [Kanban](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/projects/1) \
-  [Gantt Chart](https://uob-my.sharepoint.com/:x:/g/personal/ij21409_bristol_ac_uk/EX73IxO8MzxJpIT4n8v2akIBD4Ke-R7LHc50kl0CKyK-Aw?e=IhAzEd)
+  [Gantt Chart](https://uob-my.sharepoint.com/:x:/g/personal/ij21409_bristol_ac_uk/EX73IxO8MzxJpIT4n8v2akIBD4Ke-R7LHc50kl0CKyK-Aw?e=IhAzEd) \
+  [Preview](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/django-ui/django/PREVIEW.md)
 
 <p align="right">[<a href="#11-index">Top</a>]</p>
