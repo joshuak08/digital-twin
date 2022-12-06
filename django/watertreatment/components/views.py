@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Document
 import json
 """
 Works in a MVC Pattern 
@@ -10,7 +10,7 @@ Controller - views.py
 
 
 def home(request):
-    context = {'posts': Post.objects.all()}
+    context = {}
     return render(request, 'components/home.html', context)
 
 
@@ -18,7 +18,7 @@ def about(request):
     return render(request, 'components/about.html', {'title': 'About'})
 
 def elements(request):
-    elements = Post.objects.all() 
+    elements = Document.objects.all() 
     types = {}
 
     for i in elements:
@@ -31,16 +31,16 @@ def elements(request):
     return render(request, 'components/types.html' , context)
 
 def elementsOfType(request, type):
-    elements = Post.objects.filter(name=type)
+    elements = Document.objects.filter(name=type)
     ids = []
     for i in elements:
-        ids.append(i.elementID)
+        ids.append(i.elemID)
     context = {'elements' : ids, 'title' : "Elements of type " + type, 'type': type}
     return render(request, 'components/elements-of-type.html', context)
 
 def element(request, type, ID):
-    element = Post.objects.get(elementID = ID)
-    params = element.params
+    element = Document.objects.get(elemID = ID)
+    params = json.loads(element.params)
     context = {'elementID' : ID, "params" : params, 'type': type}
     return render(request, 'components/element.html', context)
 

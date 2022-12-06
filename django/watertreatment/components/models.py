@@ -3,12 +3,10 @@ from django.db import models
 
 # Each Post has parameters.
 # Create your models here.
-class Post(models.Model):
-    name = models.CharField(max_length=100)
-    elementID = models.IntegerField()
-    content = models.TextField()
-    params = models.JSONField()
+class Document(models.Model):
+    elemID = models.IntegerField(db_column='elemID', blank=True, null=False, primary_key=True)  # Field name made lowercase.
+    name = models.TextField(blank=True, null=True)
+    params = models.TextField(blank=True, null=True)
 
-    # Return post name when querying using SQL
-    def __str__(self):
-        return self.name
+    class Meta:
+        managed = False
