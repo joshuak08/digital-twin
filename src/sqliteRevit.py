@@ -43,6 +43,9 @@ class DataBaser:  # class to hold info about database
         json_out = json.dumps(dict_arr)
         return json_out
 
+    def close_connection(self):
+        self.dbConn.close()
+
 
 # params = sqlTest.TestParameter("param", "string", 0.1)  # initialises params
 # elem1 = sqlTest.element_type_element(0, params)  # initialises an element
