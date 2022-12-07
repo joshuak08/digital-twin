@@ -45,7 +45,7 @@ class DocumentInterface:
             # name (before being added, the elements are converted into ElementInterfaces
             if not (i is None):
                 try:
-                    name = i.Name
+                    name = i.Category.Name
                 except:
                     name = "unnamed"
                 if name in self.elementDict:
@@ -69,11 +69,11 @@ class ElementInterface:
     def __init__(self, element):
         # Basically just copying info from the element (can be expanded on if there's anything extra we want)
         try:
-            name = element.Name
+            name = element.Category.Name.replace(' ', '_')    
         except:
             name = "unnamed"
         self.name = name
-        self.elementID = element.Id
+        self.elementID = element.Id.IntegerValue
         self.underlyingElement = element
         self.parameters = {}
         # Dealing with parameters - formatting them into a dictionary
@@ -118,7 +118,7 @@ class ParameterInterface:
         try:
             self.stringValue = parameter.AsValueString()
         except:
-            self.StringValue = ""
+            self.stringValue = ""
         try:
             self.numericalValue = parameter.AsDouble()
         except:

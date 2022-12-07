@@ -1,18 +1,21 @@
-import Autodesk.Revit.DB as DB
-from revitutils import doc
 import DocumentInterface
 import sqliteRevitIpy
+import Autodesk.Revit.DB as DB
 
+doc = __revit__.ActiveUIDocument.Document
 collector = DB.FilteredElementCollector(doc)
+#categories = [DB.BuiltInCategory.OST_MechanicalEquipment, DB.BuiltInCategory.OST_PipingSystem, DB.BuiltInCategory.OST_PipeFitting, DB.BuiltInCategory.OST_PipeAccessory]
+document = DocumentInterface.DocumentInterface(doc, collector, [DB.BuiltInCategory.OST_MechanicalEquipment])
+for elements in document.elementDict.values():
+    for i in elements:
+        print(i.elementID)
+    
 
-categories = []
-# Construct categories - user input / hardcode / something else
 
-docI = DocumentInterface.DocumentInterface(doc, collector, categories)
-# Next needs to pass this into something to construct the database, and that should be it
+dataBaser = sqliteRevitIpy.DataBaser(document)
 
-dataBaser = sqliteRevitIpy.DataBaser(docI)
 dataBaser.access_table()
 dataBaser.store_elems()
 dataBaser.close_connection()
 
+print("Done making DB")
