@@ -1,7 +1,7 @@
 import Autodesk.Revit.DB as DB
 from revitutils import doc
 import DocumentInterface
-import sqliteRevit
+import sqliteRevitIpy
 
 collector = DB.FilteredElementCollector(doc)
 
@@ -11,7 +11,8 @@ categories = []
 docI = DocumentInterface.DocumentInterface(doc, collector, categories)
 # Next needs to pass this into something to construct the database, and that should be it
 
-dataBaser = sqliteRevit.DataBaser(docI)
+dataBaser = sqliteRevitIpy.DataBaser(docI)
 dataBaser.access_table()
 dataBaser.store_elems()
+dataBaser.close_connection()
 
