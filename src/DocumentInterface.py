@@ -43,11 +43,16 @@ class DocumentInterface:
         for i in elements:
             # If the name of the element is already a key in the dictionary - add it to the list of elements with that
             # name (before being added, the elements are converted into ElementInterfaces
-            if i.Name in self.elementDict:
-                self.elementDict[i.Name].append(ElementInterface(i))
-            # Otherwise make a new list to store elements of this name
-            else:
-                self.elementDict[i.Name] = [ElementInterface(i)]
+            if not (i is None):
+                try:
+                    name = i.Name
+                except:
+                    name = "unnamed"
+                if name in self.elementDict:
+                    self.elementDict[name].append(ElementInterface(i))
+                # Otherwise make a new list to store elements of this name
+                else:
+                    self.elementDict[name] = [ElementInterface(i)]
 
     # Method to get all names of elements that have been put into the interface
     def get_element_names(self):
@@ -63,7 +68,11 @@ class ElementInterface:
     # Initialisation - takes in a revit element, produces an Interface
     def __init__(self, element):
         # Basically just copying info from the element (can be expanded on if there's anything extra we want)
-        self.name = element.Name
+        try:
+            name = element.Name
+        except:
+            name = "unnamed"
+        self.name = name
         self.elementID = element.Id
         self.underlyingElement = element
         self.parameters = {}
@@ -71,7 +80,12 @@ class ElementInterface:
         for i in element.Parameters:
             # Excludes parameters that don't have values, this can be removed if needed
             if i.HasValue:
-                self.parameters[i.Definition.Name] = ParameterInterface(i)
+                if not (i is None):
+                    try:
+                        name = i.Definition.Name
+                    except:
+                        name = "unnamed"
+                    self.parameters[name] = ParameterInterface(i)
 
     # Whether the element has a parameter of a certain name
     def has_parameter(self, parametername):
@@ -92,10 +106,21 @@ class ParameterInterface:
     def __init__(self, parameter):
         # Mostly just copying data from the revit parameter
         # Metadata about a parameter is mostly stored in it's .Definition
-        self.name = parameter.Definition.Name
+        try:
+            name = parameter.Definition.Name
+        except:
+            name = "unnamed"
+        self.name = name
         self.underlyingParameter = parameter
         # Revit parameters have 4 possible data types - Ints, Doubles, Strings, ValueStrings
         # It seems that all parameters have either a Double value or ValueString defined, so storing the others isn't
         # necessary, can be changed if needed
-        self.stringValue = parameter.AsValueString()
-        self.numericalValue = parameter.AsDouble()
+        try:
+            self.stringValue = parameter.AsValueString()
+        except:
+            self.StringValue = ""
+        try:
+            self.numericalValue = parameter.AsDouble()
+        except:
+            self.numericalValue = 0
+
