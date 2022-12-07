@@ -1,0 +1,11 @@
+{% extends "components/base.html" %}
+{% block content %}
+	<h2>Elements of type {{type}}</h2>
+    <div><button onclick="history.back()">Go Back</button></div>
+    <table>
+        <tr><th>ElementID</th></tr>
+        {% for i in elements %}
+            <tr><td><a href = {{i}}/>{{i}}</a></td></tr>
+        {% endfor %}
+    </table>
+{% endblock content %}	
