@@ -69,7 +69,7 @@ class ElementInterface:
     def __init__(self, element):
         # Basically just copying info from the element (can be expanded on if there's anything extra we want)
         try:
-            name = i.Name
+            name = element.Name
         except:
             name = "unnamed"
         self.name = name
@@ -107,7 +107,7 @@ class ParameterInterface:
         # Mostly just copying data from the revit parameter
         # Metadata about a parameter is mostly stored in it's .Definition
         try:
-            name = i.Definition.Name
+            name = parameter.Definition.Name
         except:
             name = "unnamed"
         self.name = name
