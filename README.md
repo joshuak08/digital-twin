@@ -19,12 +19,14 @@ This will consist of:
 
 ## 1.3 Planning
 
+
 Main planned features include:
 - 3D modelling of plant details, similar to tools like Revit.
 - Ability to simulate running process of a plant designed in the software.
 - Ability to connect the software to a live system to allow for updates to the model from the real world.
   - Including visual updates to the 3D model.
 - Ability to use the software to control real world components.
+
 
 ## 1.4 Stakeholders
 - John Williams
@@ -35,6 +37,7 @@ Main planned features include:
   - Public Sector
   - Private Sector
 
+
 ## 1.5 User stories
 - As John Williams, I want to improve the design tools for water treatment plants, so that I can design better plants.
 - As a Nijhuis Employee, I want to have better design tools, so that the design process can be easier and more accurate.
@@ -42,6 +45,7 @@ Main planned features include:
 - As a public sector Nijhuis client, I want to have more effetive treatment plants with better control tools, so that water treatment can be more effective to reduce costs.
 - As a private sectore Nijhuis client, I want to take advantage of waste water produced at my factories, so that my business is more profitable.
   
+
  ## 1.6 Setup
  [Starting the Frontend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/django-ui/django/README.md) \
  [Starting the Backend]()
