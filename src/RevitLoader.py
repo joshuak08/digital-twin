@@ -9,8 +9,6 @@ document = DocumentInterface.DocumentInterface(doc, collector, [DB.BuiltInCatego
 for elements in document.elementDict.values():
     for i in elements:
         print(i.elementID)
-    
-
 
 dataBaser = sqliteRevitIpy.DataBaser(document)
 

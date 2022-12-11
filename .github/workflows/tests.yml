@@ -38,7 +38,7 @@ jobs:
         run: |
           cd src
           python -m unittest DocumentInterfaceTest.DocumentInterfaceTests
-          
+          python -m unittest 
         
 
       # Runs a set of commands using the runners shell
