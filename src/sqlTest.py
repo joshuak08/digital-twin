@@ -25,7 +25,10 @@ class testSqliteRevitDB(unittest.TestCase):
         print("setting up class done")
 
     def test_1_check_columns(self):  # checks the names of columns
-        pass
+        self.cursor.execute("""SELECT * FROM components_document""")
+        self.cursor.fetchone()
+        names = list(map(lambda x: x[0], self.cursor.description))
+        self.assertEqual(["elemID", "name", "params"], names)
 
     def test_2_correct_row_Count(self):  # checks the correct number of rows are in the table
         self.cursor.execute("""SELECT * FROM components_document""")
