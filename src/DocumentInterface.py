@@ -37,6 +37,7 @@ class DocumentInterface:
         # If not then the collector is unmodified (all elements passed through)
         else:
             elements = newcollector
+        
         # At this point the collector should contain all elements belonging to specified categories
         # if categories are specified, otherwise should have all elements
         # Then goes through all of these elements, and adds them to the dictionary
