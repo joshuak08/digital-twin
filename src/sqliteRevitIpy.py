@@ -1,21 +1,10 @@
 import sqlite3
 import os
 
-# import json
-# import DocumentInterface
-# import DocumentInterfaceTest
-import DocumentInterfaceTest
-import DocumentInterface
-
-
 class DataBaser:  # class to hold info about database
     def __init__(self, document_interface, test=""):
         self.document = document_interface  # assigns document to a variable
         print(self.document)
-
-        # for elements in self.document.elementDict.values():
-        #     for i in elements:
-        #         print(i.elementID)
 
         path = os.path.dirname(os.path.realpath(__file__)) + '\\' + test + "db.sqlite3"
         print("path:" + path)
@@ -46,31 +35,8 @@ class DataBaser:  # class to hold info about database
                 self.cursor.execute("INSERT INTO components_document VALUES (?, ?, ?)", (element.elementID,
                                                                                          element.name,
                                                                                          param_string))
-        self.dbConn.commit()  # commits changes
-
-    # returns entire table in json format
-    # def return_elems(self):
-    #     table = self.cursor.execute("SELECT * FROM components_document")
-    #     dict_arr = [
-    #         dict((self.cursor.description[i][0], row[i] if i != 2 else json.loads(row[i]))  # array of dictionaries
-    #              for i, value in enumerate(row))  # late binding, enumerate row tuple
-    #         for row in self.cursor.fetchall()  # fetchall returns rows as a list of tuples (1 row = 1 tuple)
-    #         ]
-    #     json_out = json.dumps(dict_arr)
-    #     return json_out
+        self.dbConn.commit()  # commits changes to database
 
     def close_connection(self):
         self.dbConn.close()
 
-
-# testDoc = DocumentInterfaceTest.generic_3_cat_document("cat1", "cat2", "cat3")
-# document = DocumentInterface.DocumentInterface(testDoc, DocumentInterfaceTest.TestCollector(testDoc.elementList), [])
-#
-# database = DataBaser(document)  # creates databaser class with the document passed in
-# database.access_table()  # creates a table with element columns as parameters if one doesn't exist
-# # #
-# database.store_elems()  # queries the database and prints all rows
-# # #
-# database.cursor.execute("DELETE FROM components_document")  # empties the database
-# database.dbConn.commit()  # commits changes
-# database.dbConn.close()  # closes connection to database
