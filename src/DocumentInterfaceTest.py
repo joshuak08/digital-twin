@@ -74,13 +74,9 @@ class TestCollectorIterator:
 class TestElement:
 
     def __init__(self, iselementtype, category, elementid, parameters, name):
-        self.Id = type("", (), dict(IntegerValue=elementid))()
-        # self.Id.IntegerValue = elementid
         self.isElementType = iselementtype
-
         self.Category = TestCategory(category)
         self.Id = TestId(elementid)
-
         self.Parameters = parameters
         self.Name = name
 
