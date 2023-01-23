@@ -37,9 +37,8 @@ class TestCollector:
     def OfCategory(self, category):
         newElements = []
         for i in self.filteredElements:
-            if i.category == category:
+            if i.Category.Name == category:
                 newElements.append(i)
-
         return TestCollector(newElements)
 
     # Unions the elements of two collectors together into a new collector
@@ -76,12 +75,20 @@ class TestElement:
 
     def __init__(self, iselementtype, category, elementid, parameters, name):
         self.isElementType = iselementtype
-        self.category = category
-        self.Id = elementid
+        self.Category = TestCategory(category)
+        self.Id = TestId(elementid)
         self.Parameters = parameters
         self.Name = name
 
+class TestId:
 
+    def __init__(self, elementid):
+        self.IntegerValue = elementid
+
+class TestCategory:
+
+    def __init__(self, category):
+        self.Name = category
 # Simulates revit parameters, initialised with its name, its string value, and its numerical value
 class TestParameter:
 
