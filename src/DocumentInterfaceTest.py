@@ -60,7 +60,7 @@ class TestCollectorIterator:
         self.collector = collector
         self.index = 0
 
-    def __next__(self):
+    def next(self):
         if self.index < len(self.collector.filteredElements):
             result = self.collector.filteredElements[self.index]
             self.index += 1
