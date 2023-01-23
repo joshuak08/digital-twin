@@ -5,7 +5,6 @@ import DocumentInterfaceTest
 import DocumentInterface
 import os
 import json
-import sqlite3
 
 
 class testSqliteRevitDB(unittest.TestCase):
