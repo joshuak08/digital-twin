@@ -80,15 +80,19 @@ class TestElement:
         self.Parameters = parameters
         self.Name = name
 
+
 class TestId:
 
     def __init__(self, elementid):
         self.IntegerValue = elementid
 
+
 class TestCategory:
 
     def __init__(self, category):
         self.Name = category
+
+
 # Simulates revit parameters, initialised with its name, its string value, and its numerical value
 class TestParameter:
 
