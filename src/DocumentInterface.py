@@ -1,4 +1,4 @@
-import Autodesk.Revit.DB as DB
+# import Autodesk.Revit.DB as DB
 
 """
 Set of classes for interfacing with a Revit document
@@ -22,7 +22,7 @@ document or making another query.
 
 class DocumentInterface:
     # DocumentInterface initilisation, takes in a document, collector, and list of categories
-    def __init__(self, document, collector, categories):
+    def __init__(self, document, collector, categories, testing):
         self.underlyingDocument = document  # saves the actual revit document in the object
         self.elementDict = {}  # initialises the dictionary to store elements
         newcollector = collector.WhereElementIsNotElementType()  # removes element types from the collector
@@ -30,7 +30,10 @@ class DocumentInterface:
         # If categories have been specified, union together all elements from specified categories
         if len(categories) != 0:
             for i in categories:
-                categoryElements = DB.FilteredElementCollector(document).WhereElementIsNotElementType().OfCategory(i)
+                if testing:
+                    categoryElements = newcollector.OfCategory(i)
+                else:
+                    categoryElements = DB.FilteredElementCollector(document).WhereElementIsNotElementType().OfCategory(i)
                 elements.append(categoryElements)
         # If not then the collector is unmodified (all elements passed through)
         else:

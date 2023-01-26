@@ -5,7 +5,7 @@ import Autodesk.Revit.DB as DB
 doc = __revit__.ActiveUIDocument.Document
 collector = DB.FilteredElementCollector(doc)
 #categories = [DB.BuiltInCategory.OST_MechanicalEquipment, DB.BuiltInCategory.OST_PipingSystem, DB.BuiltInCategory.OST_PipeFitting, DB.BuiltInCategory.OST_PipeAccessory]
-document = DocumentInterface.DocumentInterface(doc, collector, [DB.BuiltInCategory.OST_MechanicalEquipment])
+document = DocumentInterface.DocumentInterface(doc, collector, [DB.BuiltInCategory.OST_MechanicalEquipment], False)
 for elements in document.elementDict.values():
     for i in elements:
         print(i.elementID)
