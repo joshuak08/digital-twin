@@ -47,12 +47,12 @@ Main planned features include:
   
 
  ## 1.6 Setup
- [Starting the Frontend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/django-ui/django/README.md) \
+ [Starting the Frontend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/README.md) \
  [Starting the Backend]()
  
   ## 1.7 Kanban and Gantt Chart
   [Kanban](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/projects/1) \
   [Gantt Chart](https://uob-my.sharepoint.com/:x:/g/personal/ij21409_bristol_ac_uk/EX73IxO8MzxJpIT4n8v2akIBD4Ke-R7LHc50kl0CKyK-Aw?e=IhAzEd) \
-  [Preview](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/django-ui/django/PREVIEW.md)
+  [Preview](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/PREVIEW.md)
 
 <p align="right">[<a href="#11-index">Top</a>]</p>
