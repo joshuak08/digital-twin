@@ -13,7 +13,7 @@ class testSqliteRevitDB(unittest.TestCase):
     def setUpClass(cls):  # sets up the data baser class with a test document
         test_doc = DocumentInterfaceTest.generic_3_cat_document("cat1", "cat2", "cat3")  # document for testing
         test_doc_interface = DocumentInterface.DocumentInterface(test_doc, DocumentInterfaceTest.TestCollector(
-            test_doc.elementList), [])  # document interface for testing
+            test_doc.elementList), [], True)  # document interface for testing
         data_baser = sqliteRevitIpy.DataBaser(test_doc_interface, "test")  # creates database
         data_baser.access_table()  # creates table / accesses table if it doesn't exist
         data_baser.store_elems()

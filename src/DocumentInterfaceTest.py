@@ -80,15 +80,19 @@ class TestElement:
         self.Parameters = parameters
         self.Name = name
 
+
 class TestId:
 
     def __init__(self, elementid):
         self.IntegerValue = elementid
 
+
 class TestCategory:
 
     def __init__(self, category):
         self.Name = category
+
+
 # Simulates revit parameters, initialised with its name, its string value, and its numerical value
 class TestParameter:
 
@@ -147,7 +151,7 @@ class DocumentInterfaceTests(unittest.TestCase):
         element = element_type_element(0)
         document = TestDocument([element])
         collector = TestCollector(document.elementList)
-        interface = DocumentInterface.DocumentInterface(document, collector, [])
+        interface = DocumentInterface.DocumentInterface(document, collector, [], True)
         self.assertEqual(len(interface.elementDict), 0)
 
     # Tests to ensure category filtering works in a generic case
@@ -157,7 +161,7 @@ class DocumentInterfaceTests(unittest.TestCase):
         cat3 = "Category3"
         document = generic_3_cat_document(cat1, cat2, cat3)
         collector = TestCollector(document.elementList)
-        interface = DocumentInterface.DocumentInterface(document, collector, [cat1, cat2])
+        interface = DocumentInterface.DocumentInterface(document, collector, [cat1, cat2], True)
         self.assertEqual(len(interface.elementDict), 2)
         self.assertEqual(len(interface.get_elements_of_name(cat1)), 3)
         self.assertEqual(len(interface.get_elements_of_name(cat2)), 2)
@@ -169,20 +173,20 @@ class DocumentInterfaceTests(unittest.TestCase):
         cat3 = "Category3"
         document = generic_3_cat_document(cat1, cat2, cat3)
         collector = TestCollector(document.elementList)
-        interface = DocumentInterface.DocumentInterface(document, collector, [])
+        interface = DocumentInterface.DocumentInterface(document, collector, [], True)
         self.assertEqual(len(interface.elementDict), 3)
 
     # Tests that if an element is created with a parameter that this is reflected through has parameter
     def test_has_parameter(self):
         element = TestElement(False, "Generic", 0, [TestParameter("Height", None, 10)], "generic")
-        interface = DocumentInterface.ElementInterface(element)
+        interface = DocumentInterface.ElementInterface(element, "Generic")
         self.assertTrue(interface.has_parameter("Height"))
 
     # Tests that created parameters return the expected values when put into an interface
     def test_parameter_has_right_value(self):
         element = TestElement(False, "Generic", 0,
                               [TestParameter("Height", None, 10), TestParameter("Material", "Steel", None)], "generic")
-        interface = DocumentInterface.ElementInterface(element)
+        interface = DocumentInterface.ElementInterface(element, "Generic")
         parameter1 = interface.get_parameter("Height")
         parameter2 = interface.get_parameter("Material")
         self.assertEqual(parameter1.numericalValue, 10.0)

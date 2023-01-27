@@ -22,38 +22,39 @@ document or making another query.
 
 class DocumentInterface:
     # DocumentInterface initilisation, takes in a document, collector, and list of categories
-    def __init__(self, document, collector, categories):
+    def __init__(self, document, collector, categories, testing):
         self.underlyingDocument = document  # saves the actual revit document in the object
         self.elementDict = {}  # initialises the dictionary to store elements
         newcollector = collector.WhereElementIsNotElementType()  # removes element types from the collector
-        elements = None
+        elements = []
         # If categories have been specified, union together all elements from specified categories
         if len(categories) != 0:
             for i in categories:
-                if elements is None:
-                    elements = newcollector.OfCategory(i)
+                if testing:
+                    categoryElements = newcollector.OfCategory(i)
                 else:
-                    elements = elements.UnionWith(newcollector.OfCategory(i))
+                    categoryElements = DB.FilteredElementCollector(document).WhereElementIsNotElementType().OfCategory(i)
+                elements.append(categoryElements)
         # If not then the collector is unmodified (all elements passed through)
         else:
-            elements = newcollector
-        
+            elements = [newcollector]
         # At this point the collector should contain all elements belonging to specified categories
         # if categories are specified, otherwise should have all elements
         # Then goes through all of these elements, and adds them to the dictionary
-        for i in elements:
+        for category in elements:
             # If the name of the element is already a key in the dictionary - add it to the list of elements with that
             # name (before being added, the elements are converted into ElementInterfaces
-            if not (i is None):
-                try:
-                    name = i.Category.Name
-                except:
-                    name = "unnamed"
-                if name in self.elementDict:
-                    self.elementDict[name].append(ElementInterface(i))
-                # Otherwise make a new list to store elements of this name
-                else:
-                    self.elementDict[name] = [ElementInterface(i)]
+            for i in category:
+                if not (i is None):
+                    try:
+                        name = i.Category.Name
+                    except:
+                        name = "unnamed"
+                    if name in self.elementDict:
+                        self.elementDict[name].append(ElementInterface(i, name))
+                    # Otherwise make a new list to store elements of this name
+                    else:
+                        self.elementDict[name] = [ElementInterface(i, name)]
 
     # Method to get all names of elements that have been put into the interface
     def get_element_names(self):
@@ -67,12 +68,8 @@ class DocumentInterface:
 # Interface for dealing with individual elements from a Revit document
 class ElementInterface:
     # Initialisation - takes in a revit element, produces an Interface
-    def __init__(self, element):
+    def __init__(self, element, name):
         # Basically just copying info from the element (can be expanded on if there's anything extra we want)
-        try:
-            name = element.Category.Name.replace(' ', '_')    
-        except:
-            name = "unnamed"
         self.name = name
         self.elementID = element.Id.IntegerValue
         self.underlyingElement = element
