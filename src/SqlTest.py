@@ -1,6 +1,6 @@
 import unittest
 
-import sqliteRevitIpy
+import SqliteRevitIpy
 import DocumentInterfaceTest
 import DocumentInterface
 import os
