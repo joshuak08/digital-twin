@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class genericPipe(ABC):
+class GenericPipe(ABC):
     def __init__(self, inputs, outputs, length):
         self.inputs = inputs  # inputs of pipe
         self.outputs = outputs  # outputs of pipe
