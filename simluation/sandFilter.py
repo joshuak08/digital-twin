@@ -14,14 +14,14 @@ class sandFilter(genericPipe):
         self.backwash = False 
 
     def push(self, flow):
-        self.sandHeight += 1
-        
-        if self.sandHeight > 10:
+        self.sandHeight += 1 # incrementing amount of particulate in system - should be based on flow
+
+        if self.sandHeight > 10: # arbitrary boundary to start backwash
             backwash = True
         if backwash:
-            self.outputBackwash.push(flow)
+            self.outputBackwash.push(flow) # should be based on how full the unit is
         else:
-            self.outputNormal.push(flow)
+            self.outputNormal.push(flow) # ''
         
 
 
