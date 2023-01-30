@@ -14,14 +14,16 @@ class SplitterPipe(GenericPipe):
 
         self.time = max(time, self.time) + 1  # increases time by 1 after a push
 
-        #TODO add condition for valve closure to output rate as well
-        self.capacity += (flow_in - self.outputRate*len(self.outputs))  # increase capacity difference of input and output
+        # TODO add condition for valve closure to output rate as well
+        self.capacity += (
+                    flow_in - self.outputRate * len(self.outputs))  # increase capacity difference of input and output
 
         if self.capacity > self.maxVolume:
             raise Exception("capacity is greater than max volume :(")
 
-        for child_pipe in self.outputs:       # iterates through all output pipes
-            self.time = max(self.time, child_pipe.push(self.outputRate, self.time))  # updates current time with oldest time and pushes flow
+        for child_pipe in self.outputs:  # iterates through all output pipes
+            self.time = max(self.time, child_pipe.push(self.outputRate,
+                                                       self.time))  # updates current time with oldest time and pushes flow
 
     # ================================== #
 
@@ -35,8 +37,9 @@ class SplitterPipe(GenericPipe):
             child_pipe.snap(snap_dict)
 
         return snap_dict
+
     # ================================== #
 
     def toggle_valve(self):
-        #TODO
+        # TODO
         pass
