@@ -4,7 +4,7 @@
 - [Planning](#13-planning)
 - [Stakeholders](#14-stakeholders)
 - [User stories](#15-user-stories)
-- [Setup](#16-setup)
+- [Development and Depolyment](#16-development-and-deployment)
 - [Links](#17-kanban-and-gantt-chart) to Kanban Board, Gantt Chart and Site Preview 
 ---
 ## 1.2 Overview
@@ -46,7 +46,7 @@ Main planned features include:
 - As a private sectore Nijhuis client, I want to take advantage of waste water produced at my factories, so that my business is more profitable.
   
 
- ## 1.6 Setup
+ ## 1.6 Development and Deployment
  [Starting the Frontend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/README.md) \
  [Starting the Backend]()
  
