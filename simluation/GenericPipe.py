@@ -11,6 +11,7 @@ class GenericPipe(ABC):
         self.maxVolume = 8   # maximum volume of pipe m^3
         self.capacity = 0       # current capacity of pipe
         self.time = 0
+        self.valve = False
 
     @abstractmethod
     def push(self, flowi_in, time: int) -> int:  # pushes water down pipe on a single tick
@@ -19,5 +20,9 @@ class GenericPipe(ABC):
     @abstractmethod
     def snapshot(self, snap_dict: dict) -> dict:  # takes snapshot of pipe and stores it in a db
         pass
+
+    @abstractmethod
+    def toggle_valve(self):
+        self.valve = not self.valve
 
 
