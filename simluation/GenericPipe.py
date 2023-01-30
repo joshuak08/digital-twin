@@ -21,7 +21,6 @@ class GenericPipe(ABC):
     def snapshot(self, snap_dict: dict) -> dict:  # takes snapshot of pipe and stores it in a db
         pass
 
-    @abstractmethod
     def toggle_valve(self):
         self.valve = not self.valve
 
