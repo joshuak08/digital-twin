@@ -21,7 +21,7 @@ class sandFilter(genericPipe):
         if backwash:
             self.outputBackwash.push(flow) # should be based on how full the unit is
         else:
-            self.outputNormal.push(flow) # ''
+            self.outputNormal.push(flow) # should be based on how full the unit is
         
 
 
