@@ -10,20 +10,21 @@ class SplitterPipe(GenericPipe):
     # ======== override methods ======== #
     def push(self, flow_in, time):
         # TODO THIS IS JUST EXAMPLE CODE currently DOES NOT DO TIME PROPERLY, we need all components to keep track of
-        #  the oldest time (perhaps by pointer) although time may not even matter
+        #  the oldest time (perhaps by pointer) although time may not even matter if we just pick the oldest time in
+        #  c columns
 
         self.time = max(time, self.time) + 1  # increases time by 1 after a push
 
-        # TODO add condition for valve closure to output rate as well
-        self.capacity += (
-                    flow_in - self.outputRate * len(self.outputs))  # increase capacity difference of input and output
+        self.capacity += flow_in  # increase capacity difference of input and output
+        for output in self.outputs:
+            if output.valve:
+                self.capacity -= output.outputRate
 
         if self.capacity > self.maxVolume:
             raise Exception("capacity is greater than max volume :(")
 
         for child_pipe in self.outputs:  # iterates through all output pipes
-            self.time = max(self.time, child_pipe.push(self.outputRate,
-                                                       self.time))  # updates current time with oldest time and pushes flow
+            child_pipe.push(self.outputRate, self.time)  # pushes flow down every child pipe
 
     # ================================== #
 

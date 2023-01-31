@@ -14,7 +14,7 @@ class GenericPipe(ABC):
         self.valve = False
 
     @abstractmethod
-    def push(self, flowi_in, time: int) -> int:  # pushes water down pipe on a single tick
+    def push(self, flowi_in, time: int):  # pushes water down pipe on a single tick
         pass
 
     @abstractmethod
