@@ -14,8 +14,8 @@ Water treatment plants need a tool which can help improve the planning, design, 
 A digital twin of a water system will provide accurate and reliable data of that can used to make informed decisions throughout 
 the lifecycle of that water system. \
 This will consist of: 
-  - A front-end in Django. 
-  - A backend in pyRevit to interface with Revit APIs.
+  - A front-end in Django + HTML Templates. 
+  - A backend in Django + pyRevit to interface with Revit APIs.
 
 ## 1.3 Planning
 
