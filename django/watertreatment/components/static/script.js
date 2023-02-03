@@ -58,7 +58,7 @@ const drawScene = () => {
 		ctx.fillRect(30 + change_in_x, 50, 100, 200);
 	}
 
-	// Tanks
+	// Water Tanks
 	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
 		let dx = 120; 
 		change_in_x = (dx * i);
@@ -131,10 +131,8 @@ const drawScene = () => {
 const renderLoop = () => {
 	// Render background
 	ctx.clearRect(0, 0, width, height);
-	
 	drawScene();
-	
-	fillLevel += 0.005;
+	fillLevel += 0.002;
 	console.log(fillLevel);
 	if (fillLevel > 1) { fillLevel = 0;}
 	
