@@ -43,5 +43,4 @@ class SplitterPipe(GenericPipe):
     # ================================== #
 
     def toggle_valve(self):
-        # TODO
-        pass
+        self.valve = not self.valve
