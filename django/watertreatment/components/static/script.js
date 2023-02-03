@@ -5,7 +5,7 @@ const NUMBER_OF_TANKS = 4;
 const NUMBER_OF_PIPES = 3;
 const ctx = canvas.getContext('2d');
 
-class Pipe {
+class Fillable {
 	constructor(x, y, w, h, colour) {
 		this.x = x;
 		this.y = y;
@@ -21,7 +21,19 @@ class Pipe {
 	}
 }
 
-class WaterPipe extends Pipe {
+class WaterPipe extends Fillable {
+	constructor(x, y, w, h, colour, fillHeight) {
+		super(x, y, w, h, colour);
+		this.fillHeight = fillHeight;
+	}
+
+	render() {
+		ctx.fillStyle = this.colour;
+		ctx.fillRect(this.x, this.y, this.w, this.h);
+	}
+} 
+
+class WaterTank extends Fillable {
 	constructor(x, y, w, h, colour, fillHeight) {
 		super(x, y, w, h, colour);
 		this.fillHeight = fillHeight;
@@ -44,8 +56,14 @@ const drawScene = () => {
 		change_in_x = (dx * i);
 		ctx.fillStyle = 'grey';
 		ctx.fillRect(30 + change_in_x, 50, 100, 200);
-		// ctx.fillStyle = 'Black';
-		// ctx.fillRect(30 + change_in_x, 50, 100, 200);
+	}
+
+	// Tanks
+	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
+		let dx = 120; 
+		change_in_x = (dx * i);
+		ctx.fillStyle = 'black';
+		ctx.fillRect(50 + change_in_x, 100, 50, 100);
 	}
 
 	// Roofs
@@ -58,44 +76,55 @@ const drawScene = () => {
 		ctx.lineTo(130 + change_in_x, 250);
 		ctx.closePath();
 		ctx.strokeStyle = 'black';
+		ctx.fillStyle = 'grey';
 		ctx.fill();
 		ctx.stroke();
 	}
+	
+	const pipes = []
+	const tanks = []
+	const tankHeight = 100;
+	const tankFillHeight = tankHeight * fillLevel;
 
-	// Filling pipe
-	// ctx.fillStyle = "#afeeee";
-	// ctx.fillRect(110, 210 - fillHeight, 18, fillHeight);
-	
-	// All pipes
-	let pipes = []
-	let waterPipes = []
-	
+	// Four water tanks
+	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
+		let change_in_x = 120;
+		tanks.push(
+			new WaterTank(50 + (change_in_x * i), 210, 50, -100 + tankFillHeight, '#afeeee'),
+		);
+	}
+
 	// Three pipes
 	for (let i = 0; i < NUMBER_OF_PIPES; i++) {
 		let change_in_x = 120;
 		pipes.push(
-			new Pipe(130 + (change_in_x * i) , 180, 20, 20, 'blue'), 
-			new Pipe(150 + (change_in_x * i) , 180, 80, 20, 'purple'), 
+			new Fillable(130 + (change_in_x * i) , 180, 20, 20, 'blue'), 
+			new Fillable(150 + (change_in_x * i) , 180, 80, 20, 'purple'), 
 		);
 	}
+
+	// Fill height from 0 to 1 
+	const height = 100;
+	const fillHeight = height * fillLevel;	
 	
-	let height = 100;
-	let fillHeight = height * fillLevel;
-	// const waterPipe = new WaterPipe(110, 210 - fillHeight, 18, fillHeight , "#afeeee");
-	
-	// Four pipes
+	// Four water pipes
 	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
 		let change_in_x = 120;
 		pipes.push(
+			// Start from the (y coordinate - fillHeight), slowly increases and height is
 			new WaterPipe(110 + (change_in_x * i) , 210 - fillHeight, 20, fillHeight , "#afeeee"),
-			new Pipe(110 + (change_in_x * i), 110, 20, 100, '#000000')
+			new Fillable(110 + (change_in_x * i), 110, 20, 100, '#000000'),
 		);
 	}
 	
+	for (let i = 0 ; i < tanks.length; i++ ) {
+		tanks[i].render();
+	}
 	
 	for (let i = 0 ; i < pipes.length; i++ ) {
 		pipes[i].render();
 	}
+
 		
 }
 
