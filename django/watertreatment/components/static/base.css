@@ -83,3 +83,39 @@ body {
 #title {
     font-size: 35px;
 }
+
+* {
+	box-sizing: border-box;
+	
+}
+
+#canvas {
+	background: #f0f0f0;
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	border: solid #5B6DCD 10px;
+}
+
+/* #source {
+	display: none;
+} */
+
+figure {
+    border: thin #c0c0c0 solid;
+    display: flex;
+    flex-flow: column;
+    /* padding: 5px; */
+    /* max-width: 220px; */
+    margin: auto;
+}
+
+figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+}
