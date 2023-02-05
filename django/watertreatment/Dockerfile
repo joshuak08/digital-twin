@@ -1,3 +1,4 @@
+# Running container in python 3.10 environment
 FROM python:3.10-slim-buster
 
 WORKDIR /app
