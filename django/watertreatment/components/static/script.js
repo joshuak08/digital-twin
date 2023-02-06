@@ -45,7 +45,6 @@ class WaterTank extends Fillable {
 	}
 } 
 
-
 let fillLevel = 0; // between 0 and 1	
 
 const drawScene = () => {
@@ -86,14 +85,6 @@ const drawScene = () => {
 	const tankHeight = 100;
 	const tankFillHeight = tankHeight * fillLevel;
 
-	// Four water tanks
-	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
-		let change_in_x = 120;
-		tanks.push(
-			new WaterTank(50 + (change_in_x * i), 210, 50, -100 + tankFillHeight, '#afeeee'),
-		);
-	}
-
 	// Three pipes
 	for (let i = 0; i < NUMBER_OF_PIPES; i++) {
 		let change_in_x = 120;
@@ -110,11 +101,15 @@ const drawScene = () => {
 	// Four water pipes
 	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
 		let change_in_x = 120;
+		tanks.push(
+			new WaterTank(50 + (change_in_x * i), 210, 50, -100 + tankFillHeight, '#afeeee'),
+		);
 		pipes.push(
 			// Start from the (y coordinate - fillHeight), slowly increases and height is
 			new WaterPipe(110 + (change_in_x * i) , 210 - fillHeight, 20, fillHeight , "#afeeee"),
 			new Fillable(110 + (change_in_x * i), 110, 20, 100, '#000000'),
 		);
+		
 	}
 	
 	for (let i = 0 ; i < tanks.length; i++ ) {
