@@ -1,11 +1,16 @@
 from GenericPipe import GenericPipe
+import math
 
 
 # Q = av where Q is the flow rate, a = cross-sectional area, v = velocity of water
 
 class SplitterPipe(GenericPipe):
     def __init__(self, id_num, inputs, outputs, length):
-        super().__init__(id_num, inputs, outputs, length)
+        if len(self.inputs) == 0 or len(self.outputs) == 0:
+            raise Exception("missing an input/output")
+        else:
+            super().__init__(id_num, inputs, outputs, length)
+            self.radius = 1  # arbitrary
 
     # ================================== #
     def push(self, flow_in, time):
@@ -15,13 +20,15 @@ class SplitterPipe(GenericPipe):
 
         self.time = max(time, self.time) + 1  # increases time by 1 after a push
 
+        self.maxVolume -= math.pi * (self.radius ** 2)
         self.capacity += flow_in  # increase capacity difference of input and output
-        for child_pipe in self.outputs:
-            if child_pipe.valve:  # if the valve isn't closed
-                self.capacity -= child_pipe.outputRate
 
-        if self.capacity > self.maxVolume:
-            raise Exception("capacity is greater than max volume :(")
+        for child_pipe in self.outputs:
+            if child_pipe.valve:  # if the valve isn't closed remove
+                self.capacity -= child_pipe.outputRates
+
+        if self.capacity > self.maxVolume or self.capacity < 0:
+            raise Exception("capacity is out of bounds")
 
         for child_pipe in self.outputs:  # iterates through all output pipes
             if child_pipe.valve:
