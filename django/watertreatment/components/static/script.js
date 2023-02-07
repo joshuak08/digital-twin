@@ -62,7 +62,7 @@ const drawScene = () => {
 		let dx = 120; 
 		change_in_x = (dx * i);
 		ctx.fillStyle = 'black';
-		ctx.fillRect(50 + change_in_x, 100, 50, 100);
+		ctx.fillRect(50 + change_in_x, 110, 50, 100);
 	}
 
 	// Roofs
@@ -79,20 +79,19 @@ const drawScene = () => {
 		ctx.fill();
 		ctx.stroke();
 	}
-	
+
+	// Animation 
 	const pipes = []
 	const tanks = []
 	const tankHeight = 100;
 	const tankFillHeight = tankHeight * fillLevel;
 
 	// Three pipes
-	for (let i = 0; i < NUMBER_OF_PIPES; i++) {
-		let change_in_x = 120;
-		pipes.push(
-			new Fillable(130 + (change_in_x * i) , 180, 20, 20, 'blue'), 
-			new Fillable(150 + (change_in_x * i) , 180, 80, 20, 'purple'), 
-		);
-	}
+	// for (let i = 0; i < NUMBER_OF_PIPES; i++) {
+	// 	let change_in_x = 120;
+	// 	pipes.push(
+	// 	);
+	// }
 
 	// Fill height from 0 to 1 
 	const height = 100;
@@ -101,13 +100,17 @@ const drawScene = () => {
 	// Four water pipes
 	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
 		let change_in_x = 120;
+
 		tanks.push(
 			new WaterTank(50 + (change_in_x * i), 210, 50, -100 + tankFillHeight, '#afeeee'),
 		);
+
 		pipes.push(
 			// Start from the (y coordinate - fillHeight), slowly increases and height is
-			new WaterPipe(110 + (change_in_x * i) , 210 - fillHeight, 20, fillHeight , "#afeeee"),
-			new Fillable(110 + (change_in_x * i), 110, 20, 100, '#000000'),
+			new Fillable(110 + (change_in_x * i) , 220, 120, 20,  '#2F4F4F'), 
+			// new Fillable(150 + (change_in_x * i) , 180, 80, 20, 'purple'), 
+			new WaterPipe(110 + (change_in_x * i) , 220 - fillHeight, 20, fillHeight , "#afeeee"),
+			new Fillable(110 + (change_in_x * i), 120, 20, 100, '#000000'),
 		);
 		
 	}
@@ -124,13 +127,11 @@ const drawScene = () => {
 }
 
 const renderLoop = () => {
-	// Render background
 	ctx.clearRect(0, 0, width, height);
 	drawScene();
 	fillLevel += 0.002;
 	console.log(fillLevel);
 	if (fillLevel > 1) { fillLevel = 0;}
-	
 	requestAnimationFrame(renderLoop);
 };
 
