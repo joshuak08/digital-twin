@@ -15,6 +15,6 @@ body:
     attributes:
       label: Work on Feature
       description: Describe what specific changes are being covered by this issue
-      placeholder: e.g. Addding component X to the system
+      placeholder: e.g. Adding component X to the system
     validations:
       required: true
