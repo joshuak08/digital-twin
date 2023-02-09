@@ -17,4 +17,4 @@ body:
       description: Describe what specific changes are being covered by this issue
       placeholder: e.g. Addding component X to the system
     validations:
-      required: false
+      required: true
