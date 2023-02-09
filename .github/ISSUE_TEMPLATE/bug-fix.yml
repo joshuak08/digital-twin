@@ -17,4 +17,4 @@ body:
       description: Describe what the bug you are fixing is, and what the intended behaviour is
       placeholder: e.g. A is doing X but should be doing Y
     validations:
-      required: false
+      required: true
