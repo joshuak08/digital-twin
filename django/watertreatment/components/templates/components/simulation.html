@@ -3,6 +3,6 @@
 {% block content %}
 <h2>Simulation</h2>
 <canvas id="canvas" width="600" height="600"></canvas>
-<script src="{% static 'animation.js' %}"></script>
-<script src="{% static 'script.js' %}"></script>
+<!-- <script src="{% static 'animation.js' %}"></script> -->
+<script type="module" src="{% static 'animScripts/AnimController.js' %}"></script>
 {% endblock content %}
