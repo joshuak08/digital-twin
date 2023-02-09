@@ -14,7 +14,7 @@ body:
     id: work-description
     attributes:
       label: Work on Feature
-      description: Describe what speicific changes are being covered by this issue
+      description: Describe what specific changes are being covered by this issue
       placeholder: e.g. Addding component X to the system
     validations:
       required: false
