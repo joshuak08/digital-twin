@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prototype
+  template:
+    metadata:
+      labels:
+        app: prototype
+    spec:
+      containers:
+      - name: prototype
+        image: docker.io/joshuak08/python-django:latest
