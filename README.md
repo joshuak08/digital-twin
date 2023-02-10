@@ -95,7 +95,7 @@ Main planned features include:
 
  ## 1.6 Development and Deployment
  [Starting the Frontend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/README.md) \
- [Starting the Backend]()
+ [Starting the Backend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/src/README.md)
  
  ## 1.7 Styling
  We are following [Google Style Guides](https://google.github.io/styleguide/) for our code:
