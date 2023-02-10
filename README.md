@@ -5,7 +5,8 @@
 - [Stakeholders](#14-stakeholders)
 - [User stories](#15-user-stories)
 - [Development and Depolyment](#16-development-and-deployment)
-- [Links](#17-kanban-and-gantt-chart) to Kanban Board, Gantt Chart and Site Preview 
+- [Styling](#17-styling)
+- [Links](#18-kanban-gantt-chart-preview) to Kanban Board, Gantt Chart and Site Preview 
 ---
 ## 1.2 Overview
 > _Nijhuis Saur Industries provides solid and adaptive solutions for sustainable and resilient water use, energy and resource recovery around the world._ - [Nijhuis Industries](https://www.nijhuisindustries.com/)
