@@ -1,19 +1,19 @@
-from GenericPipe import GenericPipe
+import GenericPipe
 
 
 # Q = av where Q is the flow rate, a = cross-sectional area, v = velocity of water
 
-class SplitterPipe(GenericPipe):
-    def __init__(self, id_num, inputs, outputs, length, tickLength):
-        super().__init__(id_num, inputs, outputs, length, tickLength)
+class SplitterPipe(GenericPipe.GenericPipe):
+    def __init__(self, id_num, inputs, outputs, length, tick_length):
+        super().__init__(id_num, inputs, outputs, length, tick_length)
 
     # ======== override methods ======== #
     def push(self, flow_in):
 
         #TODO add condition for valve closure to output rate as well
-        self.capacity += (flow_in - self.outputRate*len(self.outputs))  # increase capacity difference of input and output
+        self.capacity += (flow_in - self.output_rate*len(self.outputs))  # increase capacity difference of input and output
 
-        if self.capacity > self.maxVolume:
+        if self.capacity > self.max_volume:
             raise Exception("capacity is greater than max volume :(")
     # ================================== #
 
