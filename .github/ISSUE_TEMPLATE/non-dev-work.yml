@@ -1,0 +1,20 @@
+name: Non Dev Work
+description: Track work being done on the project that isn't coding
+title: "[Non Dev Work]: "
+body: 
+  - type: input
+    id: area-name
+    attributes:
+      label: Area Name
+      description: What area of non dev work are you working on?
+      placeholder: e.g. GitHub, Documentation, Meetings, Deployment etc.
+    validations:
+      required: true
+  - type: textarea
+    id: work-description
+    attributes:
+      label: Work Done
+      description: Describe what specific work you've done in this area
+      placeholder: e.g. Added X to the GitHub
+    validations:
+      required: true
