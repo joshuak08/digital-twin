@@ -15,6 +15,7 @@ export class WaterTank extends Fillable{
 	};
 
     draw(){
+        // reactangle hegiht
         let x = 60 + this.tankNum*200;
         let y = 210;
         let width = 80;
@@ -29,12 +30,8 @@ export class WaterTank extends Fillable{
             this.currentLevel = this.valueArr[this.valueIdx];
             this.valueIdx += 1;
         }
-        // if (this.valueIdx <= this.valueArr.len){
-            // ctx_layer2.strokeRect(x, y+(h-this.currentLevel), w, this.currentLevel) //x, y, sizex, sizey
-            waterBG(this.tankNum)
-            this.ctx_layer2.fillRect(x,y,width, height - this.currentLevel);
-        // } else {
-        //     this.end = true
-        // }
+
+        waterBG(this.tankNum)
+        this.ctx_layer2.fillRect(x,y,width, height - this.currentLevel);
     }
 }

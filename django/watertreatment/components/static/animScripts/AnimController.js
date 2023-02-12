@@ -16,8 +16,6 @@ const bottomTankY = tankY+170
 const offsetBetweenTanks = (layer1Width/4)
 
 const tankValues=[153, 57, 0, 35, 0, 153]
-let curr_tank_value = tankValues[0]
-let curr_tank_idx = 0
 
 let tanks = []
 //==========================================//
