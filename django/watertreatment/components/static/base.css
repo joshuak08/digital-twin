@@ -89,15 +89,30 @@ body {
 	
 }
 
-#canvas {
-	background: #f0f0f0;
-	padding-left: 0;
+/*=======for perfectly overlapping canvas please don't mess with it=======*/
+#canvas_wrapper {
+    position: relative;
+}
+
+#canvas_wrapper canvas {
+    padding-left: 0;
 	padding-right: 0;
 	margin-left: auto;
 	margin-right: auto;
-	display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+}
+
+#canvas_layer1 {
+	background: #f0f0f0;
 	border: solid #5B6DCD 10px;
 }
+
+#canvas_layer2_anim {
+	border: solid #5B6DCD 10px;
+}
+/* ====================================================================== */
 
 /* #source {
 	display: none;

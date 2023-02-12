@@ -1,96 +1,84 @@
-import Fillable from "./Fillable.js"
-import WaterTank from "./WaterTank.js";
-import WaterPipe from "./WaterPipe.js";
+import { WaterTank } from "./waterTank.js"
 
+//============ constant values ============//
+const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d")
+const ctx_layer2 = document.getElementById("canvas_layer2_anim").getContext("2d")
 
-const canvas = document.getElementById('canvas');
-const width = canvas.width;
-const height = canvas.height;
-const NUMBER_OF_TANKS = 4;
-const ctx = canvas.getContext('2d');
+const layer1Width = 800
+const layer1Height = 600
 
-let fillLevel = 0; // between 0 and 1	
+const tankY = layer1Height/3
+const tankX = (layer1Width/4)/2/2
 
-const drawScene = () => {
+const tankWidth = 2*tankX
+const bottomTankY = tankY+170
 
-	// Tanks
-	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
-        console.log("here")
-		let dx = 120; 
-		let change_in_x = (dx * i);
-		ctx.fillStyle = 'grey';
-		ctx.fillRect(30 + change_in_x, 50, 100, 200);
-	}
+const offsetBetweenTanks = (layer1Width/4)
 
-	// Water Tanks
-	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
-		let dx = 120; 
-		let change_in_x = (dx * i);
-		ctx.fillStyle = 'black';
-		ctx.fillRect(50 + change_in_x, 110, 50, 100);
-	}
+const tankValues=[153, 57, 0, 35, 0, 153]
+let curr_tank_value = tankValues[0]
+let curr_tank_idx = 0
 
-	// Roofs
-	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
-		let dx = 120;
-		let change_in_x = (dx * i) 
-		ctx.beginPath();
-		ctx.moveTo(30 + change_in_x, 250);
-		ctx.lineTo(80 + change_in_x, 300);
-		ctx.lineTo(130 + change_in_x, 250);
-		ctx.closePath();
-		ctx.strokeStyle = 'black';
-		ctx.fillStyle = 'grey';
-		ctx.fill();
-		ctx.stroke();
-	}
+let tanks = []
+//==========================================//
 
-	// Animation 
-	const pipes = []
-	const tanks = []
-	const tankHeight = 100;
-	const tankFillHeight = tankHeight * fillLevel;
-
-	// Fill height from 0 to 1 
-	const height = 100;
-	const fillHeight = height * fillLevel;	
-	
-	// Four water pipes
-	for (let i = 0; i < NUMBER_OF_TANKS; i++) {
-		let change_in_x = 120;
-
-		tanks.push(
-			new WaterTank(50 + (change_in_x * i), 210, 50, -100 + tankFillHeight, '#afeeee', ctx),
-		);
-
-		pipes.push(
-			// Start from the (y coordinate - fillHeight), slowly increases and height is
-			new Fillable(110 + (change_in_x * i) , 220, 120, 20,  '#2F4F4F', ctx), 
-			// new Fillable(150 + (change_in_x * i) , 180, 80, 20, 'purple'), 
-			new WaterPipe(110 + (change_in_x * i) , 220 - fillHeight, 20, fillHeight , "#afeeee", ctx),
-			new Fillable(110 + (change_in_x * i), 120, 20, 100, '#000000', ctx),
-		);
-		
-	}
-	
-	for (let i = 0 ; i < tanks.length; i++ ) {
-		tanks[i].render();
-	}
-	
-	for (let i = 0 ; i < pipes.length; i++ ) {
-		pipes[i].render();
-	}
-
-		
+//draws grey tank background
+function tankBG(tankNum){
+    //draw square part of tank (grey)
+    ctx_layer1.fillRect(tankX + offsetBetweenTanks*tankNum, tankY, 2*tankX, 170); //x, y, sizex, sizey
+    //draw triangle part of tank (grey)
+    let tankTopLeftCoord = tankX + offsetBetweenTanks*tankNum;
+    ctx_layer1.beginPath();
+    ctx_layer1.moveTo(tankTopLeftCoord, bottomTankY);
+    ctx_layer1.lineTo(tankTopLeftCoord + tankWidth, bottomTankY);
+    ctx_layer1.lineTo((2*tankTopLeftCoord + tankWidth)/2, bottomTankY + 20);
+    ctx_layer1.closePath();
+    ctx_layer1.fill();
 }
 
-const renderLoop = () => {
-	ctx.clearRect(0, 0, width, height);
-	drawScene();
-	fillLevel += 0.002;
-	console.log(fillLevel);
-	if (fillLevel > 1) { fillLevel = 0;}
-	requestAnimationFrame(renderLoop);
-};
+//draws water background
+export function waterBG(tankNum){
+    let TLCoord = tankX + offsetBetweenTanks*tankNum + 10; // 50 + 200 *tankNum + 10
+    let waterWidth = 2*tankX - 20;
+    let waterHeight = 170 - 17;
+    let BTTank = tankY + 10 + waterHeight;
 
-renderLoop();
+    ctx_layer2.fillStyle = 'lightBlue'
+    // water for tanks (lightBlue)
+    ctx_layer2.fillRect(TLCoord, tankY + 10, waterWidth, waterHeight);
+    // triangle water (lightBlue)
+    
+    ctx_layer2.fillStyle = '#C2B280'
+    ctx_layer2.beginPath();
+    ctx_layer2.moveTo(TLCoord, BTTank);
+    ctx_layer2.lineTo(TLCoord + 2*tankX - 20, BTTank);
+    ctx_layer2.lineTo((TLCoord + TLCoord + 2*tankX - 20)/2, BTTank + 15);
+    ctx_layer2.closePath();
+    ctx_layer2.fill();
+    // initialise water animation objects
+    tanks.push(new WaterTank(TLCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, tankValues));
+}
+
+//creates background for 4 tanks 
+function drawBG(){
+    ctx_layer1.fillStyle = '#5A5A5A';
+    for (let tankNum = 0; tankNum < 4; tankNum++ ){
+        tankBG(tankNum);
+        waterBG(tankNum);
+    }
+}
+
+drawBG();
+
+
+function animate(){
+    tanks[0].draw()
+    tanks[1].draw()
+    tanks[2].draw()
+    tanks[3].draw()
+    requestAnimationFrame(animate)
+
+}
+
+animate();
+
