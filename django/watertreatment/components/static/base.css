@@ -90,33 +90,40 @@ body {
 }
 
 /*=======for perfectly overlapping canvas please don't mess with it=======*/
-#canvas_wrapper {
-    position: relative;
-}
-
-#canvas_wrapper canvas {
-    padding-left: 0;
-	padding-right: 0;
-	margin-left: auto;
-	margin-right: auto;
-    position: absolute;
-    left: 50%;
-    margin-left: -400px;
-}
-
 #canvas_layer1 {
+    z-index: 1;
+    position: absolute;    
 	background: #f0f0f0;
 	border: solid #5B6DCD 10px;
 }
 
 #canvas_layer2_anim {
+    z-index: 2;
+    position: relative;
 	border: solid #5B6DCD 10px;
 }
+
 /* ====================================================================== */
 
-/* #source {
-	display: none;
-} */
+#box1 {
+    background: #f0f0f0;
+	border: solid #5B6DCD 10px;
+}
+
+#box2 {
+    background: #f0f0f0;
+	border: solid #5B6DCD 10px;
+}
+
+#box3 {
+    background: #f0f0f0;
+	border: solid #5B6DCD 10px;
+}
+
+#box4 {
+    background: #f0f0f0;
+	border: solid #5B6DCD 10px;
+}
 
 figure {
     border: thin #c0c0c0 solid;
