@@ -63,11 +63,10 @@ export function waterBG(tankNum){
     let waterHeight = 170 - 17;
     let BTTank = tankY + 10 + waterHeight;
 
-    ctx_layer2.fillStyle = 'lightBlue'
     // water for tanks (lightBlue)
+    ctx_layer2.fillStyle = 'lightBlue'
     ctx_layer2.fillRect(TLCoord, tankY + 10, waterWidth, waterHeight);
     // triangle water (lightBlue)
-    
     ctx_layer2.fillStyle = '#C2B280'
     ctx_layer2.beginPath();
     ctx_layer2.moveTo(TLCoord, BTTank);
@@ -85,7 +84,7 @@ function drawBG(){
     for (let tankNum = 0; tankNum < 4; tankNum++ ){
         tankBG(tankNum);
         waterBG(tankNum);
-        IOPipes(tankNum)
+        IOpipes(tankNum)
 
     }
 }
