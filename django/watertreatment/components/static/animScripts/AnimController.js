@@ -1,24 +1,46 @@
 import { WaterTank } from "./waterTank.js"
 
 //============ constant values ============//
-const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d")
-const ctx_layer2 = document.getElementById("canvas_layer2_anim").getContext("2d")
+const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d");
+const ctx_layer2 = document.getElementById("canvas_layer2_anim").getContext("2d");
 
-const layer1Width = 800
-const layer1Height = 600
+const layer1Width = 800;
+const layer1Height = 600;
 
-const tankY = layer1Height/3
-const tankX = (layer1Width/4)/2/2
+const tankY = layer1Height/3;
+const tankX = (layer1Width/4)/2/2;
 
-const tankWidth = 2*tankX
-const bottomTankY = tankY+170
+const tankWidth = 2*tankX;
+const bottomTankY = tankY+170;
 
-const offsetBetweenTanks = (layer1Width/4)
+const offsetBetweenTanks = (layer1Width/4);
 
-const tankValues=[153, 57, 0, 35, 0, 153]
+const tankValues=[153, 57, 0, 35, 0, 153];
+const pipeWidth = 12;
 
 let tanks = []
 //==========================================//
+
+//draws grey pipes connected to tanks
+function IOpipes(tankNum){
+    let pipeX = tankX + offsetBetweenTanks*tankNum + tankX - pipeWidth/2
+    let pipeHeight = 50
+    let pipeY = tankY-pipeHeight
+    //pipes ontop
+    ctx_layer1.fillRect(pipeX, pipeY, pipeWidth, pipeHeight);
+    //pipes below
+    ctx_layer1.fillRect(pipeX, pipeY+pipeHeight+170, pipeWidth, pipeHeight);
+
+    if (tankNum === 0 ){
+        ctx_layer1.fillRect(pipeX, pipeY, 700, pipeWidth);
+        ctx_layer1.fillRect(pipeX, pipeY+2*pipeHeight+170, 700, pipeWidth);
+        ctx_layer1.font = "12px Arial";
+        ctx_layer1.fillStyle = "white";
+        ctx_layer1.fillText("input pipe", pipeX+645, pipeY+10);
+        ctx_layer1.fillText("output pipe", pipeX+638, pipeY+10+170+2*pipeHeight);
+        ctx_layer1.fillStyle = "#5A5A5A";
+    }
+}
 
 //draws grey tank background
 function tankBG(tankNum){
@@ -63,6 +85,8 @@ function drawBG(){
     for (let tankNum = 0; tankNum < 4; tankNum++ ){
         tankBG(tankNum);
         waterBG(tankNum);
+        IOPipes(tankNum)
+
     }
 }
 
