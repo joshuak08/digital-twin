@@ -57,6 +57,7 @@ class SandFilter(GenericPipe.GenericPipe):
             if self.backwash_timer == 0:
                 self.backwash = False
                 self.output = self.normal_pipe
+                self.particulate_mass = 0
                 self.input.toggle_valve()
 
         else:
