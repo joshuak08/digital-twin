@@ -78,4 +78,18 @@ class TestSplitterBehaviour(unittest.TestCase):
         pipe = SplitterPipe.SplitterPipe(1, 1, [sink], 1, 1, 1)
         pipe.push(100)
         self.assertEqual(100, sink.total_flow)
-        
+    
+    def test_pipe_chain(self):
+        system = TestSystem("Dummy System")
+        sink = Sink.Sink(1, system)
+        pipe1 = SplitterPipe.SplitterPipe(1, 1, [sink], 1, 1, 1)
+        pipe2 = SplitterPipe.SplitterPipe(1, 1, [pipe1], 1, 1, 1)
+        pipe2.push(100)
+        self.assertEqual(100, sink.total_flow)
+    
+    def test_basic_split(self):
+        system = TestSystem("Dummy System")
+        sink1 = Sink.Sink(1, system)
+        sink2 = Sink.Sink(1, system)
+        pipe = SplitterPipe.SplitterPipe(1, 1, [sink1, sink2])
+        # test work paused to add area attribute to Splitters
