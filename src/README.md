@@ -20,6 +20,8 @@ Once you are in the extensions folder you will need to create a series of nested
 
 Now you need to put the scripts from the project folder into the button, so pyRevit knows what code to run when the button is pressed. Copy the files “DocumentInterface.py”, “sqliteRevitIpy.py” and “RevitLoader_script.py” from the src folder in the project, to the “runScripts.pushbutton” folder. 
 
+Open DocumentInterface.py in a text editor (e.g. notepad) and remove the # and space at the start of the first line, then close and save the file.
+
 Close Revit, then open it again, and open a project. There should now be a new panel on the tabs at the top of the project, next to pyRevit, called loadToDB. Clicking on this panel should open up a tab with a button labelled runScripts on it. If this works then you are ready to move on to the next step.
 
 ## Generating and Using the database:
