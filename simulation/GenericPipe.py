@@ -14,7 +14,7 @@ class GenericPipe(ABC):
         self.num_of_inputs = num_of_inputs
 
     @abstractmethod
-    def push(self, flowi_in) -> int:  # pushes water down pipe on a single tick
+    def push(self, flow_in) -> int:  # pushes water down pipe on a single tick
         pass
 
     @abstractmethod

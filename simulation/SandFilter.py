@@ -33,10 +33,10 @@ class SandFilter(GenericPipe.GenericPipe):
         water_height = self.capacity / (math.pi * (self.radius ** 2))
         return math.sqrt(2 * 9.807 * water_height)
 
-    def push(self, flowi_in):
+    def push(self, flow_in):
         self.sand_height += 1 # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
         self.max_volume -= math.pi * (self.radius ** 2)
-        self.capacity += flowi_in
+        self.capacity += flow_in
 
         if self.sand_height > 10: # arbitrary boundary to start backwash
             self.backwash = True
