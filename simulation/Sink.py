@@ -2,13 +2,13 @@ import GenericPipe
 
 
 class Sink(GenericPipe.GenericPipe):
-    def __init__(self, num_of_inputs, simulation_system):
-        self.num_of_inputs = num_of_inputs
+
+    def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius, simulation_system):
+        super().__init__(id_num, num_of_inputs, outputs, length, tick_length, radius)
         self.pushes_in_round = 0
         self.flow_in_round = 0
         self.total_flow = 0
         self.system = simulation_system
-        pass
 
     def push(self, flow_in):
         self.pushes_in_round += 1
