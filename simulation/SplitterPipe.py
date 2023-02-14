@@ -9,6 +9,7 @@ class SplitterPipe(GenericPipe.GenericPipe):
         self.pushes_in_current_round = 0
         self.flow_in_current_round = 0
         self.output_ratios = []
+        self.cs_area = math.pi * (self.radius ** 2)
         
     def get_output_ratios(self):
         total_radius = 0
