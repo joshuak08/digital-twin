@@ -1,14 +1,14 @@
 import { WaterTank } from "./waterTank.js"
-import { drawText } from "./BoxController.js"
+import { drawText } from "./ScadaController.js"
 
 //============ constant values ============//
 const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d");
 const ctx_layer2 = document.getElementById("canvas_layer2_anim").getContext("2d");
 
-const box1 = document.getElementById("box1").getContext("2d");
-const box2 = document.getElementById("box2").getContext("2d");
-const box3 = document.getElementById("box3").getContext("2d");
-const box4 = document.getElementById("box4").getContext("2d");
+const box1 = document.getElementById("scada1").getContext("2d");
+const box2 = document.getElementById("scada2").getContext("2d");
+const box3 = document.getElementById("scada3").getContext("2d");
+const box4 = document.getElementById("scada4").getContext("2d");
 
 
 const layer1Width = 800;
@@ -96,22 +96,14 @@ function drawBG(){
     }
 }
 
-drawBG();
-
-
-
 function animate(){
-    tanks[0].draw()
-    tanks[1].draw()
-    tanks[2].draw()
-    tanks[3].draw()
-    for (let boxNum = 0; boxNum < 4; boxNum++ ){
-        drawText(boxes[boxNum], boxNum)
-    }
+    for (let tankNum=0; tankNum<4; tankNum++) {tanks[tankNum].draw();}
     requestAnimationFrame(animate)
-
-    
 }
 
+// temp test code for scada text
+for (let boxNum = 0; boxNum < 4; boxNum++ ){drawText(boxes[boxNum], boxNum);}
+
+drawBG();
 animate();
 

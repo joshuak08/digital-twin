@@ -4,22 +4,23 @@
 
 <h2>Simulation</h2>
 
-<div class="row">
-  <div class="column">       
-    <canvas id="box1" width="400" height="290"></canvas>
-    <canvas id="box2" width="400" height="290"></canvas>
-  </div>
-  <div class="column">
-    <canvas id="canvas_layer1" width="800" height="600"></canvas>
-    <canvas id="canvas_layer2_anim" width="800" height="600"></canvas>
-  </div>
-  <div class="column">
-    <canvas id="box3" width="400" height="290"></canvas>
-    <canvas id="box4" width="400" height="290"></canvas>
-  </div>
+<div class="anim_scada">
+    <div class="side">
+        <canvas id="scada1" class="Scada" width="400" height="285"></canvas>
+        <canvas id="scada2" class="Scada" width="400" height="285"></canvas>
+    </div>
+    <div class="main_anim">
+        <canvas id="canvas_layer1" width="800" height="600"></canvas>
+        <canvas id="canvas_layer2_anim" width="800" height="600"></canvas>
+    </div>
+    <div class="side">
+        <canvas id="scada3" class="Scada" width="400" height="285"></canvas>
+        <canvas id="scada4" class="Scada" width="400" height="285"></canvas>
+    </div>
 </div>
 
-<script type="module" src="{% static 'animScripts/BoxController.js' %}"></script>
+<script type="module" src="{% static 'animScripts/ScadaController.js' %}"></script>
+
 <script type="module" src="{% static 'animScripts/AnimController.js' %}"></script>
 
 {% endblock content %}
