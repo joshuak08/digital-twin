@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Document
+from .models import Document, SimDataTable
+from django.core import serializers
 import json
 
 """
@@ -52,5 +53,7 @@ def element(request, type, ID):
 def revitModel(request):
     return render(request, 'components/revit-model.html', {'title': "Revit Model"})
 
+
 def simulation(request):
-    return render(request, 'components/simulation.html', {'title': "Simulation"})
+    all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
+    return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': all_SimData})

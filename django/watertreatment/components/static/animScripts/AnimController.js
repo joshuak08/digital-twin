@@ -28,7 +28,6 @@ const pipeWidth = 12;
 let tanks = []
 let boxes = [box1,box2,box3,box4]
 //==========================================//
-
 //draws grey pipes connected to tanks
 function IOpipes(tankNum){
     let pipeX = tankX + offsetBetweenTanks*tankNum + tankX - pipeWidth/2
