@@ -1,0 +1,22 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      ["build", "-t", "gcr.io/prototype-377723/python-django:latest", "."]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/prototype-377723/python-django"]
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "run",
+        "deploy",
+        "python-django",
+        "--image",
+        "gcr.io/prototype-377723/python-django",
+        "--region",
+        "europe-west2",
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
+      ]
