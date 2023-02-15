@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-10k#2igt7)e(xq-mc!!1zao&%s$0ms%_4%3t&rl-yvz_6ot%1o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['python-django-vb27oaoulq-nw.a.run.app']
 
 # Application definition
 
@@ -36,8 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-	# 'livereload',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -47,8 +46,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	# 'livereload.middleware.LiveReloadScript',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'watertreatment.urls'
