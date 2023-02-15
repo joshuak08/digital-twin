@@ -51,3 +51,6 @@ def element(request, type, ID):
 
 def revitModel(request):
     return render(request, 'components/revit-model.html', {'title': "Revit Model"})
+
+def simulation(request):
+    return render(request, 'components/simulation.html', {'title': "Simulation"})

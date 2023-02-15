@@ -1,0 +1,13 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% block content %}
+
+<h2>Simulation</h2>
+
+<div id="canvas_wrapper">
+  <canvas id="canvas_layer1" width="800" height="600"></canvas>
+  <canvas id="canvas_layer2_anim" width="800" height="600"></canvas>
+</div>
+<script type="module" src="{% static 'animScripts/AnimController.js' %}"></script>
+
+{% endblock content %}
