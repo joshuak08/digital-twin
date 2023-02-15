@@ -32,11 +32,15 @@ class SplitterPipe(GenericPipe.GenericPipe):
 
         if self.pushes_in_current_round == self.num_of_inputs:
             self.get_output_ratios()
+            flow_out = 0
             for i in range(0, len(self.outputs)):
-                self.outputs[i].push(self.flow_in_current_round * self.output_ratios[i])
+                flow = self.flow_in_current_round * self.output_ratios[i]
+                flow_out += flow
+                self.outputs[i].push(flow)
                 self.pushes_in_current_round = 0
                 self.flow_in_current_round = 0
 
+            self.capacity += (flow_in - flow_out)
         if self.capacity > self.max_volume:
             raise Exception("capacity is greater than max volume :(")
     # ================================== #
