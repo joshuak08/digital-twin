@@ -78,6 +78,7 @@ class TestSplitterBehaviour(unittest.TestCase):
         pipe = SplitterPipe.SplitterPipe(1, 1, [sink], 1, 1, 1)
         pipe.push(100)
         self.assertEqual(100, sink.total_flow)
+        self.assertEqual(0, pipe.capacity)
     
     def test_pipe_chain(self):
         system = TestSystem("Dummy System")
@@ -86,6 +87,8 @@ class TestSplitterBehaviour(unittest.TestCase):
         pipe2 = SplitterPipe.SplitterPipe(2, 1, [pipe1], 1, 1, 1)
         pipe2.push(100)
         self.assertEqual(100, sink.total_flow)
+        self.assertEqual(0, pipe1.capacity)
+        self.assertEqual(0, pipe2.capacity)
     
     def test_basic_split(self):
         system = TestSystem("Dummy System")
@@ -95,6 +98,7 @@ class TestSplitterBehaviour(unittest.TestCase):
         pipe.push(100) 
         self.assertEqual(50, sink1.total_flow)
         self.assertEqual(50, sink2.total_flow)
+        self.assertEqual(0, pipe.capacity)
     
     def test_split_one_closed(self):
         system = TestSystem("Dummy System")
@@ -105,4 +109,16 @@ class TestSplitterBehaviour(unittest.TestCase):
         pipe.push(100) 
         self.assertEqual(0, sink1.total_flow)
         self.assertEqual(100, sink2.total_flow)
-        # test writing paused to make a change to splitters
+        self.assertEqual(0, pipe.capacity)
+
+    def test_split_both_closed(self):
+        system = TestSystem("Dummy System")
+        sink1 = Sink.Sink(0, 1, [], 1, 1, 1, system)
+        sink2 = Sink.Sink(1, 1, [], 1, 1, 1, system)
+        pipe = SplitterPipe.SplitterPipe(2, 1, [sink1, sink2])
+        sink1.toggle_valve()
+        sink2.toggle_valve()
+        pipe.push(100) 
+        self.assertEqual(0, sink1.total_flow)
+        self.assertEqual(0, sink2.total_flow)
+        self.assertEqual(100, pipe.capacity)
