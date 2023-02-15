@@ -1,4 +1,4 @@
-import { WaterTank } from "./waterTank.js"
+import { WaterTank } from "./WaterTank.js"
 
 //============ constant values ============//
 const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d");
