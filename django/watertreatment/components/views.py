@@ -44,8 +44,6 @@ def elementsOfType(request, type):
 
 def element(request, type, ID):
     element = Document.objects.get(elemID=ID)
-    print(element.params)
-    print(element.params[700:715])
     params = json.loads(element.params)
     print(params)
     context = {'elementID': ID, "params": params, 'type': type}

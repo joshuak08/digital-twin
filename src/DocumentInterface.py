@@ -47,7 +47,7 @@ class DocumentInterface:
             for i in category:
                 if not (i is None):
                     try:
-                        name = i.Category.Name
+                        name = i.Category.Name.replace(" ", "_")
                     except:
                         name = "unnamed"
                     if name in self.elementDict:
@@ -115,6 +115,7 @@ class ParameterInterface:
         # necessary, can be changed if needed
         try:
             self.stringValue = parameter.AsValueString()
+            self.stringValue = self.stringValue.replace('"', ' inches')
         except:
             self.stringValue = ""
         try:
