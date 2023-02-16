@@ -6,7 +6,8 @@
 - [User stories](#15-user-stories)
 - [Development and Depolyment](#16-development-and-deployment)
 - [Styling](#17-styling)
-- [Links](#18-kanban-gantt-chart-preview) to Kanban Board, Gantt Chart and Site Preview 
+- [Kanban Board, Gantt Chart, Progress made](#18-kanban-gantt-chart-progress-made)
+- [Site Preview](https://beta-release-vb27oaoulq-ew.a.run.app/), now hosted on Google Cloud! 
 ---
 ## 1.2 Overview
 > _Nijhuis Saur Industries provides solid and adaptive solutions for sustainable and resilient water use, energy and resource recovery around the world._ - [Nijhuis Industries](https://www.nijhuisindustries.com/)
@@ -56,15 +57,12 @@ Main planned features include:
  - [JavaScript](https://google.github.io/styleguide/jsguide.html) 
  - [HTML/CSS](https://google.github.io/styleguide/htmlcssguide.html) 
  
- We also frequently refer to [Django's](https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/) official docs for their conventions.
+We also frequently refer to [Django's  official docs](https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/) for their conventions. \
+These guides are used to keep our code **consistent** and **understandable**.
  
-We attempt to keep our code **clean** and **understandable** while following these standards. \
-We adopted these conventions so that our code is *consistent*. \
-Others can then focus on what we're saying rather than how we are trying to say it.
- 
-  ## 1.8 Kanban, Gantt Chart, Preview 
+  ## 1.8 Kanban, Gantt Chart, Progress made
   [Kanban](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/projects/1) \
   [Gantt Chart](https://uob-my.sharepoint.com/:x:/g/personal/ij21409_bristol_ac_uk/EX73IxO8MzxJpIT4n8v2akIBD4Ke-R7LHc50kl0CKyK-Aw?e=IhAzEd) \
-  [Preview](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/PREVIEW.md)
+  [Progress](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/PREVIEW.md)
 
 <p align="right">[<a href="#11-index">Top</a>]</p>
