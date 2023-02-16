@@ -1,5 +1,6 @@
-import { WaterTank } from "./waterTank.js"
-import { drawText } from "./ScadaController.js"
+import { WaterTank } from "./WaterTank.js"
+// import { draw } from "./ScadaController.js"
+import { ScadaController } from "./ScadaController.js";
 
 //============ constant values ============//
 const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d");
@@ -101,8 +102,14 @@ function animate(){
 }
 
 // temp test code for scada text
-for (let boxNum = 0; boxNum < 4; boxNum++ ){drawText(boxes[boxNum], boxNum);}
+// for (let boxNum = 0; boxNum < 4; boxNum++ ){drawText(boxes[boxNum], boxNum);}
+
+let destroyer = new ScadaController([box1, box2, box3, box4])
+destroyer.clearScada()
+destroyer.draw()
+destroyer.format_json(1, 1)
 
 drawBG();
 animate();
+
 

@@ -1,6 +1,8 @@
 import { Fillable } from "./Fillable.js"
 import { waterBG } from "./AnimController.js"
 
+let json_list_sim_data = document.getElementById('all_SimData').textContent
+
 export class WaterTank extends Fillable{
     constructor(TLCoord, y, waterWidth, waterHeight, colour, ctx_layer2, tankNum, valuesArr) {
 		super(TLCoord, y, waterWidth, waterHeight, colour);
@@ -27,6 +29,7 @@ export class WaterTank extends Fillable{
             this.currentLevel += 0.5;
         } else if (this.currentLevel === this.valueArr[this.valueIdx]) {
             console.log(this.currentLevel);
+            // change scada here
             this.currentLevel = this.valueArr[this.valueIdx];
             this.valueIdx += 1;
         }
