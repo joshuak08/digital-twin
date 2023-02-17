@@ -1,10 +1,9 @@
 import { Fillable } from "./Fillable.js"
 import { waterBG } from "./AnimController.js"
-
-let json_list_sim_data = document.getElementById('all_SimData').textContent
+import { ScadaController } from "./ScadaController";
 
 export class WaterTank extends Fillable{
-    constructor(TLCoord, y, waterWidth, waterHeight, colour, ctx_layer2, tankNum, valuesArr) {
+    constructor(TLCoord, y, waterWidth, waterHeight, colour, ctx_layer2, tankNum, valuesArr, scada_controller) {
 		super(TLCoord, y, waterWidth, waterHeight, colour);
         // this.currentLevel = (initialLevel- y)/((y+h)-y) // initiallevel normalised to within pixel height of tank
         this.valueIdx = 1;
@@ -13,7 +12,7 @@ export class WaterTank extends Fillable{
         this.ctx_layer2 = ctx_layer2;
         this.ctx_layer2.fillStyle = colour;
         this.tankNum = tankNum;
-
+        this.scada_controller = scada_controller
 	};
 
     draw(){
@@ -30,6 +29,8 @@ export class WaterTank extends Fillable{
         } else if (this.currentLevel === this.valueArr[this.valueIdx]) {
             console.log(this.currentLevel);
             // change scada here
+            this.scada_controller.draw(("tank"+(this.valueIdx-1)), )
+            //
             this.currentLevel = this.valueArr[this.valueIdx];
             this.valueIdx += 1;
         }

@@ -101,14 +101,6 @@ function animate(){
     requestAnimationFrame(animate)
 }
 
-// temp test code for scada text
-// for (let boxNum = 0; boxNum < 4; boxNum++ ){drawText(boxes[boxNum], boxNum);}
-
-let destroyer = new ScadaController([box1, box2, box3, box4])
-destroyer.clearScada()
-destroyer.draw()
-destroyer.format_json(1, 1)
-
 drawBG();
 animate();
 

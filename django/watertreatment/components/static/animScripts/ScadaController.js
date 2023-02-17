@@ -3,56 +3,41 @@
 //     canvas.fillText(`Scada: ${boxNum}`, 10, 50);
 // };
 
-console.log(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
+// console.log(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
 // first parse converts to list second converts to json list
 
 export class ScadaController{
-    constructor(scada_contexts){
+    constructor(scada_context){
         this.json_list_simdata = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
-        this.scada_contexts = scada_contexts;
+        // this.scada_context = scada_context;
     }
 
-    clearScada(){
-        for (let scada_num=0; scada_num < 4; scada_num++) {
-            this.scada_contexts[scada_num].clearRect(0, 0, 250,     285);
+    clearScada(scada_context){
+        scada_context.clearRect(0, 0, 250,     285);
+    }
+
+    format_scada_text(snapshot_data){ // input = this.json_list_simdata[scada_num].fields
+        let text = []
+        // puts key and values into text array e.g. "water level": 5 based off database column names
+        for (let field_num = 0; field_num < Object.entries(snapshot_data["fields"]).length; field_num++){
+            text.push(Object.keys(snapshot_data["fields"])[field_num] + " : " + Object.values(snapshot_data["fields"])[field_num])
+        }
+
+        return text
+    }
+
+    draw(component_name ,snapshot_num, scada_context){
+        //filters for correct tank and snapshot row where fields contain the water level sand displacement
+        let snapshot_data = ((Object.entries(this.json_list_simdata)).filter(fields => fields[1]["pk"] === (component_name) && fields[1]["fields"]["snapshots"] === snapshot_num))[0][1]
+
+        scada_context.font = "20px serif"; // sets font and font size
+
+        let simdata = this.json_list_simdata;
+        let text_pieces = this.format_scada_text(snapshot_data)
+
+        this.clearScada(scada_context)
+        for (let field_num=0; field_num < text_pieces.length; field_num++) {
+            scada_context.fillText(text_pieces[field_num], 2, 15 + field_num*20)
         }
     }
-
-    format_json(scada_num, snapshot_num){ // input = this.json_list_simdata[scada_num].fields
-        // let text = []
-        // console.log("field length:" + Object.keys(scada_json).length);
-        //
-        // text.push("component-name : " + component_name)
-        // for (let field_num=0; field_num < Object.keys(scada_json).length; field_num++){
-        //
-        //
-        //     let field = Object.keys(scada_json)[field_num];
-        //     text.push(field+ " : " + scada_json[field]);
-        // }
-        // return text;
-        let text = []
-        let fields = (Object.entries(this.json_list_simdata).filter(([entry_num, json]) => json.pk === "tank1").filter(([entry_num, json]) => json.fields.snapshots === 1).map(([entry_num, json]) => json.fields))
-        console.log(fields)
-        // let tank_name = Object.keys(this.scada_contexts).map().filter(field => field === ("tank"+scada_num))
-    }
-
-    //filter correct component first then filter for snapshot number
-
-    draw(snapshot_num){ //JSON.parse(this.json_list_simdata[scada_num])
-        // for (let scada_num=0; scada_num < 4; scada_num++) {
-        //     this.scada_list[scada_num].font = "20px serif";
-        //     let simdata = this.json_list_simdata;
-        //
-        //     for (let field_num=0; field_num < Object.keys(simdata[scada_num].fields).length+1; field_num++) {
-        //
-        //         let text_piece = this.format_json(scada_num)[field_num];
-        //
-        //         this.scada_list[scada_num].fillText(text_piece, 2, 15 + field_num*20)
-        //     }
-        // }
-    }
-
-
 }
-// probably should handle the sql stuff ajax and what not
-// once data is retrieved convert it to array from, unsure on how to sync pipe and tanks but can worry about that later
