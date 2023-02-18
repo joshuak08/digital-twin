@@ -10,7 +10,7 @@ const box1 = document.getElementById("scada1").getContext("2d");
 const box2 = document.getElementById("scada2").getContext("2d");
 const box3 = document.getElementById("scada3").getContext("2d");
 const box4 = document.getElementById("scada4").getContext("2d");
-
+let boxes = [box1,box2,box3,box4]
 
 const layer1Width = 800;
 const layer1Height = 600;
@@ -27,7 +27,6 @@ const tankValues=[153, 57, 0, 35, 0, 153];
 const pipeWidth = 12;
 
 let tanks = []
-let boxes = [box1,box2,box3,box4]
 //==========================================//
 //draws grey pipes connected to tanks
 function IOpipes(tankNum){
@@ -83,7 +82,8 @@ export function waterBG(tankNum){
     ctx_layer2.closePath();
     ctx_layer2.fill();
     // initialise water animation objects
-    tanks.push(new WaterTank(TLCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, tankValues));
+    let scada_controller = new ScadaController(boxes[tankNum])
+    tanks.push(new WaterTank(TLCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, scada_controller));
 }
 
 //creates background for 4 tanks 
@@ -97,7 +97,9 @@ function drawBG(){
 }
 
 function animate(){
-    for (let tankNum=0; tankNum<4; tankNum++) {tanks[tankNum].draw();}
+    for (let tankNum=0; tankNum<4; tankNum++) {
+        tanks[tankNum].draw();
+    }
     requestAnimationFrame(animate)
 }
 
