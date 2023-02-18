@@ -12,6 +12,14 @@ export class ScadaController{
         this.scada_context.clearRect(0, 0, 250,     285);
     }
 
+    change_rate_tank(current_snapshot, tankNum){
+        let json_list = (Object.entries(this.json_list_simdata))
+        // filter for next snapshots
+        let next_snapshot_data = json_list.filter(fields => fields[1]["pk"] === ("tank"+tankNum) && fields[1]["fields"]["snapshots"] === current_snapshot+1).map(fields => fields[1]["fields"]["waterLevel"])
+        let current_snapshot_data = json_list.filter(fields => fields[1]["pk"] === ("tank"+tankNum) && fields[1]["fields"]["snapshots"] === current_snapshot).map(fields => fields[1]["fields"]["waterLevel"])
+        return Math.abs(current_snapshot_data - next_snapshot_data)
+    }
+
     format_scada_text(snapshot_data, component_specific_data){ // input = this.json_list_simdata[scada_num].fields
         let text = []
         // puts key and values into text array e.g. "water level": 5 based off database column names
