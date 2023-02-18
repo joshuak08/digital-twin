@@ -63,7 +63,7 @@ function tankBG(tankNum){
     ctx_layer1.fill();
 }
 
-//draws water background
+//draws water background and initialises the tank objects and scada objects
 export function waterBG(tankNum){
     let TLCoord = tankX + offsetBetweenTanks*tankNum + 10; // 50 + 200 *tankNum + 10
     let waterWidth = 2*tankX - 20;
@@ -73,7 +73,7 @@ export function waterBG(tankNum){
     // water for tanks (lightBlue)
     ctx_layer2.fillStyle = 'lightBlue'
     ctx_layer2.fillRect(TLCoord, tankY + 10, waterWidth, waterHeight);
-    // triangle water (lightBlue)
+    // triangle sand (lightBlue)
     ctx_layer2.fillStyle = '#C2B280'
     ctx_layer2.beginPath();
     ctx_layer2.moveTo(TLCoord, BTTank);
@@ -81,8 +81,7 @@ export function waterBG(tankNum){
     ctx_layer2.lineTo((TLCoord + TLCoord + 2*tankX - 20)/2, BTTank + 15);
     ctx_layer2.closePath();
     ctx_layer2.fill();
-    // initialise water animation objects
-
+    // initialise water animation objects and scada screen controller for each water tank
     let scada_controller = new ScadaController(boxes[tankNum])
     tanks.push(new WaterTank(TLCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, scada_controller));
 }
@@ -92,15 +91,15 @@ function drawBG(){
     ctx_layer1.fillStyle = '#5A5A5A';
     for (let tankNum = 0; tankNum < 4; tankNum++ ){
         tankBG(tankNum);
-        waterBG(tankNum);
+        waterBG(tankNum); // this one also initialises tank and scada controller objects
         IOpipes(tankNum)
     }
 }
 
+//animation loop
 function animate(){
-    for (let tankNum=0; tankNum<4; tankNum++) {
-        tanks[tankNum].draw();
-    }
+    // makes the tanks draw on canvases
+    for (let tankNum=0; tankNum<4; tankNum++) {tanks[tankNum].draw();}
     requestAnimationFrame(animate)
 }
 
