@@ -37,15 +37,14 @@ export class WaterTank extends Fillable{
         let width = 80;
         let height = 153;
 
-        if (this.currentLevel > this.valuesArr[this.valueIdx]){
+         if (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.00000000001) {
+            this.currentLevel = this.valuesArr[this.valueIdx];
+            this.valueIdx += 1;
+        } else if (this.currentLevel > this.valuesArr[this.valueIdx]){
             this.currentLevel -= this.water_change;
 
         } else if (this.currentLevel < this.valuesArr[this.valueIdx]){
             this.currentLevel += this.water_change;
-
-        } else if (this.currentLevel === this.valuesArr[this.valueIdx]) {
-            this.currentLevel = this.valuesArr[this.valueIdx];
-            this.valueIdx += 1;
         }
 
         if (this.valueIdx <= this.valuesArr.length){
