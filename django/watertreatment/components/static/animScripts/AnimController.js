@@ -1,5 +1,4 @@
 import { WaterTank } from "./WaterTank.js"
-// import { draw } from "./ScadaController.js"
 import { ScadaController } from "./ScadaController.js";
 
 //============ constant values ============//
