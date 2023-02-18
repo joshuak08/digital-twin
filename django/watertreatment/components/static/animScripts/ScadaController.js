@@ -6,7 +6,6 @@ export class ScadaController{
     constructor(scada_context){
         this.json_list_simdata = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
         this.scada_context = scada_context;
-        // console.log((Object.entries(this.json_list_simdata)).filter(fields => fields[1]["pk"] === ("tank1") && fields[1]["fields"]["snapshots"] === 1))
     }
 
     clearScada(){
@@ -19,16 +18,16 @@ export class ScadaController{
         for (let field_num = 0; field_num < Object.entries(snapshot_data["fields"]).length; field_num++){
             text.push(Object.keys(snapshot_data["fields"])[field_num] + " : " + Object.values(snapshot_data["fields"])[field_num])
         }
-
-        return text.concat(component_specific_data)
+        return component_specific_data.concat(text)
     }
 
     draw(component_name ,snapshot_num, component_specific_data){
-        // console.log(component_name ,snapshot_num)
+
         //filters for correct tank and snapshot row where fields contain the water level sand displacement
         let snapshot_data = ((Object.entries(this.json_list_simdata)).filter(fields => fields[1]["pk"] === (component_name) && fields[1]["fields"]["snapshots"] === snapshot_num))
-        // console.log(snapshot_data)
-        snapshot_data = snapshot_data   [0][1]
+
+        snapshot_data = snapshot_data[0][1]
+
 
         this.scada_context.font = "20px serif"; // sets font and font size
 

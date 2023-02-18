@@ -15,6 +15,9 @@ export class WaterTank extends Fillable{
         this.ctx_layer2.fillStyle = colour;
         this.scada_controller = scada_controller
         this.tankNum = tankNum
+        this.water_change = 0.5
+        this.tak = 0
+
 	};
 
     draw(){
@@ -25,23 +28,21 @@ export class WaterTank extends Fillable{
         let height = 153;
 
         if (this.currentLevel > this.valuesArr[this.valueIdx]){
-            this.currentLevel -= 0.5;
+            this.currentLevel -= this.water_change;
 
         } else if (this.currentLevel < this.valuesArr[this.valueIdx]){
-            this.currentLevel += 0.5;
+            this.currentLevel += this.water_change;
 
-        } else if (this.valueIdx > this.valuesArr.length){
-
-        }
-        else if (this.currentLevel === this.valuesArr[this.valueIdx]) {
+        } else if (this.currentLevel === this.valuesArr[this.valueIdx]) {
             this.currentLevel = this.valuesArr[this.valueIdx];
             this.valueIdx += 1;
         }
 
-        waterBG(this.tankNum)
-        this.ctx_layer2.fillRect(x,y,width, height - this.currentLevel);
-        // draws scada stuff
-        this.scada_controller.draw(("tank"+(this.valueIdx)), (this.valueIdx), ["current water lvl : "+this.currentLevel, "component name : "+"tank" + this.tankNum, "valuesArr :" + this.valuesArr])
-
+        if (this.valueIdx <= this.valuesArr.length){
+            waterBG(this.tankNum)
+            this.ctx_layer2.fillRect(x,y,width, height - this.currentLevel);
+            // draws scada stuff
+            this.scada_controller.draw(("tank"+this.tankNum), (this.valueIdx-1), ["component name : "+"tank" + this.tankNum,"current water lvl : "+this.currentLevel,  "valuesArr :" + this.valuesArr])
+        }
     }
 }
