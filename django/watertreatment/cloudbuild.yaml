@@ -3,19 +3,19 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     args:
-      ["build", "-t", "gcr.io/$PROJECT_ID/python-django:latest", "."]
+      ["build", "-t", "gcr.io/$PROJECT_ID/beta-release:latest", "."]
 
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/python-django"]
+    args: ["push", "gcr.io/$PROJECT_ID/beta-release"]
 
   - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
         "run",
         "deploy",
-        "${_SERVICE_NAME}",
+        "beta-release",
         "--image",
-        "gcr.io/$PROJECT_ID/python-django:latest",
+        "gcr.io/$PROJECT_ID/beta-release:latest",
         "--region",
         "europe-west1",
         "--platform",
