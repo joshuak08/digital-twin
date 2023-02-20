@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+import math
 
 class GenericPipe(ABC):
     def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius):
@@ -12,6 +12,7 @@ class GenericPipe(ABC):
         self.tick_length = tick_length # length of each round in seconds
         self.radius = radius # diameter of the pipe
         self.num_of_inputs = num_of_inputs
+        self.cs_area = math.pi * (self.radius ** 2)
 
     @abstractmethod
     def push(self, flow_in) -> int:  # pushes water down pipe on a single tick
