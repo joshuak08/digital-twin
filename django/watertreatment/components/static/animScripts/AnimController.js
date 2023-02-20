@@ -1,8 +1,14 @@
 import { WaterTank } from "./WaterTank.js"
-
+import { drawText } from "./ScadaController.js"
 //============ constant values ============//
 const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d");
 const ctx_layer2 = document.getElementById("canvas_layer2_anim").getContext("2d");
+
+const box1 = document.getElementById("scada1").getContext("2d");
+const box2 = document.getElementById("scada2").getContext("2d");
+const box3 = document.getElementById("scada3").getContext("2d");
+const box4 = document.getElementById("scada4").getContext("2d");
+
 
 const layer1Width = 800;
 const layer1Height = 600;
@@ -19,6 +25,7 @@ const tankValues=[153, 57, 0, 35, 0, 153];
 const pipeWidth = 12;
 
 let tanks = []
+let boxes = [box1,box2,box3,box4]
 //==========================================//
 
 //draws grey pipes connected to tanks
@@ -85,21 +92,17 @@ function drawBG(){
         tankBG(tankNum);
         waterBG(tankNum);
         IOpipes(tankNum)
-
     }
 }
 
-drawBG();
-
-
 function animate(){
-    tanks[0].draw()
-    tanks[1].draw()
-    tanks[2].draw()
-    tanks[3].draw()
+    for (let tankNum=0; tankNum<4; tankNum++) {tanks[tankNum].draw();}
     requestAnimationFrame(animate)
-
 }
 
+// temp test code for scada text
+for (let boxNum = 0; boxNum < 4; boxNum++ ){drawText(boxes[boxNum], boxNum);}
+
+drawBG();
 animate();
 
