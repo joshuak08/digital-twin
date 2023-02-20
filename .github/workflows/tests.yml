@@ -38,7 +38,7 @@ jobs:
         run: |
           cd src
           python -m unittest DocumentInterfaceTest.DocumentInterfaceTests
-          python -m unittest sqlTest.testSqliteRevitDB
+          python -m unittest SqlTest.testSqliteRevitDB
       - name: Setup Python 3.9
         uses: actions/setup-python@v4.3.0
         with:
