@@ -148,7 +148,7 @@ class TestSplitterBehaviour(unittest.TestCase):
         sink1 = Sink.Sink(0, 1, [], 1, 1, 3, system)
         sink2 = Sink.Sink(1, 1, [], 1, 1, 1, system)
         pipe = SplitterPipe.SplitterPipe(2, 1, [sink1, sink2], 1, 1, 1)
-        pipe.push(45)
+        pipe.push(100)
         self.assertEqual(75, sink1.total_flow)
         self.assertEqual(25, sink2.total_flow)
         self.assertEqual(0, pipe.capacity)
