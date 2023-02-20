@@ -57,3 +57,4 @@ def revitModel(request):
 def simulation(request):
     all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
     return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': all_SimData})
+
