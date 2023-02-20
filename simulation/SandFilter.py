@@ -64,7 +64,7 @@ class SandFilter(GenericPipe.GenericPipe):
         else:
             self.backwash_pipe.push(0)
 
-        flow_out = self.water_velocity() * self.output.cs_area * self.tick_length # get area will get crossectional area of the pipe (or it can be calculated this side)
+        flow_out = self.water_velocity() * self.output.cs_area * self.tick_length 
         self.output.push(flow_out) # pushes flow out to the output pipe
 
         self.capacity -= flow_out

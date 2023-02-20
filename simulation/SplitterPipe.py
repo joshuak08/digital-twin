@@ -34,7 +34,6 @@ class SplitterPipe(GenericPipe.GenericPipe):
 
         if self.pushes_in_current_round == self.num_of_inputs:
             self.get_output_ratios()
-            print(self.output_ratios)
             flow_out = 0
             for i in range(0, len(self.outputs)):
                 flow = self.flow_in_current_round * self.output_ratios[i]
