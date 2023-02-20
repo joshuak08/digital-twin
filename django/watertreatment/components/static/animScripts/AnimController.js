@@ -1,6 +1,5 @@
-import { WaterTank } from "./waterTank.js"
+import { WaterTank } from "./WaterTank.js"
 import { drawText } from "./ScadaController.js"
-
 //============ constant values ============//
 const ctx_layer1 = document.getElementById("canvas_layer1").getContext("2d");
 const ctx_layer2 = document.getElementById("canvas_layer2_anim").getContext("2d");
