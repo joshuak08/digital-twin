@@ -30,7 +30,7 @@ class DataBaser:  # class to hold info about database
                 for name, parameter in parameters.items():
                     newString = '"' + name + '" : ' + '"(' + parameter.stringValue + ', ' + str(parameter.numericalValue) + ')"'
                     param_string += newString + ','
-                param_string.rstrip(',')
+                param_string = param_string.rstrip(',')
                 param_string += '}'
 
                 self.cursor.execute("INSERT INTO components_document VALUES (?, ?, ?)", (element.elementID,

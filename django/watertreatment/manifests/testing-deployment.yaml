@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testing-deployment
+  labels:
+    app: testing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testing
+  template:
+    metadata:
+      labels:
+        app: testing
+    spec:
+      containers:
+      - name: testing-deployment
+        image: docker.io/joshuak08/python-django:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000

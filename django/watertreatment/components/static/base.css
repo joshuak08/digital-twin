@@ -1,6 +1,4 @@
-html {
-    font-family: Arials, Helvetica, sans-serif;
-}
+html {font-family: Arials, Helvetica, sans-serif;}
 
 table {
     border: 1px solid;
@@ -23,17 +21,6 @@ th, td {
     float: left;
     width: 40%;
     display: grid;
-    /*height: 20%;*/
-    /*object-fit: cover;*/
-}
-
-.row {
-  display: flex;
-}
-
-.column {
-  flex: 33.33%;
-  padding: 5px;
 }
 
 .horizontal-grid {
@@ -76,10 +63,64 @@ body {
 }
 
 /* Right-aligned section inside the top navigation */
-.topnav-right {
-    float: right;
+.topnav-right {float: right;}
+
+#title {font-size: 35px;}
+
+* {box-sizing: border-box;}
+/*===== handles scada css =====*/
+.anim_scada{
+    display: flex;
+    justify-content: center;
 }
 
-#title {
-    font-size: 35px;
+.Scada, .main{
+    display:flex;
+    flex-direction: column;
+}
+
+.main_anim {flex-basis:800px;}
+
+.Scada {
+    flex-basis:400px;
+    background: #f0f0f0;
+    margin: 0 10px 10px 10px;
+}
+/*=======for perfectly overlapping canvas please don't mess with it=======*/
+canvas {border: solid #5B6DCD 10px;}
+
+#canvas_layer1 {
+    position: absolute;
+	background: #f0f0f0;
+}
+
+#canvas_layer2_anim {
+    position: relative;
+}
+/* ====================================================================== */
+
+figure {
+    border: thin #c0c0c0 solid;
+    display: flex;
+    flex-flow: column;
+    /* padding: 5px; */
+    /* max-width: 220px; */
+    margin: auto;
+}
+
+figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+  }
+  
+.column {
+    flex: 33.33%;
+    padding: 5px;
 }
