@@ -16,6 +16,8 @@ class SplitterPipe(GenericPipe.GenericPipe):
         for i in self.outputs:
             if i.valve == False:
                 total_radius += i.radius 
+        if total_radius == 0:
+            total_radius = 1
         for i in self.outputs:
             numerator = i.radius
             if i.valve == True:
@@ -37,8 +39,8 @@ class SplitterPipe(GenericPipe.GenericPipe):
                 flow = self.flow_in_current_round * self.output_ratios[i]
                 flow_out += flow
                 self.outputs[i].push(flow)
-                self.pushes_in_current_round = 0
-                self.flow_in_current_round = 0
+            self.pushes_in_current_round = 0
+            self.flow_in_current_round = 0
 
             self.capacity += (flow_in - flow_out)
         if self.capacity > self.max_volume:

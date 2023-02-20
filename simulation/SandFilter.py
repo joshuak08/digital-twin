@@ -4,7 +4,7 @@ class SandFilter(GenericPipe.GenericPipe):
 
     def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius):
     
-        if len(num_of_inputs) != 1 or len(self.outputs) == 2:
+        if num_of_inputs != 1 or len(outputs) != 2:
             print("Error: Bad Inputs / Outputs.")
             return 
         
@@ -21,6 +21,7 @@ class SandFilter(GenericPipe.GenericPipe):
         self.radius = radius # radius of the tank in metres
         self.tick_length = tick_length # length of each round in seconds
         self.radius = radius
+        self.input = None 
         # will likely be pre-set, user just decides how often a snapshot is taken
 
         self.id = id_num # id of the component, used for snapshotting
@@ -63,7 +64,7 @@ class SandFilter(GenericPipe.GenericPipe):
         else:
             self.backwash_pipe.push(0)
 
-        flow_out = self.water_velocity() * self.output.cs_area * self.tick_length # get area will get crossectional area of the pipe (or it can be calculated this side)
+        flow_out = self.water_velocity() * self.output.cs_area * self.tick_length 
         self.output.push(flow_out) # pushes flow out to the output pipe
 
         self.capacity -= flow_out
