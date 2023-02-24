@@ -22,7 +22,6 @@ const bottomTankY = tankY+170;
 
 const offsetBetweenTanks = (layer1Width/4);
 
-const tankValues=[153, 57, 0, 35, 0, 153];
 const pipeWidth = 12;
 
 const tanks = [];
