@@ -44,7 +44,6 @@ class SandFilter(GenericPipe.GenericPipe):
     def push(self, flow_in):
         
         self.particulate_mass += flow_in * 252 # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
-        self.max_volume -= math.pi * (self.radius ** 2)
         self.capacity += flow_in
 
         if self.particulate_mass > 500000: # arbitrary boundary to start backwash - 500g of particulate collected
