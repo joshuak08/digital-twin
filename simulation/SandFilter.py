@@ -75,7 +75,7 @@ class SandFilter(GenericPipe.GenericPipe):
         snap_dict[self.id_num] = (snap_num, (self.capacity, self.backwash, self.sand_height))  # adds self to dictionary
 
         for child_pipe in self.outputs:
-            child_pipe.snap(snap_dict)
+            child_pipe.snapshot(snap_dict)
 
         return snap_dict
         
