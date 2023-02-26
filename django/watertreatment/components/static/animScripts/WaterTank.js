@@ -2,8 +2,8 @@ import {Fillable} from './Fillable.js';
 import {waterBG} from './AnimController.js';
 
 export class WaterTank extends Fillable {
-  constructor(xCoord, y, waterWidth, waterHeight, colour, ctx_layer2, tankNum, scada_controller) {
-    super(xCoord, y, waterWidth, waterHeight, colour);
+  constructor(xCoord, yCoord, waterWidth, waterHeight, colour, ctx_layer2, tankNum, scada_controller) {
+    super(xCoord, yCoord, waterWidth, waterHeight, colour);
 
     // this.currentLevel = (initialLevel- y)/((y+h)-y) // initiallevel normalised to within pixel height of tank
     this.json_list_simdata = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
@@ -45,6 +45,7 @@ export class WaterTank extends Fillable {
     if (this.valueIdx <= this.valuesArr.length) {
       waterBG(this.tankNum);
       this.ctx_layer2.fillRect(this.x, this.y, this.w, this.h - this.currentLevel);
+
       // calls the scada screen controller to sync the current water level of tank with the current water level data displayed on the scada screen
       this.scada_controller.draw(('tank'+this.tankNum), (this.valueIdx-1), ['component name : '+'tank' + this.tankNum, 'current water lvl : '+ this.currentLevel.toFixed(2), 'valuesArr :' + this.valuesArr]);
     }

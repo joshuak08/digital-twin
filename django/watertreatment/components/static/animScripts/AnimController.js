@@ -8,7 +8,7 @@ const scada1CTX = document.getElementById('scada1').getContext('2d');
 const scada2CTX = document.getElementById('scada2').getContext('2d');
 const scada3CTX = document.getElementById('scada3').getContext('2d');
 const scada4CTX = document.getElementById('scada4').getContext('2d');
-const contexts = [scada1CTX, , scada2CTX, scada3CTX, scada4CTX];
+const contexts = [scada1CTX, scada2CTX, scada3CTX, scada4CTX];
 
 const layer1Width = 800;
 const layer1Height = 600;
@@ -17,7 +17,7 @@ const tankY = layer1Height/3;
 const tankX = ((layer1Width/4)/2)/2;
 
 const tankWidth = 2*tankX;
-const tankHeight = 170
+const tankHeight = 180;
 const bottomTankY = tankY+tankHeight;
 
 const offsetBetweenTanks = (layer1Width/4);
@@ -39,21 +39,20 @@ function drawTankShape(ctx, bottomTankY, triangleTipOffset, xCoord, yCoord, widt
 
 // draws grey pipes connected to tanks
 function IOpipes(tankNum) {
-  const pipeX = tankX + offsetBetweenTanks*tankNum + tankX - pipeWidth/2;
+  const pipeX = tankX + offsetBetweenTanks*tankNum + tankWidth/2 - pipeWidth/2;
   const pipeHeight = 50;
   const pipeY = tankY-pipeHeight;
-  // pipes ontop
-  ctx_layer1.fillRect(pipeX, pipeY, pipeWidth, pipeHeight);
-  // pipes below
-  ctx_layer1.fillRect(pipeX, pipeY+pipeHeight+170, pipeWidth, pipeHeight);
+
+  ctx_layer1.fillRect(pipeX, pipeY, pipeWidth, pipeHeight);// pipes on top
+  ctx_layer1.fillRect(pipeX, pipeY+pipeHeight+tankHeight, pipeWidth, pipeHeight);// pipes below
 
   if (tankNum === 0 ) {
     ctx_layer1.fillRect(pipeX, pipeY, 700, pipeWidth);
-    ctx_layer1.fillRect(pipeX, pipeY+2*pipeHeight+170, 700, pipeWidth);
+    ctx_layer1.fillRect(pipeX, pipeY+2*pipeHeight+tankHeight, 700, pipeWidth);
     ctx_layer1.font = '12px Arial';
     ctx_layer1.fillStyle = 'white';
     ctx_layer1.fillText('input pipe', pipeX+645, pipeY+10);
-    ctx_layer1.fillText('output pipe', pipeX+638, pipeY+10+170+2*pipeHeight);
+    ctx_layer1.fillText('output pipe', pipeX+638, pipeY+10+tankHeight+2*pipeHeight);
     ctx_layer1.fillStyle = '#5A5A5A';
   }
 }
@@ -68,7 +67,7 @@ function tankBG(tankNum) {
 export function waterBG(tankNum) {
   const xCoord = tankX + offsetBetweenTanks*tankNum + 10; // 50 + 200 *tankNum + 10
   const waterWidth = tankWidth - 20;
-  const waterHeight = 170 - 17;
+  const waterHeight = tankHeight - 17;
   const bottomWaterY = tankY + 10 + waterHeight;
 
   drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, 'lightBlue', '#C2B280')
