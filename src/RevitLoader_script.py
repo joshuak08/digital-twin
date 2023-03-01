@@ -1,5 +1,5 @@
 import DocumentInterface
-import sqliteRevitIpy
+import SqliteRevitIpy
 import Autodesk.Revit.DB as DB
 
 doc = __revit__.ActiveUIDocument.Document

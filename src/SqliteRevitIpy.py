@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+
 class DataBaser:  # class to hold info about database
     def __init__(self, document_interface, test=""):
         self.document = document_interface  # assigns document to a variable
