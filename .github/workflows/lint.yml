@@ -1,14 +1,12 @@
 name: Lint
 
+  # Trigger the workflow on pull requests
+  # for main and dev
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
-    branches:
-      - main
+    branches-ignore: [dev, main]
   pull_request:
-    branches:
-      - main
+    branches: [dev, main]
 
 jobs:
   run-linters:
