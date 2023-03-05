@@ -37,7 +37,8 @@ jobs:
           cd django/watertreatment/components/static/animScripts
           npm ci
             - name: Install 3.9 Packages
-        
+            
+      - name: Install Python dependencies
         run: |
           echo Installing 3.9 Packages
           pip install --upgrade autopep8
@@ -45,13 +46,14 @@ jobs:
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
+          auto_fix: true
+          
           # ESLint
           eslint_dir: django/watertreatment/components/static/animScripts
-          auto_fix: true
           eslint: true
           eslint_extensions: js
 
           # autopep8
           autopep8_dir: simulation
-          auto_fix: true
           autopep8: true
+          autopep8_extensions: py
