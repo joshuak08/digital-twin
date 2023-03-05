@@ -1,4 +1,4 @@
-import unittest 
+import unittest
 import math
 
 import GenericPipe
@@ -7,22 +7,23 @@ import SandFilter
 import Sink
 import Source
 
+
 class TestSystem:
-    def __init__ (self, name):
-        self.name = name 
+    def __init__(self, name):
+        self.name = name
         self.rounds_taken = 0
-    
+
     def take_round(self):
         self.rounds_taken += 1
 
+
 class TestPipe:
-    def __init__ (self, name):
-        self.name = name 
-        self.valve = False 
-    
+    def __init__(self, name):
+        self.name = name
+        self.valve = False
+
     def toggle_valve(self):
         self.valve = not self.valve
-
 
 
 class TestSinkBehaviour(unittest.TestCase):
@@ -35,7 +36,7 @@ class TestSinkBehaviour(unittest.TestCase):
         self.assertEqual(0, sink.flow_in_round)
         self.assertEqual(0, sink.pushes_in_round)
         self.assertEqual(1, system.rounds_taken)
-    
+
     def test_sink_multi_round_one_input(self):
         system = TestSystem("Dummy System")
         sink = Sink.Sink(0, 1, [], 1, 1, 1, system)
@@ -45,7 +46,7 @@ class TestSinkBehaviour(unittest.TestCase):
         self.assertEqual(0, sink.flow_in_round)
         self.assertEqual(0, sink.pushes_in_round)
         self.assertEqual(5, system.rounds_taken)
-    
+
     def test_sink_partial_round_multi_input(self):
         system = TestSystem("Dummy System")
         sink = Sink.Sink(0, 3, [], 1, 1, 1, system)
@@ -55,7 +56,7 @@ class TestSinkBehaviour(unittest.TestCase):
         self.assertEqual(200, sink.flow_in_round)
         self.assertEqual(2, sink.pushes_in_round)
         self.assertEqual(0, system.rounds_taken)
-    
+
     def test_sink_one_round_multi_input(self):
         system = TestSystem("Dummy System")
         sink = Sink.Sink(0, 3, [], 1, 1, 1, system)
@@ -66,7 +67,7 @@ class TestSinkBehaviour(unittest.TestCase):
         self.assertEqual(0, sink.flow_in_round)
         self.assertEqual(0, sink.pushes_in_round)
         self.assertEqual(1, system.rounds_taken)
-    
+
     def test_sink_multi_round_multi_input(self):
         system = TestSystem("Dummy System")
         sink = Sink.Sink(0, 3, [], 1, 1, 1, system)
@@ -89,7 +90,7 @@ class TestSplitterBehaviour(unittest.TestCase):
         pipe.push(100)
         self.assertEqual(100, sink.total_flow)
         self.assertEqual(0, pipe.capacity)
-    
+
     def test_pipe_chain(self):
         system = TestSystem("Dummy System")
         sink = Sink.Sink(0, 1, [], 1, 1, 1, system)
@@ -99,24 +100,24 @@ class TestSplitterBehaviour(unittest.TestCase):
         self.assertEqual(100, sink.total_flow)
         self.assertEqual(0, pipe1.capacity)
         self.assertEqual(0, pipe2.capacity)
-    
+
     def test_basic_split(self):
         system = TestSystem("Dummy System")
         sink1 = Sink.Sink(0, 1, [], 1, 1, 1, system)
         sink2 = Sink.Sink(1, 1, [], 1, 1, 1, system)
         pipe = SplitterPipe.SplitterPipe(2, 1, [sink1, sink2], 1, 1, 1)
-        pipe.push(100) 
+        pipe.push(100)
         self.assertEqual(50, sink1.total_flow)
         self.assertEqual(50, sink2.total_flow)
         self.assertEqual(0, pipe.capacity)
-    
+
     def test_split_one_closed(self):
         system = TestSystem("Dummy System")
         sink1 = Sink.Sink(0, 1, [], 1, 1, 1, system)
         sink2 = Sink.Sink(1, 1, [], 1, 1, 1, system)
         pipe = SplitterPipe.SplitterPipe(2, 1, [sink1, sink2], 1, 1, 1)
         sink1.toggle_valve()
-        pipe.push(100) 
+        pipe.push(100)
         self.assertEqual(0, sink1.total_flow)
         self.assertEqual(100, sink2.total_flow)
         self.assertEqual(0, pipe.capacity)
@@ -128,7 +129,7 @@ class TestSplitterBehaviour(unittest.TestCase):
         pipe = SplitterPipe.SplitterPipe(2, 1, [sink1, sink2], 1, 1, 1)
         sink1.toggle_valve()
         sink2.toggle_valve()
-        pipe.push(5) 
+        pipe.push(5)
         self.assertEqual(0, sink1.total_flow)
         self.assertEqual(0, sink2.total_flow)
         self.assertEqual(5, pipe.capacity)
@@ -138,7 +139,7 @@ class TestSplitterBehaviour(unittest.TestCase):
         sink1 = Sink.Sink(0, 1, [], 1, 1, 1, system)
         sink2 = Sink.Sink(1, 1, [], 1, 1, 1, system)
         pipe = SplitterPipe.SplitterPipe(2, 1, [sink1, sink2], 1, 1, 1)
-        pipe.push(45) 
+        pipe.push(45)
         self.assertEqual(22.5, sink1.total_flow)
         self.assertEqual(22.5, sink2.total_flow)
         self.assertEqual(0, pipe.capacity)
@@ -152,6 +153,7 @@ class TestSplitterBehaviour(unittest.TestCase):
         self.assertEqual(75, sink1.total_flow)
         self.assertEqual(25, sink2.total_flow)
         self.assertEqual(0, pipe.capacity)
+
 
 class TestSourceBehaviour(unittest.TestCase):
 

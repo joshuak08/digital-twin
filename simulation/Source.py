@@ -6,13 +6,12 @@ class Source(SplitterPipe.SplitterPipe):
         super().__init__(id_num, 1, outputs, length, tick_length, radius)
         self.total_flow = 0
 
-
     def push(self, flow_in):
         super().push(flow_in)
         self.total_flow += flow_in
-    
+
     def snapshot(self, snap_dict, snap_num):
-        
+
         for child_pipe in self.outputs:
             child_pipe.snapshot(snap_dict, snap_num)
 

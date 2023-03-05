@@ -3,19 +3,19 @@ import math
 
 # Q = av where Q is the flow rate, a = cross-sectional area, v = velocity of water
 
+
 class SplitterPipe(GenericPipe.GenericPipe):
     def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius):
         super().__init__(id_num, num_of_inputs, outputs, length, tick_length, radius)
         self.pushes_in_current_round = 0
         self.flow_in_current_round = 0
         self.output_ratios = []
-        
-        
+
     def get_output_ratios(self):
         total_radius = 0
         for i in self.outputs:
             if i.valve == False:
-                total_radius += i.radius 
+                total_radius += i.radius
         if total_radius == 0:
             total_radius = 1
         for i in self.outputs:
@@ -24,11 +24,11 @@ class SplitterPipe(GenericPipe.GenericPipe):
                 numerator = 0
             self.output_ratios.append(numerator / total_radius)
 
-
     # ======== override methods ======== #
+
     def push(self, flow_in):
 
-        #TODO add condition for valve closure to output rate as well
+        # TODO add condition for valve closure to output rate as well
         self.pushes_in_current_round += 1
         self.flow_in_current_round += flow_in
 
@@ -48,9 +48,10 @@ class SplitterPipe(GenericPipe.GenericPipe):
     # ================================== #
 
     def snapshot(self, snap_dict, snap_num):
-        
+
         # returns a dictionary of pipe id's as keys with their value being a tuple of time and capacity
-        snap_dict[self.id_num] = (snap_num, self.capacity)  # adds self to dictionary with time and capacity
+        # adds self to dictionary with time and capacity
+        snap_dict[self.id_num] = (snap_num, self.capacity)
 
         for child_pipe in self.outputs:
             child_pipe.snapshot(snap_dict, snap_num)
@@ -59,5 +60,5 @@ class SplitterPipe(GenericPipe.GenericPipe):
     # ================================== #
 
     def toggle_valve(self):
-        #TODO
+        # TODO
         pass

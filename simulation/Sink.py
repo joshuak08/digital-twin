@@ -12,13 +12,13 @@ class Sink(GenericPipe.GenericPipe):
 
     def push(self, flow_in):
         self.pushes_in_round += 1
-        self.flow_in_round += flow_in 
-        self.total_flow += flow_in 
+        self.flow_in_round += flow_in
+        self.total_flow += flow_in
         if self.pushes_in_round == self.num_of_inputs:
             self.pushes_in_round = 0
             self.flow_in_round = 0
-            self.system.take_round() # this doesn't exist yet, but would be the method in our system to take another round, might also pass information from sink
+            # this doesn't exist yet, but would be the method in our system to take another round, might also pass information from sink
+            self.system.take_round()
 
     def snapshot(self, snap_dict: dict, snap_num: int) -> dict:
         return snap_dict
-    
