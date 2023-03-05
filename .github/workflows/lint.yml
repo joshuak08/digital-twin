@@ -35,4 +35,21 @@ jobs:
           auto_fix: true
           eslint: true
           eslint_extensions: js
-          
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install 3.9 Packages
+        run: |
+          echo Installing 3.9 Packages
+          pip install --upgrade autopep8
+
+       - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          autopep8_dir: simulation
+          auto_fix: true
+          autopep8: true
+      
