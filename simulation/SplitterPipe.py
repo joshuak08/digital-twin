@@ -5,10 +5,12 @@ import math
 
 class SplitterPipe(GenericPipe.GenericPipe):
     def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius):
+        
         super().__init__(id_num, num_of_inputs, outputs, length, tick_length, radius)
         self.pushes_in_current_round = 0
         self.flow_in_current_round = 0
         self.output_ratios = []
+        self.type = "Splitter"
         
         
     def get_output_ratios(self):

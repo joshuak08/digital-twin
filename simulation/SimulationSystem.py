@@ -1,5 +1,10 @@
 import abc 
 
+import SplitterPipe
+import SandFilter
+import Sink
+import Source
+
 class SimulationSystem(abc.ABC):
 
     @abc.abstractclassmethod
@@ -17,6 +22,7 @@ class SimulationSystem(abc.ABC):
         self.source = None 
         self.sink = None 
         self.finished = False
+        self.components = []
 
     @abc.abstractclassmethod
     def take_round(self):
@@ -28,7 +34,22 @@ class SimulationSystem(abc.ABC):
 
         if self.round > self.total_rounds:
             self.finished = True 
-         
+    
+    def add_component(self, num_of_inputs, outputs, length, tick_length, radius, type):
+
+        id_num = len(self.components)
+        if type == "pipe":
+            component = SplitterPipe.SplitterPipe(id_num, num_of_inputs, outputs, length, tick_length, radius)
+        if type == "filter":
+            component = SandFilter.SandFilter(id_num, num_of_inputs, outputs, length, tick_length, radius)
+        if type == "sink":
+            component = Sink.Sink(id_num, num_of_inputs, outputs, length, tick_length, radius, self)
+        if type == "source":
+            component = Source.Source(id_num, num_of_inputs, outputs, length, tick_length, radius)
+
+        self.components.append(component)
+
+        return component
 
 
 

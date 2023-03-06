@@ -13,6 +13,7 @@ class GenericPipe(ABC):
         self.radius = radius # diameter of the pipe
         self.num_of_inputs = num_of_inputs
         self.cs_area = math.pi * (self.radius ** 2)
+        self.type = "GenericPipe"
 
     @abstractmethod
     def push(self, flow_in) -> int:  # pushes water down pipe on a single tick

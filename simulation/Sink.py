@@ -9,6 +9,7 @@ class Sink(GenericPipe.GenericPipe):
         self.flow_in_round = 0
         self.total_flow = 0
         self.system = simulation_system
+        self.type = "Sink"
 
     def push(self, flow_in):
         self.pushes_in_round += 1
