@@ -19,13 +19,13 @@ class SandFilter(GenericPipe.GenericPipe):
         self.height = length # height of the tank
         self.particulate_mass = 0 # mass of particulate currently captured in the sand
         self.backwash = False # whether or not the tank is currently backwashing
-        self.max_volume = 100 # max volume of the tank
         self.valve = False # whether or not the tank is shut
         self.capacity = 0 # current volume of liquid in the tank
         self.radius = radius # radius of the tank in metres
         self.tick_length = tick_length # length of each round in seconds
         self.radius = radius
         self.input = None 
+        self.max_volume = self.height * (math.pi * (self.radius ** 2)) # max volume of the tank
 
         self.id = id_num # id of the component, used for snapshotting
         
@@ -53,8 +53,7 @@ class SandFilter(GenericPipe.GenericPipe):
     def push(self, flow_in, flow_tss):
         
         # updates it's state based on the flow pushed into it
-        self.particulate_mass += flow_in * flow_tss # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
-        self.max_volume -= math.pi * (self.radius ** 2)
+        self.particulate_mass += flow_in * flow_tss * 1000 # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
         self.capacity += flow_in
 
         # if it's caught a certain amount of particulate it goes into backwash
