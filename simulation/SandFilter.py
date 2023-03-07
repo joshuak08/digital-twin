@@ -1,9 +1,13 @@
 import GenericPipe
 import math
+
+# class to represent a Sand Filter (based off of Nijhuis CSF 300)
 class SandFilter(GenericPipe.GenericPipe):
 
+    # initialisation for a sand filter is quite different to a regular pipe, so parents initialiser is not used
     def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius):
-    
+        
+        # sand filters have specific configuratiosn
         if num_of_inputs != 1 or len(outputs) != 2:
             print("Error: Bad Inputs / Outputs.")
             return 
@@ -22,11 +26,11 @@ class SandFilter(GenericPipe.GenericPipe):
         self.tick_length = tick_length # length of each round in seconds
         self.radius = radius
         self.input = None 
-        # will likely be pre-set, user just decides how often a snapshot is taken
 
         self.id = id_num # id of the component, used for snapshotting
         
         self.backwash_timer = 0
+
         # Numbers for a standard Sand Filter
         # Diameter = 3m
         # Height of tank area ~= 8m (ish)
@@ -34,25 +38,33 @@ class SandFilter(GenericPipe.GenericPipe):
         # Particulate (TSS) capacity = 2.33kg (average wastewater has 155 - 330mg /L, or 11 - 23 kg / hr)
         # Limiting factor will then be amount of TSS in the water
 
+    # since inputs aren't necessarily defined when sand filter is defined, there's a method to add them
     def set_input(self, input_pipe):
         self.input = input_pipe
 
+    # calculates the velocity of water leaving out the bottom of the tank, based on the amount of water currently 
+    # in the tank
+    # (a more realistic simulation would take into account the amount of particluate collected)
     def water_velocity(self):
         water_height = self.capacity / (math.pi * (self.radius ** 2))
         return math.sqrt(2 * 9.807 * water_height)
 
+    # pushing for a sand filter
     def push(self, flow_in, flow_tss):
         
+        # updates it's state based on the flow pushed into it
         self.particulate_mass += flow_in * flow_tss # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
         self.max_volume -= math.pi * (self.radius ** 2)
         self.capacity += flow_in
 
+        # if it's caught a certain amount of particulate it goes into backwash
         if self.particulate_mass > 500000: # arbitrary boundary to start backwash - 500g of particulate collected
             self.backwash = True
             self.output = self.backwash_pipe
             self.input.toggle_valve()
             self.backwash_timer = 180 / self.tick_length
         
+        # if in a backwash, decrement backwash timer, and do an empty push to regular input 
         if self.backwash:
             self.backwash_timer -= 1
             self.normal_pipe.push(0, flow_tss)
@@ -61,17 +73,22 @@ class SandFilter(GenericPipe.GenericPipe):
                 self.particulate_mass = 0
                 self.input.toggle_valve()
 
+        # if not in a regular backwash do an empty push to backwash pipe
         else:
             self.backwash_pipe.push(0, flow_tss)
 
+        # push flow to current output based on water velocity and the size of the pipe being pushed to
         flow_out = self.water_velocity() * self.output.cs_area * self.tick_length 
         self.output.push(flow_out, flow_tss) # pushes flow out to the output pipe
 
+        # update capacity accordingly
         self.capacity -= flow_out
 
+        # if not in a backwash, then output is set to be normal_pipe (this is important just after a backwash has ended)
         if not self.backwash:
             self.output = self.normal_pipe
 
+    #TODO update this - include component type, and update how data is stored
     def snapshot(self, snap_dict, snap_num):
         snap_dict[self.id_num] = (snap_num, (self.capacity, self.backwash, self.sand_height))  # adds self to dictionary
 
