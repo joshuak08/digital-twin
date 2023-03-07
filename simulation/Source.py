@@ -7,8 +7,8 @@ class Source(SplitterPipe.SplitterPipe):
         self.total_flow = 0
         self.type = "Source"
 
-    def push(self, flow_in):
-        super().push(flow_in)
+    def push(self, flow_in, flow_tss):
+        super().push(flow_in, flow_tss)
         self.total_flow += flow_in
     
     def snapshot(self, snap_dict, snap_num):

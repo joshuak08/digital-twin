@@ -41,9 +41,9 @@ class SandFilter(GenericPipe.GenericPipe):
         water_height = self.capacity / (math.pi * (self.radius ** 2))
         return math.sqrt(2 * 9.807 * water_height)
 
-    def push(self, flow_in):
+    def push(self, flow_in, flow_tss):
         
-        self.particulate_mass += flow_in * 252 # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
+        self.particulate_mass += flow_in * flow_tss # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
         self.max_volume -= math.pi * (self.radius ** 2)
         self.capacity += flow_in
 
@@ -55,17 +55,17 @@ class SandFilter(GenericPipe.GenericPipe):
         
         if self.backwash:
             self.backwash_timer -= 1
-            self.normal_pipe.push(0)
+            self.normal_pipe.push(0, flow_tss)
             if self.backwash_timer == 0:
                 self.backwash = False
                 self.particulate_mass = 0
                 self.input.toggle_valve()
 
         else:
-            self.backwash_pipe.push(0)
+            self.backwash_pipe.push(0, flow_tss)
 
         flow_out = self.water_velocity() * self.output.cs_area * self.tick_length 
-        self.output.push(flow_out) # pushes flow out to the output pipe
+        self.output.push(flow_out, flow_tss) # pushes flow out to the output pipe
 
         self.capacity -= flow_out
 

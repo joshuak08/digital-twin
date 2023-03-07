@@ -24,6 +24,15 @@ class SimulationSystem(abc.ABC):
         self.finished = False
         self.components = []
 
+    def simulate(self):
+        for i in range(self.total_rounds):
+            
+            if self.round % self.snapshot_frequency == 0 and self.take_snapshots:
+                self.snapshotter.snapshot(self.source)
+            
+            self.take_round()
+
+
     @abc.abstractclassmethod
     def take_round(self):
 

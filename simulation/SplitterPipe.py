@@ -28,7 +28,7 @@ class SplitterPipe(GenericPipe.GenericPipe):
 
 
     # ======== override methods ======== #
-    def push(self, flow_in):
+    def push(self, flow_in, flow_tss):
 
         #TODO add condition for valve closure to output rate as well
         self.pushes_in_current_round += 1
@@ -40,7 +40,7 @@ class SplitterPipe(GenericPipe.GenericPipe):
             for i in range(0, len(self.outputs)):
                 flow = self.flow_in_current_round * self.output_ratios[i]
                 flow_out += flow
-                self.outputs[i].push(flow)
+                self.outputs[i].push(flow, flow_tss)
             self.pushes_in_current_round = 0
             self.flow_in_current_round = 0
 
