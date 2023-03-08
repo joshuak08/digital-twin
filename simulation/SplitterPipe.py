@@ -61,14 +61,6 @@ class SplitterPipe(GenericPipe.GenericPipe):
             raise Exception("capacity is greater than max volume :(")
     # ================================== #
 
-    #TODO update this - need to include type in data stored, and probably a better way to store data
-    def snapshot(self, snap_dict, snap_num):
-        
-        # returns a dictionary of pipe id's as keys with their value being a tuple of time and capacity
-        snap_dict[self.id_num] = (snap_num, self.capacity)  # adds self to dictionary with time and capacity
-
-        for child_pipe in self.outputs:
-            child_pipe.snapshot(snap_dict, snap_num)
-
-        return snap_dict
-    # ================================== #
+    def snapshot(self):
+        data = (self.capacity, self.valve)
+        return data

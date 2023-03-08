@@ -24,6 +24,7 @@ class Sink(GenericPipe.GenericPipe):
             self.flow_in_round = 0
 
     #TODO update - maybe keep track of sink info
-    def snapshot(self, snap_dict: dict, snap_num: int) -> dict:
-        return snap_dict
+    def snapshot(self):
+        data = (self.total_flow, self.total_particulate)
+        return data
     

@@ -87,14 +87,8 @@ class SandFilter(GenericPipe.GenericPipe):
         if not self.backwash:
             self.output = self.normal_pipe
 
-    #TODO update this - include component type, and update how data is stored
-    def snapshot(self, snap_dict, snap_num):
-        snap_dict[self.id_num] = (snap_num, (self.capacity, self.backwash, self.sand_height))  # adds self to dictionary
-
-        for child_pipe in self.outputs:
-            child_pipe.snapshot(snap_dict)
-
-        return snap_dict
+    def snapshot(self):
+        data = (self.capacity, self.particulate_mass, self.backwash)
         
 
         

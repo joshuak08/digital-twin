@@ -33,7 +33,7 @@ class SimulationSystem(abc.ABC):
         for i in range(self.total_rounds):
 
             if self.round % self.snapshot_frequency == 0 and self.take_snapshots:
-                self.snapshotter.snapshot(self.source)
+                self.snapshotter.snapshot(self)
             
             self.take_round()
 
