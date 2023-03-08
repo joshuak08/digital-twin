@@ -24,8 +24,8 @@ class GenericPipe(ABC):
     def push(self, flow_in, flow_tss):  # pushes water down pipe on a single tick
         pass
     
-    # snapshotting method used to save information about the simulation
-    # each pipe will write different parameters to the snap_dict, so this is implementred by children
+    # snapshotting method to save information about the simulation
+    # each child should implement this to return the important information about that component in a tuple
     @abstractmethod
     def snapshot(self):  # takes snapshot of pipe and stores it in a db
         pass

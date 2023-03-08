@@ -61,6 +61,7 @@ class SplitterPipe(GenericPipe.GenericPipe):
             raise Exception("capacity is greater than max volume :(")
     # ================================== #
 
+    # important information for a pipe is how much liquid it has in it and whehter or not it has been closed
     def snapshot(self):
         data = (self.capacity, self.valve)
         return data

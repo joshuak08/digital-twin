@@ -23,7 +23,7 @@ class Sink(GenericPipe.GenericPipe):
             self.pushes_in_round = 0
             self.flow_in_round = 0
 
-    #TODO update - maybe keep track of sink info
+    #important information for the sink is the total flow and particulate through the system
     def snapshot(self):
         data = (self.total_flow, self.total_particulate)
         return data
