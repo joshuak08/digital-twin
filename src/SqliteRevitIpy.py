@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+
 class DataBaser:  # class to hold info about database
     def __init__(self, document_interface, test=""):
         self.document = document_interface  # assigns document to a variable
@@ -29,7 +30,7 @@ class DataBaser:  # class to hold info about database
                 for name, parameter in parameters.items():
                     newString = '"' + name + '" : ' + '"(' + parameter.stringValue + ', ' + str(parameter.numericalValue) + ')"'
                     param_string += newString + ','
-                param_string.rstrip(',')
+                param_string = param_string.rstrip(',')
                 param_string += '}'
 
                 self.cursor.execute("INSERT INTO components_document VALUES (?, ?, ?)", (element.elementID,

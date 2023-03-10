@@ -25,21 +25,37 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Setup Python
+      - name: Setup Python 2.7
         uses: actions/setup-python@v4.3.0
         with:
           python-version: '2.7'
           
-      - name: Install Packages
+      - name: Install 2.7 Packages
         run: |
-          echo Installing Packages
-      # Runs a single command using the runners shell
-      - name: Run Tests
+          echo Installing 2.7 Packages
+          
+      - name: Run 2.7 Tests
         run: |
           cd src
           python -m unittest DocumentInterfaceTest.DocumentInterfaceTests
-          python -m unittest sqlTest.testSqliteRevitDB
-        
+          python -m unittest SqlTest.TestSqliteRevitDB
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v4.3.0
+        with:
+          python-version: '3.9'
+          
+      - name: Install 3.9 Packages
+        run: |
+          echo Installing 3.9 Packages
+      
+      - name: Run 3.9 Tests
+        run: |
+          cd simulation
+          python -m unittest SimulationTests.TestSinkBehaviour
+          python -m unittest SimulationTests.TestSplitterBehaviour
+          python -m unittest SimulationTests.TestSourceBehaviour
+          python -m unittest SimulationTests.TestSandFilterBehaviour
+      
 
       # Runs a set of commands using the runners shell
 

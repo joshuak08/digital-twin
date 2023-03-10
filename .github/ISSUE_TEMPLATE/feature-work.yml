@@ -1,0 +1,20 @@
+name: Feature Work
+description: Track work being done on a project feature
+title: "[Feature]: "
+body: 
+  - type: input
+    id: feature-name
+    attributes:
+      label: Feature Name
+      description: What feature is this issue on?
+      placeholder: e.g. Simulation, Visualisation, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: work-description
+    attributes:
+      label: Work on Feature
+      description: Describe what specific changes are being covered by this issue
+      placeholder: e.g. Adding component X to the system
+    validations:
+      required: true

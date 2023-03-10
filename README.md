@@ -6,7 +6,8 @@
 - [Stakeholders](#14-stakeholders)
 - [User stories](#15-user-stories)
 - [Development and Depolyment](#16-development-and-deployment)
-- [Links](#17-kanban-and-gantt-chart) to Kanban Board, Gantt Chart and Site Preview 
+- [Styling](#17-styling)
+- [Links](#18-kanban-gantt-chart-preview) to Kanban Board, Gantt Chart and Site Preview 
 ---
 ## 1.2 Overview
 > _Nijhuis Saur Industries provides solid and adaptive solutions for sustainable and resilient water use, energy and resource recovery around the world._ - [Nijhuis Industries](https://www.nijhuisindustries.com/)
@@ -23,7 +24,6 @@ C/D has been configured using Google Cloud Build. Click the link below to view t
   - https://beta-release-vb27oaoulq-ew.a.run.app
 
 ## 1.3 Planning
-
 
 Main planned features include:
 - 3D modelling of plant details, similar to tools like Revit.
@@ -53,9 +53,21 @@ Main planned features include:
 
  ## 1.6 Development and Deployment
  [Starting the Frontend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/README.md) \
- [Starting the Backend]()
+ [Starting the Backend](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/src/README.md)
  
-  ## 1.7 Kanban and Gantt Chart
+ ## 1.7 Styling
+ We are following [Google Style Guides](https://google.github.io/styleguide/) for our code:
+ - [Python](https://google.github.io/styleguide/pyguide.html) 
+ - [JavaScript](https://google.github.io/styleguide/jsguide.html) 
+ - [HTML/CSS](https://google.github.io/styleguide/htmlcssguide.html) 
+ 
+ We also frequently refer to [Django's](https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/) official docs for their conventions.
+ 
+We attempt to keep our code **clean** and **understandable** while following these standards. \
+We adopted these conventions so that our code is *consistent*. \
+Others can then focus on what we're saying rather than how we are trying to say it.
+ 
+  ## 1.8 Kanban, Gantt Chart, Preview 
   [Kanban](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/projects/1) \
   [Gantt Chart](https://uob-my.sharepoint.com/:x:/g/personal/ij21409_bristol_ac_uk/EX73IxO8MzxJpIT4n8v2akIBD4Ke-R7LHc50kl0CKyK-Aw?e=IhAzEd) \
   [Preview](https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin/blob/main/django/PREVIEW.md)
