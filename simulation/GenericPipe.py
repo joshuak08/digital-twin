@@ -27,7 +27,7 @@ class GenericPipe(ABC):
     # snapshotting method to save information about the simulation
     # each child should implement this to return the important information about that component in a tuple
     @abstractmethod
-    def snapshot(self):  # takes snapshot of pipe and stores it in a db
+    def snapshot(self, snap_num):  # takes snapshot of pipe and stores it in a db
         pass
 
     # method to simulate turning a valve on a pipe
