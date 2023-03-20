@@ -57,6 +57,17 @@ function IOpipes(tankNum) {
   }
 }
 
+// draws backwash pipes
+function BWpipes(tankNum) {
+  ctx_layer1.fillStyle = '#5A5A5A';
+  const pipeX = tankX - 30 + offsetBetweenTanks*tankNum;
+  const pipeY = 0;
+  const pipeHeight = tankY + pipeWidth;
+
+  ctx_layer1.fillRect(pipeX, pipeY, pipeWidth, pipeHeight);// pipes on top
+  ctx_layer1.fillRect(pipeX, pipeY+pipeHeight, pipeWidth+30, pipeWidth);
+}
+
 // draws grey tank background
 function tankBG(tankNum) {
   const xCoord = tankX+offsetBetweenTanks*tankNum;
@@ -80,6 +91,7 @@ export function waterBG(tankNum) {
 function drawBG() {
   ctx_layer1.fillStyle = '#5A5A5A';
   for (let tankNum = 0; tankNum < 4; tankNum++ ) {
+    BWpipes(tankNum);
     tankBG(tankNum);
     waterBG(tankNum); // this one also initialises tank and scada controller objects
     IOpipes(tankNum);
