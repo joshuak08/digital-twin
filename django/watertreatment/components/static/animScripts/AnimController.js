@@ -5,83 +5,75 @@ import {ScadaController} from './ScadaController.js';
 const ctx_layer1 = document.getElementById('canvas_layer1').getContext('2d');
 const ctx_layer2 = document.getElementById('canvas_layer2_anim').getContext('2d');
 
-const box1 = document.getElementById('scada1').getContext('2d');
-const box2 = document.getElementById('scada2').getContext('2d');
-const box3 = document.getElementById('scada3').getContext('2d');
-const box4 = document.getElementById('scada4').getContext('2d');
-const boxes = [box1, box2, box3, box4];
+const scada1CTX = document.getElementById('scada1').getContext('2d');
+const scada2CTX = document.getElementById('scada2').getContext('2d');
+const scada3CTX = document.getElementById('scada3').getContext('2d');
+const scada4CTX = document.getElementById('scada4').getContext('2d');
+const contexts = [scada1CTX, scada2CTX, scada3CTX, scada4CTX];
 
 const layer1Width = 800;
 const layer1Height = 600;
 
 const tankY = layer1Height/3;
-const tankX = (layer1Width/4)/2/2;
+const tankX = ((layer1Width/4)/2)/2;
 
 const tankWidth = 2*tankX;
-const bottomTankY = tankY+170;
+const tankHeight = 180;
+const bottomTankY = tankY+tankHeight;
 
 const offsetBetweenTanks = (layer1Width/4);
-
 const pipeWidth = 12;
 
 const tanks = [];
 // ==========================================//
+function drawTankShape(ctx, bottomTankY, triangleTipOffset, xCoord, yCoord, width, height, fillStyle1, fillStyle2) {
+  ctx.fillStyle = fillStyle1;
+  ctx.fillRect(xCoord, yCoord, width, height);
+  ctx.fillStyle = fillStyle2;
+  ctx.beginPath();
+  ctx.moveTo(xCoord, bottomTankY);
+  ctx.lineTo(xCoord + width, bottomTankY);
+  ctx.lineTo((2*xCoord + width)/2, bottomTankY + triangleTipOffset);
+  ctx.closePath();
+  ctx.fill();
+}
+
 // draws grey pipes connected to tanks
 function IOpipes(tankNum) {
-  const pipeX = tankX + offsetBetweenTanks*tankNum + tankX - pipeWidth/2;
+  const pipeX = tankX + offsetBetweenTanks*tankNum + tankWidth/2 - pipeWidth/2;
   const pipeHeight = 50;
   const pipeY = tankY-pipeHeight;
-  // pipes ontop
-  ctx_layer1.fillRect(pipeX, pipeY, pipeWidth, pipeHeight);
-  // pipes below
-  ctx_layer1.fillRect(pipeX, pipeY+pipeHeight+170, pipeWidth, pipeHeight);
+
+  ctx_layer1.fillRect(pipeX, pipeY, pipeWidth, pipeHeight);// pipes on top
+  ctx_layer1.fillRect(pipeX, pipeY+pipeHeight+tankHeight, pipeWidth, pipeHeight);// pipes below
 
   if (tankNum === 0 ) {
     ctx_layer1.fillRect(pipeX, pipeY, 700, pipeWidth);
-    ctx_layer1.fillRect(pipeX, pipeY+2*pipeHeight+170, 700, pipeWidth);
+    ctx_layer1.fillRect(pipeX, pipeY+2*pipeHeight+tankHeight, 700, pipeWidth);
     ctx_layer1.font = '12px Arial';
     ctx_layer1.fillStyle = 'white';
     ctx_layer1.fillText('input pipe', pipeX+645, pipeY+10);
-    ctx_layer1.fillText('output pipe', pipeX+638, pipeY+10+170+2*pipeHeight);
-    ctx_layer1.fillStyle = '#5A5A5A';
+    ctx_layer1.fillText('output pipe', pipeX+638, pipeY+10+tankHeight+2*pipeHeight);
   }
 }
 
 // draws grey tank background
 function tankBG(tankNum) {
-  // draw square part of tank (grey)
-  ctx_layer1.fillRect(tankX + offsetBetweenTanks*tankNum, tankY, 2*tankX, 170); // x, y, sizex, sizey
-  // draw triangle part of tank (grey)
-  const tankTopLeftCoord = tankX + offsetBetweenTanks*tankNum;
-  ctx_layer1.beginPath();
-  ctx_layer1.moveTo(tankTopLeftCoord, bottomTankY);
-  ctx_layer1.lineTo(tankTopLeftCoord + tankWidth, bottomTankY);
-  ctx_layer1.lineTo((2*tankTopLeftCoord + tankWidth)/2, bottomTankY + 20);
-  ctx_layer1.closePath();
-  ctx_layer1.fill();
+  const xCoord = tankX+offsetBetweenTanks*tankNum;
+  drawTankShape(ctx_layer1, bottomTankY, 20, xCoord, tankY, tankWidth, tankHeight, '#5A5A5A', '#5A5A5A');
 }
 
 // draws water background and initialises the tank objects and scada objects
 export function waterBG(tankNum) {
-  const TLCoord = tankX + offsetBetweenTanks*tankNum + 10; // 50 + 200 *tankNum + 10
-  const waterWidth = 2*tankX - 20;
-  const waterHeight = 170 - 17;
-  const BTTank = tankY + 10 + waterHeight;
+  const xCoord = tankX + offsetBetweenTanks*tankNum + 10; // 50 + 200 *tankNum + 10
+  const waterWidth = tankWidth - 20;
+  const waterHeight = tankHeight - 17;
+  const bottomWaterY = tankY + 10 + waterHeight;
 
-  // water for tanks (lightBlue)
-  ctx_layer2.fillStyle = 'lightBlue';
-  ctx_layer2.fillRect(TLCoord, tankY + 10, waterWidth, waterHeight);
-  // triangle sand (lightBlue)
-  ctx_layer2.fillStyle = '#C2B280';
-  ctx_layer2.beginPath();
-  ctx_layer2.moveTo(TLCoord, BTTank);
-  ctx_layer2.lineTo(TLCoord + 2*tankX - 20, BTTank);
-  ctx_layer2.lineTo((TLCoord + TLCoord + 2*tankX - 20)/2, BTTank + 15);
-  ctx_layer2.closePath();
-  ctx_layer2.fill();
-  // initialise water animation objects and scada screen controller for each water tank
-  const scada_controller = new ScadaController(boxes[tankNum]);
-  tanks.push(new WaterTank(TLCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, scada_controller));
+  drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, 'lightBlue', '#C2B280');
+
+  const scada_controller = new ScadaController(contexts[tankNum]);
+  tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, scada_controller));
 }
 
 // creates background for 4 tanks
