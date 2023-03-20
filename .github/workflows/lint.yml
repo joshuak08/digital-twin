@@ -6,9 +6,11 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
   run-linters:
@@ -24,17 +26,33 @@ jobs:
         with:
           node-version: 16
 
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: |
           cd django/watertreatment/components/static/animScripts
           npm ci
+            
+      - name: Install Python dependencies
+        run: |
+          echo Installing 3.9 Packages
+          pip install --upgrade autopep8
 
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
-          eslint_dir: django/watertreatment/components/static/animScripts
           auto_fix: true
+          
+          # ESLint
+          eslint_dir: django/watertreatment/components/static/animScripts
           eslint: true
           eslint_extensions: js
-          
+
+          # autopep8
+          autopep8_dir: simulation
+          autopep8: true
+          autopep8_extensions: py
