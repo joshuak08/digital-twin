@@ -26,7 +26,7 @@ export class WaterTank extends Fillable {
       differences.push(scada_controller.change_rate_tank((this.valueIdx-1), tankNum));
     }
 
-    this.water_change = current_difference/(Math.max(...differences))/2;
+    this.water_change = current_difference/(Math.max(...differences))/2
   }
 
   draw() {

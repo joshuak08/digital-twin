@@ -4,6 +4,7 @@ import {ScadaController} from './ScadaController.js';
 // ============ constant values ============//
 const ctx_layer1 = document.getElementById('canvas_layer1').getContext('2d');
 const ctx_layer2 = document.getElementById('canvas_layer2_anim').getContext('2d');
+
 const scada1CTX = document.getElementById('scada1').getContext('2d');
 const scada2CTX = document.getElementById('scada2').getContext('2d');
 const scada3CTX = document.getElementById('scada3').getContext('2d');
@@ -53,7 +54,6 @@ function IOpipes(tankNum) {
     ctx_layer1.fillStyle = 'white';
     ctx_layer1.fillText('input pipe', pipeX+645, pipeY+10);
     ctx_layer1.fillText('output pipe', pipeX+638, pipeY+10+tankHeight+2*pipeHeight);
-    ctx_layer1.fillStyle = '#5A5A5A';
   }
 }
 
