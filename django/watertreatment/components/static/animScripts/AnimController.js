@@ -83,8 +83,6 @@ function tankBG(tankNum) {
   //label io pipes
   ctx_layer1.fillStyle = 'black';
   ctx_layer1.fillText(tankNum, xCoord, tankY-3);
-
-
 }
 
 // draws water background and initialises the tank objects and scada objects
