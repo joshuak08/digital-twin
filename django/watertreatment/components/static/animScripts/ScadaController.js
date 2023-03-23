@@ -33,14 +33,11 @@ export class ScadaController {
   draw(component_name, snapshot_num, component_specific_data) {
     // filters for correct tank and snapshot. (the field that contains the water level sand displacement etc.)
     const snapshot_data = ((Object.entries(this.json_list_simdata)).filter((fields) => fields[1]['pk'] === (component_name) && fields[1]['fields']['snapshots'] === snapshot_num))[0][1];
-    // sets font and font size
-    this.scada_context.font = '20px serif';
-    // gets the pieces of text to be drawn onto scada canvas
-    const text_pieces = this.format_scada_text(snapshot_data, component_specific_data);
-    // clears the canvas for new data
-    this.clearScada();
-    // actually draws the stuff on the canvas
-    for (let field_num=0; field_num < text_pieces.length; field_num++) {
+
+    this.scada_context.font = '20px serif';// sets font and font size
+    const text_pieces = this.format_scada_text(snapshot_data, component_specific_data);// gets the pieces of text to be drawn onto scada canvas
+    this.clearScada();// clears the canvas for new data
+    for (let field_num=0; field_num < text_pieces.length; field_num++) {// actually draws the stuff on the canvas
       this.scada_context.fillText(text_pieces[field_num], 2, 15 + field_num*20);
     }
   }
