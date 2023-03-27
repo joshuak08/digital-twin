@@ -19,8 +19,9 @@ This will consist of:
   - A front-end in Django + HTML Templates. 
   - A backend in Django + pyRevit to interface with Revit APIs.
 
-## 1.2.1 Continuous deployment
-C/D has been configured using Google Cloud Build. Click the link below to view the web application. 
+## 1.2.1 Continuous Deployment (C/D)
+C/D has been configured using Google Cloud Build triggers. This listens on the main branch. During every commit, a Docker image is built, 
+pushes to the Google Cloud repository. The application is then built using the latest Docker image. Click the link below to view the web application. 
   - https://beta-release-vb27oaoulq-ew.a.run.app
 
 ## 1.3 Planning
