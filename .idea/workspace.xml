@@ -4,12 +4,8 @@
     <list default="true" id="29e051f5-75be-4117-8dfd-1723c7ee045e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/element.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/element.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/elements-of-type.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/elements-of-type.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/revit-model.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/revit-model.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/types.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/types.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +38,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;
   }
 }</component>
@@ -58,7 +55,8 @@
       <workItem from="1679588902749" duration="18083000" />
       <workItem from="1679675911620" duration="4834000" />
       <workItem from="1679924798151" duration="2145000" />
-      <workItem from="1679928714227" duration="4454000" />
+      <workItem from="1679928714227" duration="5464000" />
+      <workItem from="1680364707561" duration="4291000" />
     </task>
     <servers />
   </component>

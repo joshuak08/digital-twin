@@ -12,7 +12,7 @@ html {font-family: Arials, Helvetica, sans-serif;}
 }
 
 .nav-after {
-    padding-top: 110px;
+    padding-top: 100px;
 }
 
 .container{
@@ -141,6 +141,6 @@ nav li a:hover {
 }
 
 .hero-header{
-	background: url('water treatment plant.jpg') top right no-repeat;
+	background: url('water treatment plant 4.jpg') top right no-repeat;
 	background-size: cover;
 }
