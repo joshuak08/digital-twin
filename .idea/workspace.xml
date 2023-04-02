@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="29e051f5-75be-4117-8dfd-1723c7ee045e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" afterDir="false" />
     </list>
@@ -57,7 +56,7 @@
       <workItem from="1679924798151" duration="2145000" />
       <workItem from="1679928714227" duration="5464000" />
       <workItem from="1680364707561" duration="7677000" />
-      <workItem from="1680448023304" duration="634000" />
+      <workItem from="1680448023304" duration="2489000" />
     </task>
     <servers />
   </component>
