@@ -10,7 +10,6 @@ class SimulationSystem(abc.ABC):
 
     # abstract initialisier covers the assignment of simulation parameters, but not the setup of system components
     # children can extend this method to set up specific systems
-    @abc.abstractclassmethod
     def __init__(self, tick_length, average_flow, average_tss, snapshotter, total_rounds, snapshot_frequency, take_snapshots):
 
         self.tick_length = tick_length
