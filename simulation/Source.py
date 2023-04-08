@@ -15,7 +15,8 @@ class Source(SplitterPipe.SplitterPipe):
         super().push(flow_in, flow_tss)
         self.total_flow += flow_in
     
-    def snapshot(self):
-        data = (self.total_flow)
+    # snapshot just gives back total_flow, as this is the important information for the source
+    def snapshot(self, snap_num):
+        data = (self.id_num, snap_num, self.total_flow)
         return data
        
