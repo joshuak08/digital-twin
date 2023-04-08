@@ -62,6 +62,6 @@ class SplitterPipe(GenericPipe.GenericPipe):
     # ================================== #
 
     # important information for a pipe is how much liquid it has in it and whehter or not it has been closed
-    def snapshot(self):
-        data = (self.capacity, self.valve)
+    def snapshot(self, snap_num):
+        data = (self.id_num, snap_num, self.capacity, self.valve)
         return data

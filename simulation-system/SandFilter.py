@@ -26,8 +26,9 @@ class SandFilter(GenericPipe.GenericPipe):
         self.radius = radius
         self.input = None 
         self.max_volume = self.height * (math.pi * (self.radius ** 2)) # max volume of the tank
+        self.type = "Filter"
 
-        self.id = id_num # id of the component, used for snapshotting
+        self.id_num = id_num # id of the component, used for snapshotting
         
         self.backwash_timer = 0
 
@@ -87,8 +88,9 @@ class SandFilter(GenericPipe.GenericPipe):
         if not self.backwash:
             self.output = self.normal_pipe
 
-    def snapshot(self):
-        data = (self.capacity, self.particulate_mass, self.backwash)
+    # important information for a sand filter is the current volume of liquid in it, the amount of particulate currently capture, and whether or not it is backwashing
+    def snapshot(self, snap_num):
+        data = (self.id_num, snap_num, self.capacity, self.particulate_mass, self.backwash)
         
 
         
