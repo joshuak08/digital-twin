@@ -20,7 +20,6 @@ class SimulationSystem(abc.ABC):
         self.snapshot_frequency = snapshot_frequency
         self.take_snapshots = take_snapshots
 
-        self.round = 0
         self.source = None 
         self.sink = None 
         self.finished = False
@@ -31,7 +30,7 @@ class SimulationSystem(abc.ABC):
     def simulate(self):
         for i in range(self.total_rounds):
 
-            if self.round % self.snapshot_frequency == 0 and self.take_snapshots:
+            if i % self.snapshot_frequency == 0 and self.take_snapshots:
                 self.snapshotter.snapshot(self)
             
             self.take_round()
