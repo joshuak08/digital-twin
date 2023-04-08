@@ -1,7 +1,7 @@
 {% extends "components/new-base.html" %}
 {% load static %}
 {% block content %}
-    <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
+{#    <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">#}
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
             <div class="row justify-content-start">
@@ -22,62 +22,27 @@
 {#        informed decisions throughout the lifecycle of that water system.</p>#}
     {#    <img class="water-drop" src="{% static 'img.png' %}"/>#}
 
-{#    <div class="carousel-wrapper">#}
-{#        <span id="item-1"></span>#}
-{#        <span id="item-2"></span>#}
-{#        <span id="item-3"></span>#}
-{#        <div class="carousel-item item-1">#}
-{#          <a href="#item-3" class="arrow-prev arrow"></a>#}
-{#          <a href="#item-2" class="arrow-next arrow"></a>#}
-{#        </div>#}
-{##}
-{#        <div class="carousel-item item-2">#}
-{#          <a href="#item-1" class="arrow-prev arrow"></a>#}
-{#          <a href="#item-3" class="arrow-next arrow"></a>#}
-{#        </div>#}
-{##}
-{#        <div class="carousel-item item-3">#}
-{#          <a href="#item-2" class="arrow-prev arrow"></a>#}
-{#          <a href="#item-1" class="arrow-next arrow"></a>#}
-{#        </div>#}
-{#    </div>#}
+    <div class="carousel-wrapper">
+        <span id="item-1"></span>
+        <span id="item-2"></span>
+        <span id="item-3"></span>
+        <div class="carousel-item item-1">
+          <a href="#item-3" class="arrow-prev arrow"></a>
+          <a href="#item-2" class="arrow-next arrow"></a>
+        </div>
 
-    <div id="myCarousel" class="carousel slide bg-primary" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class aria-label="Slide 2" aria-current="true"></button>
+        <div class="carousel-item item-2">
+          <a href="#item-1" class="arrow-prev arrow"></a>
+          <a href="#item-3" class="arrow-next arrow"></a>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="overlay-image" style="background-image: url(../../static/aerial.png);"></div>
-                <div class="carousel-container">
-                    <h2>1st Example</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                        ex ea commodo consequat.</p>
-                    <a href="#" class="btn btn-lg btn-primary">More info</a>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="overlay-image" style="background-image: url(../../static/side1.png);"></div>
-                <div class="carousel-container">
-                    <h2>2nd Example</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                        ex ea commodo consequat. </p>
-                    <a href="#" class="btn btn-lg btn-primary">More info</a>
-                </div>
-            </div>
+
+        <div class="carousel-item item-3">
+          <a href="#item-2" class="arrow-prev arrow"></a>
+          <a href="#item-1" class="arrow-next arrow"></a>
         </div>
-        <button href="#myCarousel" class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button href="#myCarousel" class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
+
+
 
 
 

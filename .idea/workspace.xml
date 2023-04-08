@@ -6,6 +6,8 @@
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +62,7 @@
       <workItem from="1680448023304" duration="4438000" />
       <workItem from="1680703240308" duration="1636000" />
       <workItem from="1680776195359" duration="4903000" />
-      <workItem from="1680961853241" duration="5002000" />
+      <workItem from="1680961853241" duration="11410000" />
     </task>
     <servers />
   </component>
