@@ -4,6 +4,40 @@ html {font-family: Arials, Helvetica, sans-serif;}
     padding: 0px;
     box-sizing: border-box;
 }
+/*from old css containing scada*/
+
+/** {box-sizing: border-box;}*/
+/*===== handles scada css =====*/
+.anim_scada{
+    display: flex;
+    justify-content: center;
+}
+
+.Scada, .main{
+    display:flex;
+    flex-direction: column;
+}
+
+.main_anim {flex-basis:800px;}
+
+.Scada {
+    flex-basis:400px;
+    background: #f0f0f0;
+    margin: 0 10px 10px 10px;
+}
+/*=======for perfectly overlapping canvas please don't mess with it=======*/
+canvas {border: solid #5B6DCD 10px;}
+
+#canvas_layer1 {
+    position: absolute;
+	background: #f0f0f0;
+}
+
+#canvas_layer2_anim {
+    position: relative;
+}
+/* ====================================================================== */
+
 .logopic{
     float: left;
     height: 100px;
@@ -155,4 +189,75 @@ nav li a:hover {
 .column {
     flex: 33.33%;
     padding: 5px;
+}
+
+/*Carousell tutorial css source code*/
+
+.carousel-wrapper {
+  height: 400px;
+  position: relative;
+  width: 800px;
+  display: block;
+  margin: 50px auto ;
+  border: 2px solid black;
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 25px 50px;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+.arrow{
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 12px;
+}
+.arrow-prev {
+  left: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(135deg);
+
+}
+.arrow-next {
+  right: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+[id^= "item"] {
+  display: none;
+}
+.item-1 {
+  z-index: 2;
+  opacity: 1;
+  background: url('aerial.png');
+  background-size: cover;
+}
+.item-2 {
+  background: url('side1.png');
+  background-size: cover;
+}
+.item-3 {
+  background: url('side2.png');
+  background-size: cover;
+}
+
+*:target ~ .item-1{
+  opacity: 0;
+}
+#item-1:target ~ .item-1 {
+  opacity: 1;
+
+}
+#item-2:target ~ .item-2, #item-3:target ~ .item-3 {
+  z-index: 3;
+  opacity: 1;
 }
