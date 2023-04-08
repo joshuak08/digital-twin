@@ -179,6 +179,7 @@ nav li a:hover {
 .hero-header{
 	background: url('water treatment plant 4.jpg') top right no-repeat;
 	background-size: cover;
+    /*opacity: 0.5;*/
 }
 
 .row {
@@ -260,4 +261,33 @@ nav li a:hover {
 #item-2:target ~ .item-2, #item-3:target ~ .item-3 {
   z-index: 3;
   opacity: 1;
+}
+
+
+/*Bootstrap carousel tutorial*/
+.carousel-item {
+    height: 32rem;
+    background: #777;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+}
+
+.carousel-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 50px;
+}
+
+.overlay-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.5;
 }
