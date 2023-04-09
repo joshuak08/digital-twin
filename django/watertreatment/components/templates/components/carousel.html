@@ -1,7 +1,7 @@
 {% extends "components/new-base.html" %}
 {% load static %}
 {% block content %}
-    <div id="myCarousel" class="carousel slide bg-primary" data-bs-ride="carousel">
+    <div id="myCarousel" class="carousel slide bg-primary" data-bs-ride="carousel" data-pause="hover">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" aria-current="true"></button>
@@ -22,10 +22,30 @@
 {#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
 {#                </div>#}
                 <div class="carousel-caption d-none d-md-block">
-                    <h2>1st Examples</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. </p>
-                    <a href="#" class="btn btn-lg btn-primary">More info</a>
+{#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Launch demo modal
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title text-dark" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body text-dark text-start">
+                            <p>Testing</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
             </div>
             <div class="carousel-item">
