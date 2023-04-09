@@ -292,3 +292,13 @@ nav li a:hover {
     background-size: cover;
     opacity: 0.5;
 }
+
+.carousel-inner>.carousel-item>img {
+    display: block;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    line-height: 1;
+    margin:auto;
+    width: auto;
+}
