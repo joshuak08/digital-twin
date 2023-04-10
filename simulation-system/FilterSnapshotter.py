@@ -10,12 +10,19 @@ def filter_for_filters(pair):
 
 class FilterSnapshotter(Snapshotter.Snapshotter):
 
+    def __init__(self, testing):
+        super().__init__()
+        self.testing = testing
+
     # TODO implement this - should write to a database the information about all the filters in the system
     def to_database(self):
-
-        path = os.getcwd()
-        parent = os.path.abspath(os.path.join(path, os.pardir))
-        db_path = parent + "\django\watertreatment\db.sqlite3"
+        
+        if not self.testing:
+            path = os.getcwd()
+            parent = os.path.abspath(os.path.join(path, os.pardir))
+            db_path = parent + "\django\watertreatment\db.sqlite3"
+        else:
+            db_path = os.getcwd() + "\db.sqlite3"
 
         time_tag = datetime.datetime.now().strftime("%d/%m/%Y_%H:%M:%S")
         table_name = "filters_" + time_tag

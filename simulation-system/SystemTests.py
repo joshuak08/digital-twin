@@ -16,10 +16,14 @@
 #   - Test database
 #       - Make sure correct stuff is written to database
 import unittest
+import sqlite3
+import os
 
 import SimulationSystem
 import Snapshotter
 import FilterSystem
+import FilterSnapshotter
+
 
 class DummySimulation(SimulationSystem.SimulationSystem):
     
@@ -195,11 +199,39 @@ class TestSnapshotter(unittest.TestCase):
 
 class TestFilterSnapshotter(unittest.TestCase):
 
-    def test_correct_filtering(self):
-        pass
-
     def test_correct_contents(self):
-        pass 
+         
+        snapshotter = FilterSnapshotter.FilterSnapshotter(True)
+        system = DummySnapshotSimulation(1, 0, 0, None, 5, 1, True)
+
+        system.add_component(0, [], 0, system.tick_length, 1, "pipe")
+        system.add_component(1, [None, None], 0, system.tick_length, 1, "filter")
+        system.add_component(0, [], 0, system.tick_length, 1, "sink")
+        system.add_component(0, [], 0, system.tick_length, 1, "source")
+
+        snapshotter.setup(system)
+
+        system.simulate()
+
+        table_name = snapshotter.to_database()
+
+        connection = sqlite3.connect(os.getcwd() + "\db.sqlite3")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT * FROM " + table_name)
+        data = cursor.fetchall()
+
+        self.assertEqual(len(data), 5)
+        for i in data:
+            self.assertEqual(len(i), 5)
+            self.assertEqual(i[1], i[2])
+        
+        connection.close()
+        os.remove(os.getcwd() + "\db.sqlite3")
+
+
+
+
 
 
 
