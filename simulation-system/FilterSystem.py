@@ -7,7 +7,7 @@ class FilterSystem(SimulationSystem.SimulationSystem):
 
     # initialisation does basic system setup, then sets up the system specific components
     def __init__(self, tick_length, average_flow, average_tss, snapshotter, total_rounds, snapshot_frequency, take_snapshots):
-        super.__init__(self, tick_length, average_flow, average_tss, snapshotter, total_rounds, snapshot_frequency, take_snapshots)
+        super().__init__(tick_length, average_flow, average_tss, snapshotter, total_rounds, snapshot_frequency, take_snapshots)
 
         # initialising sink
         self.sink = self.add_component(8, [], 1, self.tick_length, 1, "sink")

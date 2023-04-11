@@ -24,19 +24,18 @@ class FilterSnapshotter(Snapshotter.Snapshotter):
         else:
             db_path = os.getcwd() + "\db.sqlite3"
 
-        time_tag = datetime.datetime.now().strftime("%d/%m/%Y_%H:%M:%S")
+        time_tag = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
         table_name = "filters_" + time_tag
 
         connection = sqlite3.connect(db_path)
         cursor = connection.cursor()
         cursor.execute("CREATE TABLE " + table_name + "(id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean)")
 
-        filtered_components = dict(filter(filter_for_filters, self.system_data.items))
-        
+        filtered_components = dict(filter(filter_for_filters, self.system_data.items()))
         data = []
 
-        for k, v in filtered_components:
-            data.append(v[1])
+        for i in filtered_components:
+            data = data + filtered_components[i][1]
 
         cursor.executemany("INSERT INTO " + table_name + " VALUES(?, ?, ?, ?, ?)", data)
         connection.commit()

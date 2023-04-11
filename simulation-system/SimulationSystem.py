@@ -37,7 +37,6 @@ class SimulationSystem(abc.ABC):
 
     # abstract method for processing of each round - each system may do different things on each rounds, 
     # so will implement this method themselves
-    @abc.abstractclassmethod
     def take_round(self):
         pass
     
@@ -52,9 +51,9 @@ class SimulationSystem(abc.ABC):
         if type == "filter":
             component = SandFilter.SandFilter(id_num, num_of_inputs, outputs, length, tick_length, radius)
         if type == "sink":
-            component = Sink.Sink(id_num, num_of_inputs, outputs, length, tick_length, radius, self)
+            component = Sink.Sink(id_num, num_of_inputs, outputs, length, tick_length, radius)
         if type == "source":
-            component = Source.Source(id_num, num_of_inputs, outputs, length, tick_length, radius)
+            component = Source.Source(id_num, outputs, length, tick_length, radius)
 
         self.components.append(component)
 
