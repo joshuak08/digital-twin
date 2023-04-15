@@ -14,23 +14,26 @@ class DataBaser:  # class to hold info about database
         self.cursor.execute("""DROP TABLE IF EXISTS components_simdatatable""")
         self.dbConn.commit()
 
+    # (id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean)
     def access_table(self):
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS components_simdatatable (
-                                components text, 
-                                snapshots integer,
-                                waterLevel integer,
-                                sanddisp integer
+                                id integer, 
+                                snap_num integer,
+                                water_vol integer,
+                                particulate integer,
+                                backwash boolean
                                 )""")
         self.dbConn.commit()  # Commit changes to database
 
     # stores all elements listed in documentInterface into database
-    def store_elems(self, components, snapshots, waterlevel, sanddisp):
+    def store_elems(self, components, snap_num, water_vol, particulate, backwash):
         for i in range(0, len(components)):
-            print("storing row: ", waterlevel[i])
-            self.cursor.execute("INSERT INTO components_simdatatable VALUES (?, ?, ?, ?)", (components[i],
-                                                                          snapshots[i],
-                                                                          waterlevel[i],
-                                                                          sanddisp[i]))
+            print("storing row: ", water_vol[i])
+            self.cursor.execute("INSERT INTO components_simdatatable VALUES (?, ?, ?, ?, ?)", (components[i],
+                                                                                               snap_num[i],
+                                                                                               water_vol[i],
+                                                                                               particulate[i],
+                                                                                               backwash[i]))
         self.dbConn.commit()  # commits changes to database
 
     def close_connection(self):
@@ -40,5 +43,10 @@ class DataBaser:  # class to hold info about database
 dummyDB = DataBaser()
 dummyDB.drop_table()
 dummyDB.access_table()
-dummyDB.store_elems(["tank0","tank0","tank1","tank1","tank2","tank2","tank3","tank3"], [0, 1, 0, 1, 0, 1, 0, 1], [152, 20, 20, 125, 0, 100, 40, 80], [5, 5, 5, 5, 5, 5, 5, 5])
+# ["tank0","tank0","tank1","tank1","tank2","tank2","tank3","tank3"], [0, 1, 0, 1, 0, 1, 0, 1], [152, 20, 20, 125, 0, 100, 40, 80], [5, 5, 5, 5, 5, 5, 5, 5]
+dummyDB.store_elems([0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3],  # component id
+                    [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2],  # snap_num
+                    [56, 0, 10, 0, 50, 20, 32, 5, 56, 0, 10, 0],  # water_vol
+                    [92800, 23921, 293083, 308351, 83458, 341822, 485693, 114396, 92800, 23921, 293083, 308351],  # particulate
+                    [False, True, True, False, True, True, False, True, True, False, True, True])  # backwash
 dummyDB.close_connection()
