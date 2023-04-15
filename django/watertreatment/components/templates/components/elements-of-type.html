@@ -1,12 +1,28 @@
 {% extends "components/new-base.html" %}
 {% block content %}
-    <div class="nav-after"></div>
 	<h2>Elements of type {{type}}</h2>
     <div><button onclick="history.back()">Go Back</button></div>
-    <table>
-        <tr><th>ElementID</th></tr>
+{#    <table>#}
+{#        <tr><th>ElementID</th></tr>#}
+{#        {% for i in elements %}#}
+{#            <tr><td><a href = {{i}}/>{{i}}</a></td></tr>#}
+{#        {% endfor %}#}
+{#    </table>#}
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">ElementID</th>
+{#                <th scope="col">Quantity</th>#}
+            </tr>
+        </thead>
+{#        <tr><th>Type</th><th>Quantity</th></tr>#}
+        <tbody>
         {% for i in elements %}
-            <tr><td><a href = {{i}}/>{{i}}</a></td></tr>
+            <tr><td><a href = {{i}}>{{i}}</a></td></tr>
         {% endfor %}
+        </tbody>
+{#        {% for k, v in types.items %}#}
+{#        <tr><td><a href = {{k}}/>{{k}}</a></td><td>{{v}}</td></tr>#}
+{#        {% endfor %}#}
     </table>
 {% endblock content %}	
