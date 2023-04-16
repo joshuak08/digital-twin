@@ -1,6 +1,8 @@
 import GenericPipe
 
 # special type of pipe, sink, used to mark the end of a system
+
+
 class Sink(GenericPipe.GenericPipe):
 
     # as well as regular pipe stuff sinks keep track of stats for the whole system
@@ -16,15 +18,14 @@ class Sink(GenericPipe.GenericPipe):
     # pushed to by all inputs
     def push(self, flow_in, flow_tss):
         self.pushes_in_round += 1
-        self.flow_in_round += flow_in 
-        self.total_flow += flow_in 
+        self.flow_in_round += flow_in
+        self.total_flow += flow_in
         self.total_particulate += flow_tss * flow_in
         if self.pushes_in_round == self.num_of_inputs:
             self.pushes_in_round = 0
             self.flow_in_round = 0
 
-    #important information for the sink is the total flow and particulate through the system
+    # important information for the sink is the total flow and particulate through the system
     def snapshot(self, snap_num):
         data = (self.id_num, snap_num, self.total_flow, self.total_particulate)
         return data
-    

@@ -4,11 +4,13 @@ import math
 # Q = av where Q is the flow rate, a = cross-sectional area, v = velocity of water
 
 # class for a basic pipe with any number of outputs or inputs
+
+
 class SplitterPipe(GenericPipe.GenericPipe):
 
-    # initialises the same as generic pipe, but has a few more things to keep track of 
+    # initialises the same as generic pipe, but has a few more things to keep track of
     def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius):
-        
+
         super().__init__(id_num, num_of_inputs, outputs, length, tick_length, radius)
 
         # to handle having multiple inputs the pipe won't continue until it's been pushed to by all children
@@ -16,15 +18,15 @@ class SplitterPipe(GenericPipe.GenericPipe):
         self.flow_in_current_round = 0
         self.output_ratios = []
         self.type = "Splitter"
-        
-    
+
     # method to decide how much flow should be pushed to each output, based on the radius of each output
     # if an output is closed it is not brought into these calculations
+
     def get_output_ratios(self):
         total_radius = 0
         for i in self.outputs:
             if i.valve == False:
-                total_radius += i.radius 
+                total_radius += i.radius
         if total_radius == 0:
             total_radius = 1
         for i in self.outputs:
@@ -33,9 +35,9 @@ class SplitterPipe(GenericPipe.GenericPipe):
                 numerator = 0
             self.output_ratios.append(numerator / total_radius)
 
-
     # ======== override methods ======== #
-    # pushing for a splitter 
+    # pushing for a splitter
+
     def push(self, flow_in, flow_tss):
 
         # waits to be pushed to by all inputs before pushing out
@@ -55,7 +57,7 @@ class SplitterPipe(GenericPipe.GenericPipe):
             self.flow_in_current_round = 0
 
             self.capacity += (flow_in - flow_out)
-        
+
         # if the pipe is not able to push out the flow pushed into it then bad things happen
         if self.capacity > self.max_volume:
             raise Exception("capacity is greater than max volume :(")

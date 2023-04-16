@@ -1,4 +1,4 @@
-#TODO Things to Test:
+# TODO Things to Test:
 #   - Adding things to the system DONE
 #       - Make sure that IDs are unique DONE
 #       - Make sure that the list contains the right number of items DONE
@@ -26,13 +26,15 @@ import FilterSnapshotter
 
 
 class DummySimulation(SimulationSystem.SimulationSystem):
-    
+
     def __init__(self, tick_length, average_flow, average_tss, snapshotter, total_rounds, snapshot_frequency, take_snapshots):
-        super().__init__(tick_length, average_flow, average_tss, snapshotter, total_rounds, snapshot_frequency, take_snapshots)
+        super().__init__(tick_length, average_flow, average_tss,
+                         snapshotter, total_rounds, snapshot_frequency, take_snapshots)
         self.turns_taken = 0
-    
+
     def take_round(self):
         self.turns_taken += 1
+
 
 class DummySnapshotSimulation(SimulationSystem.SimulationSystem):
 
@@ -41,16 +43,14 @@ class DummySnapshotSimulation(SimulationSystem.SimulationSystem):
             i.capacity += 1
 
 
-
 class DummySnapshotter(Snapshotter.Snapshotter):
 
     def __init__(self):
         super().__init__()
         self.snapshots_taken = 0
-    
+
     def snapshot(self, system):
         self.snapshots_taken += 1
-
 
 
 class TestSystemCreation(unittest.TestCase):
@@ -70,14 +70,15 @@ class TestSystemCreation(unittest.TestCase):
 
         for i in range(100):
             system.add_component(0, [], 0, system.tick_length, 1, "pipe")
-        
+
         self.assertEqual(len(system.components), 100)
 
     def test_correct_types(self):
         system = SimulationSystem.SimulationSystem(1, 0, 0, None, 0, 1, False)
 
         system.add_component(0, [], 0, system.tick_length, 1, "pipe")
-        system.add_component(1, [None, None], 0, system.tick_length, 1, "filter")
+        system.add_component(1, [None, None], 0,
+                             system.tick_length, 1, "filter")
         system.add_component(0, [], 0, system.tick_length, 1, "sink")
         system.add_component(0, [], 0, system.tick_length, 1, "source")
 
@@ -94,28 +95,28 @@ class TestSimulationRunning(unittest.TestCase):
         system = DummySimulation(1, 0, 0, None, 100, 1, False)
         system.simulate()
         self.assertEqual(system.turns_taken, 100)
-    
+
     def test_correct_snapshots(self):
         snapshotter = DummySnapshotter()
         system = DummySimulation(1, 0, 0, snapshotter, 100, 5, True)
         system.simulate()
         self.assertEqual(snapshotter.snapshots_taken, 20)
-    
+
 
 class TestFilterSystem(unittest.TestCase):
 
     def test_system_construction(self):
-        component_dict = {"Splitter" : 0, "Filter": 0, "Sink" : 0, "Source" : 0}
+        component_dict = {"Splitter": 0, "Filter": 0, "Sink": 0, "Source": 0}
         system = FilterSystem.FilterSystem(1, 0, 0, None, 0, 1, False)
 
         for i in system.components:
             component_dict[i.type] = component_dict[i.type] + 1
-        
+
         self.assertEqual(component_dict["Splitter"], 17)
         self.assertEqual(component_dict["Filter"], 4)
         self.assertEqual(component_dict["Sink"], 1)
         self.assertEqual(component_dict["Source"], 1)
-    
+
     def test_simulation_one_round(self):
         system = FilterSystem.FilterSystem(1, 0.3, 243, None, 1, 1, False)
         system.simulate()
@@ -127,7 +128,7 @@ class TestFilterSystem(unittest.TestCase):
         first_capacity = filters[0].capacity
         for i in filters:
             self.assertEqual(i.capacity, first_capacity)
-    
+
     def test_simulation_multi_round(self):
         system = FilterSystem.FilterSystem(1, 0.3, 243, None, 10, 1, False)
         system.simulate()
@@ -142,13 +143,14 @@ class TestFilterSystem(unittest.TestCase):
 
 
 class TestSnapshotter(unittest.TestCase):
-    
+
     def test_snapshotter_setup(self):
         system = SimulationSystem.SimulationSystem(1, 0, 0, None, 0, 1, False)
         snapshotter = Snapshotter.Snapshotter()
 
         system.add_component(0, [], 0, system.tick_length, 1, "pipe")
-        system.add_component(1, [None, None], 0, system.tick_length, 1, "filter")
+        system.add_component(1, [None, None], 0,
+                             system.tick_length, 1, "filter")
         system.add_component(0, [], 0, system.tick_length, 1, "sink")
         system.add_component(0, [], 0, system.tick_length, 1, "source")
 
@@ -163,13 +165,13 @@ class TestSnapshotter(unittest.TestCase):
         self.assertEqual(snapshotter.system_data[2][1], [])
         self.assertEqual(snapshotter.system_data[3][1], [])
 
-
     def test_snapshot_amount(self):
         snapshotter = Snapshotter.Snapshotter()
         system = DummySimulation(1, 0, 0, snapshotter, 5, 1, True)
 
         system.add_component(0, [], 0, system.tick_length, 1, "pipe")
-        system.add_component(1, [None, None], 0, system.tick_length, 1, "filter")
+        system.add_component(1, [None, None], 0,
+                             system.tick_length, 1, "filter")
         system.add_component(0, [], 0, system.tick_length, 1, "sink")
         system.add_component(0, [], 0, system.tick_length, 1, "source")
 
@@ -185,27 +187,30 @@ class TestSnapshotter(unittest.TestCase):
         system = DummySnapshotSimulation(1, 0, 0, snapshotter, 5, 1, True)
 
         system.add_component(0, [], 0, system.tick_length, 1, "pipe")
-        system.add_component(1, [None, None], 0, system.tick_length, 1, "filter")
+        system.add_component(1, [None, None], 0,
+                             system.tick_length, 1, "filter")
         system.add_component(0, [], 0, system.tick_length, 1, "sink")
         system.add_component(0, [], 0, system.tick_length, 1, "source")
 
         snapshotter.setup(system)
 
         system.simulate()
-        
+
         for i in range(5):
             self.assertEqual(snapshotter.system_data[0][1][i][2], i)
             self.assertEqual(snapshotter.system_data[1][1][i][2], i)
 
+
 class TestFilterSnapshotter(unittest.TestCase):
 
     def test_correct_contents(self):
-         
+
         snapshotter = FilterSnapshotter.FilterSnapshotter(True)
         system = DummySnapshotSimulation(1, 0, 0, snapshotter, 5, 1, True)
 
         system.add_component(0, [], 0, system.tick_length, 1, "pipe")
-        system.add_component(1, [None, None], 0, system.tick_length, 1, "filter")
+        system.add_component(1, [None, None], 0,
+                             system.tick_length, 1, "filter")
         system.add_component(0, [], 0, system.tick_length, 1, "sink")
         system.add_component(0, [], 0, system.tick_length, 1, "source")
 
@@ -225,13 +230,6 @@ class TestFilterSnapshotter(unittest.TestCase):
         for i in data:
             self.assertEqual(len(i), 5)
             self.assertEqual(i[1], i[2])
-        
+
         connection.close()
         os.remove(os.getcwd() + "\db.sqlite3")
-
-
-
-
-
-
-

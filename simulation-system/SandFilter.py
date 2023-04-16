@@ -2,34 +2,37 @@ import GenericPipe
 import math
 
 # class to represent a Sand Filter (based off of Nijhuis CSF 300)
+
+
 class SandFilter(GenericPipe.GenericPipe):
 
     # initialisation for a sand filter is quite different to a regular pipe, so parents initialiser is not used
     def __init__(self, id_num, num_of_inputs, outputs, length, tick_length, radius):
-        
+
         # sand filters have specific configuratiosn
         if num_of_inputs != 1 or len(outputs) != 2:
             print("Error: Bad Inputs / Outputs.")
-            return 
-        
-        self.num_of_inputs = num_of_inputs # intake for the tank
-        self.normal_pipe = outputs[0] # default pipe for cleaned water
-        self.backwash_pipe = outputs[1] # pipe to output wash water
-        self.output = self.normal_pipe # current output of the tank
-        self.height = length # height of the tank
-        self.particulate_mass = 0 # mass of particulate currently captured in the sand
-        self.backwash = False # whether or not the tank is currently backwashing
-        self.valve = False # whether or not the tank is shut
-        self.capacity = 0 # current volume of liquid in the tank
-        self.radius = radius # radius of the tank in metres
-        self.tick_length = tick_length # length of each round in seconds
+            return
+
+        self.num_of_inputs = num_of_inputs  # intake for the tank
+        self.normal_pipe = outputs[0]  # default pipe for cleaned water
+        self.backwash_pipe = outputs[1]  # pipe to output wash water
+        self.output = self.normal_pipe  # current output of the tank
+        self.height = length  # height of the tank
+        self.particulate_mass = 0  # mass of particulate currently captured in the sand
+        self.backwash = False  # whether or not the tank is currently backwashing
+        self.valve = False  # whether or not the tank is shut
+        self.capacity = 0  # current volume of liquid in the tank
+        self.radius = radius  # radius of the tank in metres
+        self.tick_length = tick_length  # length of each round in seconds
         self.radius = radius
-        self.input = None 
-        self.max_volume = self.height * (math.pi * (self.radius ** 2)) # max volume of the tank
+        self.input = None
+        self.max_volume = self.height * \
+            (math.pi * (self.radius ** 2))  # max volume of the tank
         self.type = "Filter"
 
-        self.id_num = id_num # id of the component, used for snapshotting
-        
+        self.id_num = id_num  # id of the component, used for snapshotting
+
         self.backwash_timer = 0
 
         # Numbers for a standard Sand Filter
@@ -43,7 +46,7 @@ class SandFilter(GenericPipe.GenericPipe):
     def set_input(self, input_pipe):
         self.input = input_pipe
 
-    # calculates the velocity of water leaving out the bottom of the tank, based on the amount of water currently 
+    # calculates the velocity of water leaving out the bottom of the tank, based on the amount of water currently
     # in the tank
     # (a more realistic simulation would take into account the amount of particluate collected)
     def water_velocity(self):
@@ -52,19 +55,20 @@ class SandFilter(GenericPipe.GenericPipe):
 
     # pushing for a sand filter
     def push(self, flow_in, flow_tss):
-        
+
         # updates it's state based on the flow pushed into it
-        self.particulate_mass += flow_in * flow_tss * 1000 # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
+        # incrementing amount of particulate in system, should be based on level of particulate in water and flow in
+        self.particulate_mass += flow_in * flow_tss * 1000
         self.capacity += flow_in
 
         # if it's caught a certain amount of particulate it goes into backwash
-        if self.particulate_mass > 500000: # arbitrary boundary to start backwash - 500g of particulate collected
+        if self.particulate_mass > 500000:  # arbitrary boundary to start backwash - 500g of particulate collected
             self.backwash = True
             self.output = self.backwash_pipe
             self.input.toggle_valve()
             self.backwash_timer = 180 / self.tick_length
-        
-        # if in a backwash, decrement backwash timer, and do an empty push to regular input 
+
+        # if in a backwash, decrement backwash timer, and do an empty push to regular input
         if self.backwash:
             self.backwash_timer -= 1
             self.normal_pipe.push(0, flow_tss)
@@ -78,9 +82,10 @@ class SandFilter(GenericPipe.GenericPipe):
             self.backwash_pipe.push(0, flow_tss)
 
         # push flow to current output based on water velocity and the size of the pipe being pushed to
-        flow_out = self.water_velocity() * self.output.cs_area * self.tick_length 
+        flow_out = self.water_velocity() * self.output.cs_area * self.tick_length
 
-        self.output.push(flow_out, flow_tss) # pushes flow out to the output pipe
+        # pushes flow out to the output pipe
+        self.output.push(flow_out, flow_tss)
 
         # update capacity accordingly
         self.capacity -= flow_out
@@ -91,11 +96,6 @@ class SandFilter(GenericPipe.GenericPipe):
 
     # important information for a sand filter is the current volume of liquid in it, the amount of particulate currently capture, and whether or not it is backwashing
     def snapshot(self, snap_num):
-        data = (self.id_num, snap_num, self.capacity, self.particulate_mass, self.backwash)
+        data = (self.id_num, snap_num, self.capacity,
+                self.particulate_mass, self.backwash)
         return data
-        
-
-        
-
-
-        
