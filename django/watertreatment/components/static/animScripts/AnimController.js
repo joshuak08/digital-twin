@@ -55,7 +55,7 @@ function IOpipes(tankNum) {
     ctx_layer1.fillRect(pipeX, pipeY+2*pipeHeight+tankHeight, layer1Width-pipeX, pipeWidth);
     ctx_layer1.font = '12px Arial';
     ctx_layer1.fillStyle = 'white';
-    //label io pipes
+    // label io pipes
     ctx_layer1.fillText('input pipe', pipeX+645, pipeY+10);
     ctx_layer1.fillText('output pipe', pipeX+638, pipeY+10+tankHeight+2*pipeHeight);
   }
@@ -80,19 +80,19 @@ function BWpipes(tankNum) {
 function tankBG(tankNum) {
   const xCoord = tankX+offsetBetweenTanks*tankNum;
   drawTankShape(ctx_layer1, bottomTankY, 20, xCoord, tankY, tankWidth, tankHeight, '#5A5A5A', '#5A5A5A');
-  //label io pipes
+  // label io pipes
   ctx_layer1.fillStyle = 'black';
   ctx_layer1.fillText(tankNum, xCoord, tankY-3);
 }
 
 // draws water background and initialises the tank objects and scada objects
-export function waterBG(tankNum) {
+export function waterBG(tankNum, waterColour = 'LightBlue') {
   const xCoord = tankX + offsetBetweenTanks*tankNum + 10; // 50 + 200 *tankNum + 10
   const waterWidth = tankWidth - 20;
   const waterHeight = tankHeight - 17;
   const bottomWaterY = tankY + 10 + waterHeight;
 
-  drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, 'LightBlue', '#C2B280');
+  drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, waterColour, '#C2B280');
 
   const scada_controller = new ScadaController(contexts[tankNum]);
   tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, scada_controller));
