@@ -22,8 +22,8 @@ export class WaterTank extends Fillable {
   }
 
   water_rate_update(){
-    console.log("herw")
     // code for getting flow rates to sync so the next snapshot is reached simultaneously
+    this.diffrences = [];
     let next_snapshot_data_water_vol = this.json_list.filter((fields) => fields[1]['pk'] === (this.tankNum) && fields[1]['fields']['snap_num'] === this.valueIdx).map((fields) => fields[1]['fields']['water_vol']);
     let current_snapshot_data_water_vol = this.json_list.filter((fields) => fields[1]['pk'] === (this.tankNum) && fields[1]['fields']['snap_num'] === this.valueIdx-1).map((fields) => fields[1]['fields']['water_vol']);
     // console.log(json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === this.valueIdx-1))
@@ -37,8 +37,32 @@ export class WaterTank extends Fillable {
   }
 
   //TODO:
-  update_water_colour(colour){
-    this.ctx_layer2.fillstyle = colour;
+  hex_to_rgba_formatted(colour){//colour, alpha = 1
+    // let colour = "#046d7a"
+    const [r, g, b] = colour.match(/\w\w/g).map(x => parseInt(x, 16))
+    return [r, g, b, 1]
+  }
+
+  formatRbga = (colour) => {
+    return `rgba(${colour.r},${colour.g},${colour.b},${colour.a})`
+  }
+
+  interpolate_colour(progress){
+    const [r1, g1, b1, a1] = this.hex_to_rgba_formatted("#046d7a")
+    const [r2, g2, b2, a2] = this.hex_to_rgba_formatted("#047a47")
+    return formatRbga({
+        r: Math.round((r1 + r2) * progress),
+        g: Math.round((g1 + g2) * progress),
+        b: Math.round((b1 + b2) * progress),
+        a: Math.round((a1 + a2) * progress)
+    })
+  }
+
+  update_water_colour(particulate){
+    let particulate_range = 500000;
+    let percentage_range = 100;
+    let progress =
+    this.ctx_layer2.fillstyle = interpolate_colour((((particulate - 0) * 100) / particulate) + 0);
   }
 
   draw() {
@@ -46,7 +70,6 @@ export class WaterTank extends Fillable {
     if (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.00000000001) {
       this.currentLevel = this.valuesArr[this.valueIdx];
       this.valueIdx += 1;
-      this.diffrences = [];
       this.water_rate_update();
       // if the current water level is greater than the next water level decrease by the calculated rate of change
     } else if (this.currentLevel > this.valuesArr[this.valueIdx]) {
@@ -55,15 +78,16 @@ export class WaterTank extends Fillable {
     } else if (this.currentLevel < this.valuesArr[this.valueIdx]) {
       this.currentLevel += this.water_change;
     }
+    //TODO: UPDATE WATER COLOUR HERE
+
     // if the current snapshot isn't the last update the animation by drawing the water height (this is done via a black square to give illusion of water level dipping/increasing)
     if (this.valueIdx <= this.valuesArr.length) {
       waterBG(this.tankNum);
       this.ctx_layer2.fillRect(this.x, this.y, this.w, this.h - this.currentLevel);
 
       // calls the scada screen controller to sync the current water level of tank with the current water level data displayed on the scada screen
-      // this.scada_controller.draw(('tank'+ this.tankNum), (this.valueIdx-1), ['component name : '+'tank' + this.tankNum, 'current water lvl : '+ this.currentLevel.toFixed(2), 'valuesArr :' + this.valuesArr]);
+      //TODO: REMOVE REDUNDANT ATTRIBUTES
       this.scada_controller.draw(this.tankNum, (this.valueIdx-1), ['component name : '+'tank' + this.tankNum, 'current water lvl : '+ this.currentLevel.toFixed(2), 'valuesArr :' + this.valuesArr]);
-
     }
   }
 }

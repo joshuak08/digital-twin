@@ -1,7 +1,7 @@
 const Jtemp = (Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent))));
-// console.log(Jtemp)
+console.log(Jtemp)
 // console.log(Jtemp.filter((fields) => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0).map((fields) => fields[1]['fields']));
-// console.log( (Jtemp.filter(fields => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0))[0][1]['fields'] )
+// console.log( (Jtemp.filter(fields => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0))[0][1]['fields']['particulate'])
 
 export class ScadaController {
   constructor(scada_context) {
@@ -9,6 +9,10 @@ export class ScadaController {
     this.json_list_simdata = Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
     this.scada_context = scada_context;
 
+  }
+
+  get_particulate_level(snapshot_num){
+    return this.json_list_simdata.filter(fields => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === snapshot_num)[0][1]['fields']['particulate'];
   }
 
   // clears the canvas
@@ -40,7 +44,7 @@ export class ScadaController {
   // draws the data onto the canvas
   draw(component_name, snapshot_num, component_specific_data) {
     // filters for correct tank and snapshot. (the field that contains the water volume, snapshot number, particulate, etc.)
-    const snapshot_data = this.json_list_simdata.filter(fields => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === snapshot_num)[0][1]['fields'];
+    const snapshot_data = this.json_list_simdata.filter(fields => fields[1]['pk'] === (component_name) && fields[1]['fields']['snap_num'] === snapshot_num)[0][1]['fields'];
     // const snapshot_data = ((Object.entries(this.json_list_simdata)).filter((fields) => fields[1]['pk'] === (component_name) && fields[1]['fields']['snap_num'] === snapshot_num))[0][1];
 
     this.scada_context.font = '20px serif';// sets font and font size

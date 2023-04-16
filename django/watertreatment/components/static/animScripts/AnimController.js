@@ -92,7 +92,7 @@ export function waterBG(tankNum) {
   const waterHeight = tankHeight - 17;
   const bottomWaterY = tankY + 10 + waterHeight;
 
-  drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, 'lightBlue', '#C2B280');
+  drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, 'LightBlue', '#C2B280');
 
   const scada_controller = new ScadaController(contexts[tankNum]);
   tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, scada_controller));
