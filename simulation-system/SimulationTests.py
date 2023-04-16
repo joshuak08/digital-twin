@@ -148,13 +148,13 @@ class TestSandFilterBehaviour(unittest.TestCase):
         filter = SandFilter.SandFilter(2, 1, [sink1, sink2], 8, 1, 1.5)
         dummy_pipe = TestPipe("Dummy Pipe")
         filter.set_input(dummy_pipe)
-        filter.push(10, 252)
-        expected_water_height = 10 / (math.pi * (1.5 ** 2))
+        filter.push(1, 252)
+        expected_water_height = 1 / (math.pi * (1.5 ** 2))
         expected_velocity = math.sqrt(2 * 9.807 * expected_water_height)
         expected_flow_out = expected_velocity * sink1.cs_area
         self.assertEqual(expected_flow_out, sink1.total_flow)
         self.assertEqual(0, sink2.total_flow)
-        self.assertEqual(10 - expected_flow_out, filter.capacity)
+        self.assertEqual(1 - expected_flow_out, filter.capacity)
 
     def test_start_and_end_backwash(self):
         sink1 = Sink.Sink(0, 1, [], 1, 1, 0.1)
@@ -171,7 +171,7 @@ class TestSandFilterBehaviour(unittest.TestCase):
         self.assertEqual(0, sink1.total_flow)
         filter.particulate_mass = 0
         filter.backwash_timer = 1
-        filter.push(10, 252)
+        filter.push(1, 252)
 
         self.assertFalse(filter.backwash)
         self.assertEqual(filter.output, sink1)

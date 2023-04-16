@@ -79,6 +79,7 @@ class SandFilter(GenericPipe.GenericPipe):
 
         # push flow to current output based on water velocity and the size of the pipe being pushed to
         flow_out = self.water_velocity() * self.output.cs_area * self.tick_length 
+
         self.output.push(flow_out, flow_tss) # pushes flow out to the output pipe
 
         # update capacity accordingly
