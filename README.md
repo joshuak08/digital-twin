@@ -1,6 +1,7 @@
 # 1. Water Treatment Digital Twin 
 ## 1.1 Index
 - [Overview](#12-overview)
+- [C/D](#121-continuous-deployment)
 - [Planning](#13-planning)
 - [Stakeholders](#14-stakeholders)
 - [User stories](#15-user-stories)
@@ -17,6 +18,10 @@ the lifecycle of that water system. \
 This will consist of: 
   - A front-end in Django + HTML Templates. 
   - A backend in Django + pyRevit to interface with Revit APIs.
+
+## 1.2.1 Continuous deployment
+C/D has been configured using Google Cloud Build. Click the link below to view the web application. 
+  - https://beta-release-vb27oaoulq-ew.a.run.app
 
 ## 1.3 Planning
 
