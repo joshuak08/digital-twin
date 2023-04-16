@@ -1,29 +1,31 @@
 {% extends "components/new-base.html" %}
 {% block content %}
 {#    <div class="nav-after"></div>#}
-	<h2>Element Types</h2>
 {#    <button onclick="history.back()">Go Back</button>#}
-{#    <table>#}
-{#        <tr><th>Type</th><th>Quantity</th></tr>#}
-{#        {% for k, v in types.items %}#}
-{#        <tr><td><a href = {{k}}/>{{k}}</a></td><td>{{v}}</td></tr>#}
-{#        {% endfor %}#}
-{#    </table>#}
-    <table class="table table-striped table-hover table-bordered">
-        <thead class="table-primary">
-            <tr>
-                <th scope="col">Type</th>
-                <th scope="col">Quantity</th>
-            </tr>
-        </thead>
-{#        <tr><th>Type</th><th>Quantity</th></tr>#}
-        <tbody>
-        {% for k, v in types.items %}
-            <tr><td><a href = {{k}}>{{k}}</a></td><td>{{v}}</td></tr>
-        {% endfor %}
-        </tbody>
-{#        {% for k, v in types.items %}#}
-{#        <tr><td><a href = {{k}}/>{{k}}</a></td><td>{{v}}</td></tr>#}
-{#        {% endfor %}#}
-    </table>
+    {#    <table>#}
+    {#        <tr><th>Type</th><th>Quantity</th></tr>#}
+    {#        {% for k, v in types.items %}#}
+    {#        <tr><td><a href = {{k}}/>{{k}}</a></td><td>{{v}}</td></tr>#}
+    {#        {% endfor %}#}
+    {#    </table>#}
+    <div class="webpage-content">
+        <h2>Element Types</h2>
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+    {#        <tr><th>Type</th><th>Quantity</th></tr>#}
+            <tbody>
+            {% for k, v in types.items %}
+                <tr><td><a href = {{k}}>{{k}}</a></td><td>{{v}}</td></tr>
+            {% endfor %}
+            </tbody>
+    {#        {% for k, v in types.items %}#}
+    {#        <tr><td><a href = {{k}}/>{{k}}</a></td><td>{{v}}</td></tr>#}
+    {#        {% endfor %}#}
+        </table>
+    </div>
 {% endblock content %}	
