@@ -22,13 +22,17 @@
         informed decisions throughout the lifecycle of that water system.</p>
 {#        <img class="water-drop" src="{% static 'img.png' %}"/>#}
 
-     <div id="myCarousel" class="carousel slide bg-primary" data-bs-ride="carousel" data-pause="hover">
+    <!-- Carousel for images -->
+    <div id="myCarousel" class="carousel slide bg-primary" data-bs-ride="carousel" data-pause="hover">
+        <!-- Carousel indicators at bottom of images -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" aria-current="true"></button>
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" aria-current="true"></button>
         </div>
+        <!-- Div to insert images and info -->
         <div class="carousel-inner">
+            <!-- 1st item of carousel -->
             <div class="carousel-item active">
 {#                <div class="overlay-image" ></div>#}
                 <img src="{% static 'aerial.png' %}">
@@ -45,24 +49,24 @@
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title text-dark" id="exampleModalLabel">Aerial View</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body text-dark text-start">
-                            <p>Aerial view of the water treatment tanks</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-{#                            <button type="button" class="btn btn-primary">Save changes</button>#}
-                          </div>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Aerial View</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                            <div class="modal-body text-dark text-start">
+                                <p>Aerial view of the water treatment tanks</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
             </div>
+            <!-- 2nd item of carousel -->
             <div class="carousel-item">
 {#                <div class="overlay-image" style="background-image: url(../../static/side1.png);"></div>#}
                 <img src="{% static 'side1.png' %}">
@@ -77,21 +81,21 @@
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title text-dark" id="exampleModalLabel">Side 1</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body text-dark text-start">
-                            <p>Back view of the 3D water treatment tanks including inner components</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-dark" id="exampleModalLabel">Side 1</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-dark text-start">
+                                <p>Back view of the 3D water treatment tanks including inner components</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 {#                            <button type="button" class="btn btn-primary">Save changes</button>#}
-                          </div>
+                            </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
 {#                <div class="carousel-container">#}
@@ -101,6 +105,7 @@
 {#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
 {#                </div>#}
             </div>
+            <!-- 3rd item of carousel -->
             <div class="carousel-item">
 {#                <div class="overlay-image" style="background-image: url(../../static/side2.png)"></div>#}
                 <img src="{% static 'side2.png' %}">
@@ -115,21 +120,21 @@
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title text-dark" id="exampleModalLabel">Side 2</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body text-dark text-start">
-                            <p>Front view of the 3D water treatment tanks including inner components</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Side 2</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-dark text-start">
+                                    <p>Front view of the 3D water treatment tanks including inner components</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 {#                            <button type="button" class="btn btn-primary">Save changes</button>#}
-                          </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
 {#                <div class="carousel-container">#}
@@ -140,6 +145,7 @@
 {#                </div>#}
             </div>
         </div>
+        <!-- Buttons on each carousel to go forward or backwards -->
         <button href="#myCarousel" class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>

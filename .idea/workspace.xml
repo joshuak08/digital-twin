@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="29e051f5-75be-4117-8dfd-1723c7ee045e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/element.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/element.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/elements-of-type.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/elements-of-type.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/types.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/types.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +62,7 @@
       <workItem from="1681047038694" duration="8577000" />
       <workItem from="1681230290140" duration="556000" />
       <workItem from="1681411735171" duration="3260000" />
-      <workItem from="1681585810960" duration="2211000" />
+      <workItem from="1681585810960" duration="3487000" />
     </task>
     <servers />
   </component>
