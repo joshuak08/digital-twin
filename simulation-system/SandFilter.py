@@ -91,6 +91,7 @@ class SandFilter(GenericPipe.GenericPipe):
     # important information for a sand filter is the current volume of liquid in it, the amount of particulate currently capture, and whether or not it is backwashing
     def snapshot(self, snap_num):
         data = (self.id_num, snap_num, self.capacity, self.particulate_mass, self.backwash)
+        return data
         
 
         
