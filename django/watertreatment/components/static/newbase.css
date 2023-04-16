@@ -11,6 +11,7 @@ html {font-family: Arials, Helvetica, sans-serif;}
 .anim_scada{
     display: flex;
     justify-content: center;
+    z-index: 0;
 }
 
 .Scada, .main{
@@ -142,6 +143,7 @@ nav {
     padding: 0px 0px;
     position: fixed;
     background-color: #041858;
+    z-index: 1;
 }
 
 nav .logo p{
