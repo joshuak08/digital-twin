@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="29e051f5-75be-4117-8dfd-1723c7ee045e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/new-base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +64,9 @@
       <workItem from="1681230290140" duration="556000" />
       <workItem from="1681411735171" duration="3260000" />
       <workItem from="1681585810960" duration="3487000" />
-      <workItem from="1681651011146" duration="4656000" />
+      <workItem from="1681651011146" duration="5403000" />
+      <workItem from="1681659154012" duration="1782000" />
+      <workItem from="1681747545826" duration="880000" />
     </task>
     <servers />
   </component>
@@ -94,7 +95,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="create-components" />
+                        <option value="update-design" />
                       </list>
                     </value>
                   </entry>
