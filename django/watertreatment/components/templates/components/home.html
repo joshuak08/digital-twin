@@ -1,7 +1,7 @@
 {% extends "components/new-base.html" %}
 {% load static %}
 {% block content %}
-{#    <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">#}
+    <!-- Boostrap main homepage picture -->
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
             <div class="row justify-content-start">
@@ -20,7 +20,6 @@
     <p>Water treatment plants need a tool which can help improve the planning, design, construction and operation of
         their plants. A digital twin of a water system will provide accurate and reliable data of that can used to make
         informed decisions throughout the lifecycle of that water system.</p>
-{#        <img class="water-drop" src="{% static 'img.png' %}"/>#}
 
     <!-- Carousel for images -->
     <div id="myCarousel" class="carousel slide bg-primary" data-bs-theme="dark" data-interval="false">
@@ -34,14 +33,8 @@
         <div class="carousel-inner">
             <!-- 1st item of carousel -->
             <div class="carousel-item active">
-{#                <div class="overlay-image" ></div>#}
                 <img src="{% static 'aerial.png' %}">
-{#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
                 <div class="carousel-caption d-none d-md-block">
-{#                    <h2>1st Example</h2>#}
-{#                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et#}
-{#                        dolore magna aliqua. </p>#}
-                    {#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                       More Info
@@ -51,16 +44,19 @@
                     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
+                                <!-- Modal Title -->
                                 <div class="modal-header">
                                     <h5 class="modal-title text-dark" id="exampleModalLabel">Aerial View</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                            <div class="modal-body text-dark text-start">
-                                <p>Aerial view of the water treatment tanks asdf</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
+                                <!-- Modal Body info -->
+                                <div class="modal-body text-dark text-start">
+                                    <p>Aerial view of the water treatment tanks asdf</p>
+                                </div>
+                                <!-- Close modal button -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,13 +64,9 @@
             </div>
             <!-- 2nd item of carousel -->
             <div class="carousel-item">
-{#                <div class="overlay-image" style="background-image: url(../../static/side1.png);"></div>#}
                 <img src="{% static 'side1.png' %}">
                 <div class="carousel-caption d-none d-md-block">
-{#                    <h2>2nd Example</h2>#}
-{#                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et#}
-{#                        dolore magna aliqua. </p>#}
-{#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
+                    <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                       More Info
                     </button>
@@ -83,37 +75,29 @@
                     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-dark" id="exampleModalLabel">Side 1</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-dark text-start">
-                                <p>Back view of the 3D water treatment tanks including inner components</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-{#                            <button type="button" class="btn btn-primary">Save changes</button>#}
-                            </div>
+                                <!-- Modal Title -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Side 1</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <!-- Modal Body info -->
+                                <div class="modal-body text-dark text-start">
+                                    <p>Back view of the 3D water treatment tanks including inner components</p>
+                                </div>
+                                <!-- Close modal button -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-{#                <div class="carousel-container">#}
-{#                    <h2>2nd Example</h2>#}
-{#                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et#}
-{#                        dolore magna aliqua. </p>#}
-{#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
-{#                </div>#}
             </div>
             <!-- 3rd item of carousel -->
             <div class="carousel-item">
-{#                <div class="overlay-image" style="background-image: url(../../static/side2.png)"></div>#}
                 <img src="{% static 'side2.png' %}">
                 <div class="carousel-caption d-none d-md-block">
-{#                    <h2>3rd Examples</h2>#}
-{#                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et#}
-{#                        dolore magna aliqua. </p>#}
-{#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
+                    <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
                       More Info
                     </button>
@@ -122,27 +106,23 @@
                     <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
+                                <!-- Modal Title -->
                                 <div class="modal-header">
                                     <h5 class="modal-title text-dark" id="exampleModalLabel">Side 2</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <!-- Modal Body info -->
                                 <div class="modal-body text-dark text-start">
                                     <p>Front view of the 3D water treatment tanks including inner components</p>
                                 </div>
+                                <!-- Close modal button -->
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-{#                            <button type="button" class="btn btn-primary">Save changes</button>#}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-{#                <div class="carousel-container">#}
-{#                    <h2>2nd Example</h2>#}
-{#                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et#}
-{#                        dolore magna aliqua. </p>#}
-{#                    <a href="#" class="btn btn-lg btn-primary">More info</a>#}
-{#                </div>#}
             </div>
         </div>
         <!-- Buttons on each carousel to go forward or backwards -->
@@ -158,14 +138,6 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-{#    <a href="#myCarousel" class="carousel-control-prev" role="button" data-bs-target="#myCarousel" data-bs-slide="prev">#}
-{#        <span class="sr-only">Previous</span>#}
-{#        <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
-{#    </a>#}
-{#    <a href="#myCarousel" class="carousel-control-next" role="button" data-bs-target="#myCarousel" data-bs-slide="next">#}
-{#        <span class="sr-only">Next</span>#}
-{#        <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
-{#    </a>#}
     </div>
 
 
