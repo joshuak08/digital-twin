@@ -53,6 +53,6 @@ jobs:
           eslint_extensions: js
 
           # autopep8
-          autopep8_dir: simulation
+          autopep8_dir: simulation-system
           autopep8: true
           autopep8_extensions: py
