@@ -5,10 +5,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
     {# Set title if passed as an argument in views #}
     {% if title %}
         <title>{{ title }}</title>
@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<div class="topnav">
+    <div class="topnav">
     <img class="logo" src="{% static 'logo2.png' %}"/>
     <a id="title" href="{% url 'components-home' %}">Water Treatment Digital Twin</a>
     <div class="topnav-right">

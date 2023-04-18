@@ -58,3 +58,8 @@ def simulation(request):
     all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
     return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': all_SimData})
 
+def carousel(request):
+    return render(request, 'components/carousel.html', {'title': "Carousel"})
+
+def form(request):
+    return render(request, 'components/form-testing.html', {'title': "Form Testing", })

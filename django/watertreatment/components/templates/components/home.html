@@ -1,33 +1,141 @@
-{% extends "components/base.html" %}
+{% extends "components/new-base.html" %}
 {% load static %}
 {% block content %}
-
+    <!-- Boostrap main homepage picture -->
+    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-10 text-center text-lg-start">
+                    <h1 class="display-2 text-uppercase font-weight-bold text-light mb-lg-4">Water Treatment Digital Twin</h1>
+                    <p class="display-4 text-light mb-lg-4">By: University of Bristol Students</p>
+                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                        <a href="https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin" class="btn btn-outline-light border-2 py-md-3 px-md-5 me-5 active" aria-pressed="true">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h2>Description:</h2>
     <p>Water treatment plants need a tool which can help improve the planning, design, construction and operation of
         their plants. A digital twin of a water system will provide accurate and reliable data of that can used to make
         informed decisions throughout the lifecycle of that water system.</p>
 
-    {#    <img class="water-drop" src="{% static 'img.png' %}"/>#}
+    <!-- Carousel for images -->
+    <div id="myCarousel" class="carousel slide bg-primary" data-bs-theme="dark" data-interval="false">
+        <!-- Carousel indicators at bottom of images -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" aria-current="true"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" aria-current="true"></button>
+        </div>
+        <!-- Div to insert images and info -->
+        <div class="carousel-inner">
+            <!-- 1st item of carousel -->
+            <div class="carousel-item active">
+                <img src="{% static 'aerial.png' %}">
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      More Info
+                    </button>
 
-    <div class="row">
-        <div class="column">
-			<figure>
-				<img src="{% static 'aerial.png' %}" alt="Aerial view" style="width:100%">
-				<figcaption>Aerial view of the water system</figcaption>
-			</figure>            
+                    <!-- Modal -->
+                    <div class="modal fade"  data-bs-theme="light" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Title -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Aerial View</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <!-- Modal Body info -->
+                                <div class="modal-body text-dark text-start">
+                                    <p>Aerial view of the water treatment tanks asdf</p>
+                                </div>
+                                <!-- Close modal button -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 2nd item of carousel -->
+            <div class="carousel-item">
+                <img src="{% static 'side1.png' %}">
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                      More Info
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" data-bs-theme="light" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Title -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Side 1</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <!-- Modal Body info -->
+                                <div class="modal-body text-dark text-start">
+                                    <p>Back view of the 3D water treatment tanks including inner components</p>
+                                </div>
+                                <!-- Close modal button -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 3rd item of carousel -->
+            <div class="carousel-item">
+                <img src="{% static 'side2.png' %}">
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                      More Info
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" data-bs-theme="light" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Title -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Side 2</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <!-- Modal Body info -->
+                                <div class="modal-body text-dark text-start">
+                                    <p>Front view of the 3D water treatment tanks including inner components</p>
+                                </div>
+                                <!-- Close modal button -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="column">
-			<figure>
-				<img src="{% static 'side1.png' %}" alt="Side 1" style="width:100%">
-				<figcaption>Back view of the 3D water system including inner components</figcaption>
-			</figure>
-		</div>
-        <div class="column">
-			<figure>
-				<img src="{% static 'side2.png' %}" alt="Side 2" style="width:100%">
-				<figcaption>Front view of the 3D water system</figcaption>
-			</figure>
-        </div>
+        <!-- Buttons on each carousel to go forward or backwards -->
+        <button href="#myCarousel" class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button href="#myCarousel" class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <button href="#myCarousel" class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-
 {% endblock content %}

@@ -11,17 +11,17 @@ th, td {
     border-collapse: collapse;
 }
 
-.logo {
-    float: left;
-    height: 80px;
-    object-fit: cover;
-}
+/*.logo {*/
+/*    float: left;*/
+/*    height: 80px;*/
+/*    object-fit: cover;*/
+/*}*/
 
-.image {
-    float: left;
-    width: 40%;
-    display: grid;
-}
+/*.image {*/
+/*    float: left;*/
+/*    width: 40%;*/
+/*    display: grid;*/
+/*}*/
 
 .horizontal-grid {
     display: grid;
@@ -31,12 +31,12 @@ th, td {
 
 body {
     color: black;
-    background-color: #dfeafb;
+    background-color: white;
 }
 
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
+    background-color: #041858;
     overflow: hidden;
 }
 
@@ -67,7 +67,7 @@ body {
 
 #title {font-size: 35px;}
 
-* {box-sizing: border-box;}
+/** {box-sizing: border-box;}*/
 /*===== handles scada css =====*/
 .anim_scada{
     display: flex;

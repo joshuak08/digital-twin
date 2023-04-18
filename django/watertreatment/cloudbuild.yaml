@@ -1,5 +1,6 @@
 # File to configure continuous deployment
 # Will be triggered once there is a push to github
+# This is for Google Cloud Run through Google Cloud Build
 steps:
   - name: gcr.io/cloud-builders/docker
     args:
@@ -8,7 +9,6 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/beta-release:latest"]
 
-#    testing
   - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
@@ -24,3 +24,4 @@ steps:
         "--allow-unauthenticated",
       ]
 
+# Need to find another way for Google App Engine for it to interact with creating new database
