@@ -8,7 +8,7 @@ export class WaterTank extends Fillable {
     // this.currentLevel = (initialLevel- y)/((y+h)-y) // initiallevel normalised to within pixel height of tank
     this.json_list_simdata = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
     this.json_list = Object.entries(this.json_list_simdata);
-    this.valueIdx = 1;
+    this.valueIdx = 0;
     this.valuesArr = Object.entries(this.json_list_simdata).filter((fields) => fields[1]['pk'] === (tank_num)).map((fields) => fields[1]['fields']['water_vol']);
     this.currentLevel = this.valuesArr[0];
     this.ctx_layer2 = ctx_layer2;
@@ -27,6 +27,7 @@ export class WaterTank extends Fillable {
     this.next_particulate = 0;
 
     this.water_rate_update();
+    this.counter = 0;
   }
 
   water_rate_update() {
@@ -78,13 +79,15 @@ export class WaterTank extends Fillable {
     // const water_range = Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]);
     const old_particulate = this.scada_controller.get_particulate_level(this.valueIdx-1, this.tank_num)
     const new_particulate = this.scada_controller.get_particulate_level(this.valueIdx, this.tank_num)
+    // console.log("counter", this.counter, "index:",this.valueIdx-1)
+    console.log(old_particulate, new_particulate)
     const old_progess = ((old_particulate) * 100)/this.particulate_range;
     const new_progress = ((new_particulate) * 100)/this.particulate_range;
 
-    let pos_neg = (old_particulate >= new_particulate) ? 1 : -1;
+    let pos_neg = (old_particulate <= new_particulate) ? 1 : -1;
     //NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
-    this.progress_rate = (Math.abs(old_progess-new_progress)/this.num_of_changes * pos_neg)/100.0
-    // console.log(this.progress,this.progress_rate, this.num_of_changes)
+    this.progress_rate = ((Math.abs(old_progess-new_progress)/this.num_of_changes * pos_neg)/100.0)
+    // console.log("progress:",this.progress.toFixed(2),"progress_rate:",this.progress_rate, "num of changes:",this.num_of_changes, "pos/neg:", pos_neg)
   }
 
   draw() {
@@ -95,8 +98,9 @@ export class WaterTank extends Fillable {
         this.valueIdx += 1;
         this.water_rate_update();
         this.num_of_changes = (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]))/this.water_change;
+        // this.counter +=1
         this.progress_rate_update(this.water_change);
-
+        // console.log("progress rate:", this.progress*100)
         // if the current water level is greater than the next water level decrease by the calculated rate of change
       } else if (this.currentLevel > this.valuesArr[this.valueIdx]) {
         this.currentLevel -= this.water_change;
@@ -113,8 +117,8 @@ export class WaterTank extends Fillable {
 
       // calls the scada screen controller to sync the current water level of tank with the current water level data displayed on the scada screen
       // TODO: REMOVE REDUNDANT ATTRIBUTES
-      this.scada_controller.draw(this.tank_num, (this.valueIdx-1), ['component name : '+'tank' + this.tank_num, 'current water lvl : '+ this.currentLevel.toFixed(2), 'valuesArr :' + this.valuesArr]);
+      this.scada_controller.draw(this.tank_num, (this.valueIdx-1), ['component name : '+'tank ' + this.tank_num, 'live water vol: '+ this.currentLevel.toFixed(2), 'live particulate level:'+ this.particulate_range*(this.progress.toFixed(1))]);
     }
-    console.log(this.progress, this.progress_rate)
+    // console.log(this.progress, this.progress_rate)
   }
 }
