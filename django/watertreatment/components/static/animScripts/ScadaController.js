@@ -1,5 +1,5 @@
 const Jtemp = (Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent))));
-console.log(Jtemp);
+// console.log(Jtemp);
 // console.log(Jtemp.filter((fields) => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0).map((fields) => fields[1]['fields']));
 // console.log( (Jtemp.filter(fields => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0))[0][1]['fields']['particulate'])
 
@@ -10,8 +10,9 @@ export class ScadaController {
     this.scada_context = scada_context;
   }
 
-  get_particulate_level(snapshot_num) {
-    return this.json_list_simdata.filter((fields) => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === snapshot_num)[0][1]['fields']['particulate'];
+  get_particulate_level(snapshot_num, tank_num) {
+
+    return this.json_list_simdata.filter((fields) => fields[1]['pk'] === (tank_num) && fields[1]['fields']['snap_num'] === snapshot_num)[0][1]['fields']['particulate'];
   }
 
   // clears the canvas
@@ -24,8 +25,8 @@ export class ScadaController {
     const json_list = this.json_list_simdata;
     // filter for next snapshots and current snapshot | (id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean)
     // TODO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< done
-    const next_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === current_snapshot+1).map((fields) => fields[1]['fields']['water_vol']);
-    const current_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === current_snapshot).map((fields) => fields[1]['fields']['water_vol']);
+    const next_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === current_snapshot).map((fields) => fields[1]['fields']['water_vol']);
+    const current_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === current_snapshot-1).map((fields) => fields[1]['fields']['water_vol']);
     return Math.abs(current_snapshot_data - next_snapshot_data);
   }
 
