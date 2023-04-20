@@ -9,7 +9,8 @@ def basic_simulation(average_flow, average_tss, sim_length):
 
     # make and run the simulation, defaults to each round being a second, and snapshotting every round
     snapshotter = FilterSnapshotter.FilterSnapshotter()
-    system = FilterSystem.FilterSystem(1, average_flow, average_tss, snapshotter, rounds, 1, True)
+    system = FilterSystem.FilterSystem(
+        1, average_flow, average_tss, snapshotter, rounds, 1, True)
     system.simulate()
 
     # write results to a database
