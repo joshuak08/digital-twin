@@ -33,7 +33,7 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
     for i in system.components:
         if i.type == "Filter":
             i.particulate_mass = initial_particulates[filter]
-            filter += 0
+            filter += 1
 
     # run the simulation
     system.simulate()
