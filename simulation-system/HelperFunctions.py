@@ -10,7 +10,7 @@ def basic_simulation(average_flow, average_tss, sim_length, testing):
     # make and run the simulation, defaults to each round being a second, and snapshotting every round
     snapshotter = FilterSnapshotter.FilterSnapshotter(testing)
     system = FilterSystem.FilterSystem(
-        1, average_flow, average_tss, snapshotter, rounds, 1, True)
+        1, average_flow, average_tss, snapshotter, rounds, 5, True)
     system.simulate()
 
     # write results to a database
@@ -25,10 +25,10 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
     # sim_length is given in seconds, each round is a second, so conversion is direct
     rounds = sim_length
 
-    # make the simulation, using basic 1 snapshot per round, 1 second rounds
+    # make the simulation, using basic 1 snapshot per 5 rounds, 1 second rounds
     snapshotter = FilterSnapshotter.FilterSnapshotter(testing)
     system = FilterSystem.FilterSystem(
-        1, average_flow, average_tss, snapshotter, rounds, 1, True)
+        1, average_flow, average_tss, snapshotter, rounds, 5, True)
 
     # set initial values to those specified in parameters
     filter = 0
