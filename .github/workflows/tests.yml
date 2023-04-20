@@ -56,6 +56,7 @@ jobs:
           python -m unittest SimulationTests.TestSourceBehaviour
           python -m unittest SimulationTests.TestSandFilterBehaviour
           python -m unittest SystemTests
+          python -m unittest HelperFunctionTests
       
 
       # Runs a set of commands using the runners shell
