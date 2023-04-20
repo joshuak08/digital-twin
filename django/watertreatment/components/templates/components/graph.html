@@ -5,11 +5,13 @@
 <div class="webpage-content">
 <html>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
-    <canvas id="chart" width="500" height="500"></canvas>
-    {% comment %} <script type="module" src="{% static 'graphScripts/utils.js' %}"></script> {% endcomment %}
+    <div class="anim_scada">
+        <div class="main_anim">
+            <canvas id="chart" width="1200" height="600"></canvas>
 
+        </div>
+    </div>
     <script>
-        {% comment %} import { Utils.CHART_COLORS.blue } from '../static/graphScripts/Utils.js'; {% endcomment %}
         let ctx = document.getElementById("chart").getContext("2d");
 
         let chart = new Chart(ctx, {
@@ -30,6 +32,20 @@
                     //backgroundColor: "#79AEC8",
                     borderColor: 'rgb(255, 99, 132)',
                     data: [75, 59, 33, 61, 53, 65, 43],
+                    tension: 0.1,
+                },
+                {
+                    label: "Tank 3 Water levels",
+                    //backgroundColor: "#79AEC8",
+                    borderColor: 'rgb(255, 205, 86)',
+                    data: [65, 39, 34, 31, 43, 55, 53],
+                    tension: 0.1,
+                },
+                {
+                    label: "Tank 4 Water levels",
+                    //backgroundColor: "#79AEC8",
+                    borderColor: 'rgb(153, 102, 255)',
+                    data: [55, 59, 43, 51, 73, 55, 63],
                     tension: 0.1,
                 }
             ]
