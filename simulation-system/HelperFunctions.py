@@ -17,7 +17,8 @@ def basic_simulation(average_flow, average_tss, sim_length, testing):
     table_name = snapshotter.to_database()
 
     # return the name of the table to be used by the server
-    return table_name  
+    return table_name
+
 
 def initial_particulate_simulation(average_flow, average_tss, sim_length, initial_particulates, testing):
 
@@ -42,4 +43,4 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
     table_name = snapshotter.to_database()
 
     # return the name of the table to be used by the server
-    return table_name  
+    return table_name
