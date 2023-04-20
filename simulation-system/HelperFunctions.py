@@ -17,7 +17,8 @@ def basic_simulation(average_flow, average_tss, sim_length):
     table_name = snapshotter.to_database()
 
     # return the name of the table to be used by the server
-    return table_name  
+    return table_name
+
 
 def initial_particulate_simulation(average_flow, average_tss, sim_length, initial_particulates):
 
@@ -26,7 +27,8 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
 
     # make the simulation, using basic 1 snapshot per round, 1 second rounds
     snapshotter = FilterSnapshotter.FilterSnapshotter()
-    system = FilterSystem.FilterSystem(1, average_flow, average_tss, snapshotter, rounds, 1, True)
+    system = FilterSystem.FilterSystem(
+        1, average_flow, average_tss, snapshotter, rounds, 1, True)
 
     # set initial values to those specified in parameters
     filter = 0
@@ -42,4 +44,4 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
     table_name = snapshotter.to_database()
 
     # return the name of the table to be used by the server
-    return table_name  
+    return table_name
