@@ -27,7 +27,8 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
 
     # make the simulation, using basic 1 snapshot per round, 1 second rounds
     snapshotter = FilterSnapshotter.FilterSnapshotter(testing)
-    system = FilterSystem.FilterSystem(1, average_flow, average_tss, snapshotter, rounds, 1, True)
+    system = FilterSystem.FilterSystem(
+        1, average_flow, average_tss, snapshotter, rounds, 1, True)
 
     # set initial values to those specified in parameters
     filter = 0
