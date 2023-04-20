@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import Document, SimDataTable
 from django.core import serializers
 import json
+from .forms import SimInputForm
+from django.http import HttpResponseRedirect
 
 """
 Works in a MVC Pattern 
@@ -58,8 +60,22 @@ def simulation(request):
     all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
     return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': all_SimData})
 
+
 def carousel(request):
     return render(request, 'components/carousel.html', {'title': "Carousel"})
 
+
 def form(request):
-    return render(request, 'components/form-testing.html', {'title': "Form Testing", })
+    submitted = False
+
+    if request.POST:
+        form = SimInputForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect('/')
+    else:
+        form = SimInputForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'components/test-form.html', {'title': "Form Testing", 'form': SimInputForm, 'submitted': submitted})

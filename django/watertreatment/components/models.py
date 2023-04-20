@@ -27,3 +27,15 @@ class SimDataTable(models.Model):
                 fields=['components', 'snapshots'], name='component_snapshot_primary_key'
             )
         ]
+
+class SimInput(models.Model):
+    # average_flow, average_tss, sim_length, initial_particulates, testing
+    average_flow = models.IntegerField('Average Flow')
+    average_tss = models.IntegerField('Amount of particulate in waste water')
+    sim_length = models.IntegerField('Length of time for simulation in seconds/minutes')
+    # Want to try to create 4 different fields and merge them all into 1 list for particulates in each tank
+    initial_particulates = models.IntegerField('Amount of pre-existing particulate in tanks')
+    # If checked data will be displayed as 'on'/'off' instead of true or false
+    testing = models.BooleanField('Is this part of testing?')
+    class Meta:
+        managed = False

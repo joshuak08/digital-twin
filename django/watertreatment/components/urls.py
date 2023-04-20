@@ -9,5 +9,6 @@ urlpatterns = [
     path('types/<str:type>/<int:ID>/', views.element, name="components-elements-of-type"),
     path('revit-model/', views.revitModel, name="components-revit-model"),
 	path('simulation/', views.simulation, name="components-simulation"),
-    path('carousel/', views.carousel, name="components-carousel")
+    path('carousel/', views.carousel, name="components-carousel"),
+    path('test-form/', views.form, name="components-test-form"),
 ]

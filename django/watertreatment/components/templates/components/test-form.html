@@ -1,0 +1,18 @@
+{% extends "components/new-base.html" %}
+{% load static %}
+{% block content %}
+    <h1>Add parameters to test forms and input to database</h1>
+    {% if submitted %}
+        <p>Success!</p>
+    {% else %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Submit" class="btn btn-secondary">
+
+    </form>
+    {% endif %}
+
+{% endblock content %}
