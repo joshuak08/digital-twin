@@ -1,4 +1,13 @@
 let ctx = document.getElementById("chart").getContext("2d");
+let json_list_simdata = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
+let data_array = Object.entries(json_list_simdata).map((fields) => combine_id_fields(fields)).map((fields) => fields[1]['fields'])
+
+function combine_id_fields(json){
+    json[1]['fields']['pk'] = json[1]['pk']
+    return json
+}
+
+console.log(data_array)
 
 let chart = new Chart(ctx, {
 type: "line",

@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="webpage-content">
+    {{ all_SimData| json_script:"all_SimData" }}
 <html>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
     <div class="anim_scada">
