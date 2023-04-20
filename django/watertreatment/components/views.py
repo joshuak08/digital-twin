@@ -66,16 +66,21 @@ def carousel(request):
 
 
 def form(request):
-    submitted = False
+    # submitted = False
 
     if request.POST:
         form = SimInputForm(request.POST)
+        data = form.__dict__['data'].dict()
         if form.is_valid():
-            form.save()
+            del data['csrfmiddlewaretoken']
+            # fuunctionForSimulation(data or individual parameters) to be saved to database to be displayed, potentially
+            # redirected to simulation page to run immediately with new table name and id
+            print(data)
+            # form.save()
         return HttpResponseRedirect('/')
-    else:
-        form = SimInputForm
-        if 'submitted' in request.GET:
-            submitted = True
-
-    return render(request, 'components/test-form.html', {'title': "Form Testing", 'form': SimInputForm, 'submitted': submitted})
+    # else:
+    #     form = SimInputForm
+    #     if 'submitted' in request.GET:
+    #         submitted = True
+    #
+    return render(request, 'components/test-form.html', {'title': "Form Testing", 'form': SimInputForm})
