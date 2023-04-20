@@ -1,0 +1,42 @@
+{% extends "components/new-base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="webpage-content">
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <canvas id="chart" width="500" height="500"></canvas>
+    {% comment %} <script type="module" src="{% static 'graphScripts/utils.js' %}"></script> {% endcomment %}
+
+    <script>
+        {% comment %} import { Utils.CHART_COLORS.blue } from '../static/graphScripts/Utils.js'; {% endcomment %}
+        let ctx = document.getElementById("chart").getContext("2d");
+
+        let chart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: ["snapshot1", "snapshot2", "snapshot3", "snapshot4", "snapshot5", "snapshot6", "..."],
+            datasets: [
+                {
+                    label: "Tank 1 Water levels",
+                    //backgroundColor: "#79AEC8",
+                    //fill: false,
+                    borderColor: "rgb(75, 192, 192)",
+                    data: [65, 59, 40, 51, 46, 55, 50],
+                    tension: 0.1,
+                },
+                {
+                    label: "Tank 2 Water levels",
+                    //backgroundColor: "#79AEC8",
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [75, 59, 33, 61, 53, 65, 43],
+                    tension: 0.1,
+                }
+            ]
+        }
+        });
+    </script>
+
+</html>
+</div>
+{% endblock content %} 
