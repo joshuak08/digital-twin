@@ -34,7 +34,9 @@ jobs:
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: |
-          cd django/watertreatment/components/static
+          cd django/watertreatment/components/static/animScripts
+          npm ci
+          cd django/watertreatment/components/static/graphScripts
           npm ci
 
       - name: Install Python dependencies
