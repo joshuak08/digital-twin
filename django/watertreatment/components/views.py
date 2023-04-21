@@ -1,9 +1,14 @@
+import os
+
 from django.shortcuts import render
 from .models import Document, SimDataTable
 from django.core import serializers
 import json
 from .forms import SimInputForm
 from django.http import HttpResponseRedirect
+import sys
+sys.path.append("../../simulation-system")
+import HelperFunctions
 
 """
 Works in a MVC Pattern 
@@ -57,7 +62,8 @@ def revitModel(request):
 
 
 def simulation(request):
-    all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
+    all_SimData = serializers.serialize("json",
+                                        SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
     return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': all_SimData})
 
 
@@ -66,18 +72,21 @@ def carousel(request):
 
 
 def form(request):
-    # submitted = False
 
     if request.POST:
         form = SimInputForm(request.POST)
         data = form.__dict__['data'].dict()
         if form.is_valid():
             del data['csrfmiddlewaretoken']
-            # fuunctionForSimulation(data or individual parameters) to be saved to database to be displayed, potentially
-            # redirected to simulation page to run immediately with new table name and id
-            print(data)
-            # form.save()
-        return HttpResponseRedirect('/')
+            if 'testing' not in data:
+                data['testing'] = False
+            else:
+                data['testing'] = True
+            print('From views.py current directory: ' + os.getcwd())
+            HelperFunctions.basic_simulation(float(data['average_flow']), int(data['average_tss']), int(data['sim_length']), data['testing'])
+            # HelperFunctions.initial_particulate_simulation(int(data['average_flow']), int(data['average_tss']), int(data['sim_length']), int(data['initial_particulates']), data['testing'])
+        # redirected to simulation page to run immediately with new table name and id
+        return HttpResponseRedirect('/simulation')
     # else:
     #     form = SimInputForm
     #     if 'submitted' in request.GET:
