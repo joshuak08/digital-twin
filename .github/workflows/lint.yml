@@ -31,14 +31,11 @@ jobs:
         with:
           python-version: 3.9
 
-      # # ESLint and Prettier must be in `package.json`
-      # - name: Install Node.js dependencies
-      #   run: |
-      #     cd django/watertreatment/components/static/animScripts
-      #     npm ci
-      #     cd ..
-      #     cd django/watertreatment/components/static/graphScripts
-      #     npm ci
+      # ESLint and Prettier must be in `package.json`
+      - name: Install Node.js dependencies
+        run: |
+          cd django/watertreatment/components/static
+          npm ci
 
       - name: Install Python dependencies
         run: |
