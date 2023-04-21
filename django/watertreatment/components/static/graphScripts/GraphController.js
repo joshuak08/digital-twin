@@ -7,40 +7,55 @@ function combine_id_fields(json){
     return json
 }
 
-console.log(data_array)
+console.log(data_array);
 
+// Generate string of snapshot labels inline 
+let labels = Array.from(Array(((data_array).length/4)), (_, index) => "Snapshot " + (index + 1)); 
+console.log(labels)
+
+// Filter JSON for unique key and get all related values
+// { pk : { snapshot_num : water_vol  }, ... }
+let pks = {};
+data_array.forEach(function(a) {
+    if (!pks[a.pk]) { pks[a.pk] = {}; }; // if the pk is not already in the dict, initialse it
+    pks[a.pk][a.snap_num] = a.water_vol;
+});
+
+// Convert JSON to array by iterating and extracting values from object 
+// [0 : [ water_vol, ... ], ...]
+let tank_values = [];
+for (let i = 0; i < 4; i++) {
+    tank_values.push(Object.values(pks[i]));
+}
+
+// Create 4 lines charts for each tank
 let chart = new Chart(ctx, {
 type: "line",
 data: {
-    labels: ["snapshot1", "snapshot2", "snapshot3", "snapshot4", "snapshot5", "snapshot6", "..."],
+    labels: labels,
     datasets: [
         {
-            label: "Tank 1 Water levels",
-            //backgroundColor: "#79AEC8",
-            //fill: false,
-            borderColor: "rgb(75, 192, 192)",
-            data: [65, 59, 40, 51, 46, 55, 50],
+            label: "Tank 1 Water Levels",
+            borderColor: "rgb(75, 192, 192)", // green
+            data: tank_values[0],
+            tension: 0.1, // curving of line
+        },
+        {
+            label: "Tank 2 Water Levels",
+            borderColor: 'rgb(255, 99, 132)', // red
+            data: tank_values[1] ,
             tension: 0.1,
         },
         {
-            label: "Tank 2 Water levels",
-            //backgroundColor: "#79AEC8",
-            borderColor: 'rgb(255, 99, 132)',
-            data: [75, 59, 33, 61, 53, 65, 43],
+            label: "Tank 3 Water Levels",
+            borderColor: 'rgb(255, 205, 86)', // yellow
+            data: tank_values[2],
             tension: 0.1,
         },
         {
-            label: "Tank 3 Water levels",
-            //backgroundColor: "#79AEC8",
-            borderColor: 'rgb(255, 205, 86)',
-            data: [65, 39, 34, 31, 43, 55, 53],
-            tension: 0.1,
-        },
-        {
-            label: "Tank 4 Water levels",
-            //backgroundColor: "#79AEC8",
-            borderColor: 'rgb(153, 102, 255)',
-            data: [55, 59, 43, 51, 73, 55, 63],
+            label: "Tank 4 Water Levels",
+            borderColor: 'rgb(153, 102, 255)', // purple
+            data: tank_values[3],
             tension: 0.1,
         }
     ]
