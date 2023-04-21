@@ -53,7 +53,9 @@ jobs:
           auto_fix: true
           
           # ESLint
-          eslint_dir: django/watertreatment/components/static/animScripts
+          eslint_dir: 
+            - django/watertreatment/components/static/animScripts
+            - django/watertreatment/components/static/graphScripts
           eslint: true
           eslint_extensions: js
 
