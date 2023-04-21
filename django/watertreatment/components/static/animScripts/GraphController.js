@@ -32,8 +32,8 @@ for (let i = 0; i < 4; i++) {
 
 // Create 4 lines charts for each tank
 new Chart(ctx, {
-type: "line",
-data: {
+  type: 'line',
+  data: {
     labels: labels,
     datasets: [
       {
