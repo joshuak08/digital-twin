@@ -36,11 +36,6 @@ jobs:
         run: |
           cd django/watertreatment/components/static/animScripts
           npm ci
-      
-      - name: Install Node.js dependencies (Graph)
-        run: |
-          cd django/watertreatment/components/static/graphScripts
-          npm ci
 
       - name: Install Python dependencies
         run: |
@@ -61,13 +56,3 @@ jobs:
           autopep8_dir: simulation-system
           autopep8: true
           autopep8_extensions: py
-      
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          auto_fix: true
-          
-          # ESLint
-          eslint_dir: django/watertreatment/components/static/graphScripts
-          eslint: true
-          eslint_extensions: js
