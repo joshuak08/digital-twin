@@ -17,7 +17,7 @@ console.log(labels)
 // { pk : { snapshot_num : water_vol  }, ... }
 let pks = {};
 data_array.forEach(function(a) {
-    if (!pks[a.pk]) { pks[a.pk] = {}; };
+    if (!pks[a.pk]) { pks[a.pk] = {}; }; // if the pk is not already in the dict, initialse it
     pks[a.pk][a.snap_num] = a.water_vol;
 });
 
