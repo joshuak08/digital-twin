@@ -51,6 +51,10 @@ jobs:
           eslint_dir: django/watertreatment/components/static/animScripts
           eslint: true
           eslint_extensions: js
+          
+          eslint_dir: django/watertreatment/components/static/graphScripts
+          eslint: true
+          eslint_extensions: js
 
           # autopep8
           autopep8_dir: simulation-system
