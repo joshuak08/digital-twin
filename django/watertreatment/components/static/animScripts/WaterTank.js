@@ -18,10 +18,10 @@ export class WaterTank extends Fillable {
     this.differences = [];
     this.water_change = 0;
 
-    this.particulate_range = 500000
+    this.particulate_range = 500000;
     this.progress = 0;
     this.progress_rate = 0;
-    this.num_of_changes
+    this.num_of_changes;
 
     this.current_particulate = 0;
     this.next_particulate = 0;
@@ -36,7 +36,7 @@ export class WaterTank extends Fillable {
     // const next_snapshot_data_water_vol = this.json_list.filter((fields) => fields[1]['pk'] === (this.tank_num) && fields[1]['fields']['snap_num'] === this.valueIdx).map((fields) => fields[1]['fields']['water_vol']);
     // const current_snapshot_data_water_vol = this.json_list.filter((fields) => fields[1]['pk'] === (this.tank_num) && fields[1]['fields']['snap_num'] === this.valueIdx-1).map((fields) => fields[1]['fields']['water_vol']);
     // const current_difference = Math.abs(current_snapshot_data_water_vol-next_snapshot_data_water_vol);
-    const current_difference = this.scada_controller.change_rate_tank((this.valueIdx), this.tank_num)
+    const current_difference = this.scada_controller.change_rate_tank((this.valueIdx), this.tank_num);
 
     for (let tank_num = 0; tank_num < 4; tank_num++ ) {
       this.differences.push(this.scada_controller.change_rate_tank((this.valueIdx-1), tank_num));
@@ -56,8 +56,8 @@ export class WaterTank extends Fillable {
   };
 
   interpolate_colour(progress) {
-    const [r1, g1, b1, a1] = this.hex_to_rgba_formatted('#047a47');//'#ADD8E6'
-    const [r2, g2, b2, a2] = this.hex_to_rgba_formatted('#ADD8E6');//'#047a47'
+    const [r1, g1, b1, a1] = this.hex_to_rgba_formatted('#047a47');// '#ADD8E6'
+    const [r2, g2, b2, a2] = this.hex_to_rgba_formatted('#ADD8E6');// '#047a47'
     return this.format_rgba({
       r: Math.round(((r1 * progress) + (r2 * (1.0-progress)))),
       g: Math.round(((g1 * progress) + (g2 * (1.0-progress)))),
@@ -75,18 +75,18 @@ export class WaterTank extends Fillable {
     return String(this.interpolate_colour(this.progress));
   }
 
-  progress_rate_update(){
+  progress_rate_update() {
     // const water_range = Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]);
-    const old_particulate = this.scada_controller.get_particulate_level(this.valueIdx-1, this.tank_num)
-    const new_particulate = this.scada_controller.get_particulate_level(this.valueIdx, this.tank_num)
+    const old_particulate = this.scada_controller.get_particulate_level(this.valueIdx-1, this.tank_num);
+    const new_particulate = this.scada_controller.get_particulate_level(this.valueIdx, this.tank_num);
     // console.log("counter", this.counter, "index:",this.valueIdx-1)
-    console.log(old_particulate, new_particulate)
+    console.log(old_particulate, new_particulate);
     const old_progess = ((old_particulate) * 100)/this.particulate_range;
     const new_progress = ((new_particulate) * 100)/this.particulate_range;
 
-    let pos_neg = (old_particulate <= new_particulate) ? 1 : -1;
-    //NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
-    this.progress_rate = ((Math.abs(old_progess-new_progress)/this.num_of_changes * pos_neg)/100.0)
+    const pos_neg = (old_particulate <= new_particulate) ? 1 : -1;
+    // NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+    this.progress_rate = ((Math.abs(old_progess-new_progress)/this.num_of_changes * pos_neg)/100.0);
     // console.log("progress:",this.progress.toFixed(2),"progress_rate:",this.progress_rate, "num of changes:",this.num_of_changes, "pos/neg:", pos_neg)
   }
 
