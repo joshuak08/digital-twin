@@ -32,12 +32,12 @@ jobs:
           python-version: 3.9
 
       # ESLint and Prettier must be in `package.json`
-      - name: Install Node.js dependencies
+      - name: Install Node.js dependencies (Anim)
         run: |
           cd django/watertreatment/components/static/animScripts
           npm ci
       
-      - name: Install Node.js dependencies (Graphs)
+      - name: Install Node.js dependencies (Graph)
         run: |
           cd django/watertreatment/components/static/graphScripts
           npm ci
@@ -57,12 +57,17 @@ jobs:
           eslint: true
           eslint_extensions: js
 
-          eslint_dir: django/watertreatment/components/static/graphScripts
-          eslint: true
-          eslint_extensions: js
-
-
           # autopep8
           autopep8_dir: simulation-system
           autopep8: true
           autopep8_extensions: py
+      
+      - name: Run linters (Graphs)
+        uses: wearerequired/lint-action@v2
+        with:
+          auto_fix: true
+          
+          # ESLint
+          eslint_dir: django/watertreatment/components/static/graphScripts
+          eslint: true
+          eslint_extensions: js
