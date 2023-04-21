@@ -15,7 +15,7 @@ console.log(labels)
 
 // Filter JSON for unique key and get all related values
 // { pk : { snapshot_num : water_vol  }, ... }
-var pks = {};
+let pks = {};
 data_array.forEach(function(a) {
     if (!pks[a.pk]) { pks[a.pk] = {}; };
     pks[a.pk][a.snap_num] = a.water_vol;
@@ -24,7 +24,7 @@ data_array.forEach(function(a) {
 // Convert JSON to array by iterating and extracting values from object 
 // [0 : [ water_vol, ... ], ...]
 let tank_values = [];
-for (var i = 0; i < 4; i++) {
+for (let i = 0; i < 4; i++) {
     tank_values.push(Object.values(pks[i]));
 }
 
