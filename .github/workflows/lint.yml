@@ -62,7 +62,7 @@ jobs:
           autopep8: true
           autopep8_extensions: py
       
-      - name: Run linters (Graphs)
+      - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
           auto_fix: true
