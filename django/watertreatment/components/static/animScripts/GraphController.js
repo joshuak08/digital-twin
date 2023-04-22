@@ -9,7 +9,7 @@ function combine_id_fields(json) {
 
 // Generate string of snapshot labels inline
 const labels = Array.from(Array(((data_array).length/4)), (_, index) => 'Snapshot ' + (index + 1));
-
+console.log(data_array)
 // Filter JSON for unique key and get all related values
 // { pk : { snapshot_num : water_vol  }, ... }
 const pks = {};
@@ -23,7 +23,8 @@ data_array.forEach(function(a) {
 // Convert JSON to array by iterating and extracting values from object
 // [0 : [ water_vol, ... ], ...]
 const tank_values = [];
-for (let i = 0; i < 4; i++) {
+// (IMPORTANT) Tank IDs are: 9, 10, 11, 12
+for (let i = 9; i < 13; i++) {
   tank_values.push(Object.values(pks[i]));
 }
 
