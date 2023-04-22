@@ -61,5 +61,5 @@ def simulation(request):
 def carousel(request):
     return render(request, 'components/carousel.html', {'title': "Carousel"})
 
-def form(request):
-    return render(request, 'components/form-testing.html', {'title': "Form Testing", })
+# def form(request):
+#     return render(request, 'components/form-testing.html', {'title': "Form Testing", })
