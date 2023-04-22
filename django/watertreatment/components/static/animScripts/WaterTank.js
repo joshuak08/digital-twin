@@ -48,7 +48,7 @@ export class WaterTank extends Fillable {
   // colour stuff
   hex_to_rgba_formatted(colour) {// colour, alpha = 1
     const [r, g, b] = colour.match(/\w\w/g).map((x) => parseInt(x, 16));
-    return [r, g, b, 1];
+    return [r, g, b];
   }
 
   format_rgba = (colour) => {
@@ -56,8 +56,8 @@ export class WaterTank extends Fillable {
   };
 
   interpolate_colour(progress) {
-    const [r1, g1, b1, a1] = this.hex_to_rgba_formatted('#047a47');// '#ADD8E6'
-    const [r2, g2, b2, a2] = this.hex_to_rgba_formatted('#ADD8E6');// '#047a47'
+    const [r1, g1, b1] = this.hex_to_rgba_formatted('#047a47');// '#ADD8E6'
+    const [r2, g2, b2] = this.hex_to_rgba_formatted('#ADD8E6');// '#047a47'
     return this.format_rgba({
       r: Math.round(((r1 * progress) + (r2 * (1.0-progress)))),
       g: Math.round(((g1 * progress) + (g2 * (1.0-progress)))),
