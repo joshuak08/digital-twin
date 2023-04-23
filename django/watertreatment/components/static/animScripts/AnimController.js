@@ -39,8 +39,8 @@ function drawTankShape(ctx, bottomTankY, triangleTipOffset, xCoord, yCoord, widt
 }
 
 // draws grey pipes connected to tanks
-function IOpipes(tankNum) {
-  const pipeX = tankX + offsetBetweenTanks*tankNum + tankWidth/2 - pipeWidth/2;
+function IOpipesBG(tank_num) {
+  const pipeX = tankX + offsetBetweenTanks*tank_num + tankWidth/2 - pipeWidth/2;
   const pipeHeight = 50;
   const pipeY = tankY-pipeHeight;
   ctx_layer1.fillStyle = '#5A5A5A';
@@ -48,7 +48,7 @@ function IOpipes(tankNum) {
   ctx_layer1.fillRect(pipeX, pipeY, pipeWidth, pipeHeight);// pipes on top
   ctx_layer1.fillRect(pipeX, pipeY+pipeHeight+tankHeight, pipeWidth, pipeHeight);// pipes below
 
-  if (tankNum === 0 ) { // draws the horizontal pipes on the top and bottom of the tanks
+  if (tank_num === 0 ) { // draws the horizontal pipes on the top and bottom of the tanks
     // bottom horizontal pipe
     ctx_layer1.fillRect(pipeX, pipeY, layer1Width-pipeX, pipeWidth);
     // top horizontal pipe
@@ -62,9 +62,9 @@ function IOpipes(tankNum) {
 }
 
 // draws backwash pipes
-function BWpipes(tankNum) {
-  ctx_layer1.fillStyle = '#5A5A5A';
-  const pipeX = tankX - 30 + offsetBetweenTanks*tankNum;
+function BWpipes(tank_num) {
+  ctx_layer1.fillStyle = '#5A5A5A'; // grey colour
+  const pipeX = tankX - 30 + offsetBetweenTanks*tank_num;
   const pipeY = 0;
   const pipeHeight = tankY + pipeWidth;
   // output (top)
@@ -77,44 +77,49 @@ function BWpipes(tankNum) {
 }
 
 // draws grey tank background
-function tankBG(tankNum) {
-  const xCoord = tankX+offsetBetweenTanks*tankNum;
+function tankBG(tank_num) {
+  const xCoord = tankX+offsetBetweenTanks*tank_num;
   drawTankShape(ctx_layer1, bottomTankY, 20, xCoord, tankY, tankWidth, tankHeight, '#5A5A5A', '#5A5A5A');
   // label io pipes
   ctx_layer1.fillStyle = 'black';
-  ctx_layer1.fillText(tankNum, xCoord, tankY-3);
+  ctx_layer1.fillText(tank_num+8, xCoord, tankY-3);
 }
 
 // draws water background and initialises the tank objects and scada objects
-export function waterBG(tankNum, waterColour = 'LightBlue') {
-  const xCoord = tankX + offsetBetweenTanks*tankNum + 10; // 50 + 200 *tankNum + 10
+export function waterBG(tank_num, waterColour = 'LightBlue') {
+  tank_num += 8;
+  const xCoord = tankX + offsetBetweenTanks*tank_num + 10; // 50 + 200 *tank_num + 10
   const waterWidth = tankWidth - 20;
   const waterHeight = tankHeight - 17;
   const bottomWaterY = tankY + 10 + waterHeight;
-  // console.log("waterwidth:", waterWidth, "waterheight:",waterHeight)
   drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, waterColour, '#C2B280');
 
-  const scada_controller = new ScadaController(contexts[tankNum]);
-  tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tankNum, scada_controller));
+  const scada_controller = new ScadaController(contexts[tank_num]);
+  tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tank_num, scada_controller));
+}
 
+//passes tank array to tank specified via tank number (in array 'tanks')
+function passTankArr(tank_num){
+  tanks[tank_num].setup_tank_arr(tanks);
 }
 
 // creates background for 4 tanks
 function drawBG() {
   ctx_layer1.fillStyle = '#5A5A5A';
-  for (let tankNum = 0; tankNum < 4; tankNum++ ) {
-    BWpipes(tankNum);
-    tankBG(tankNum);
-    waterBG(tankNum); // this one also initialises tank and scada controller objects
-    IOpipes(tankNum);
+  for (let tank_num = 0; tank_num < 4; tank_num++ ) {
+    BWpipes(tank_num);
+    tankBG(tank_num);
+    waterBG(tank_num); // this one also initialises tank and scada controller objects
+    IOpipesBG(tank_num);
+    passTankArr(tank_num);
   }
 }
 
 // animation loop
 function animate() {
   // makes the tanks draw on canvases
-  for (let tankNum=0; tankNum<4; tankNum++) {
-    tanks[tankNum].draw();
+  for (let tank_num=0; tank_num<4; tank_num++) {
+    tanks[tank_num].draw();
   }
   requestAnimationFrame(animate);
 }

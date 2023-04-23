@@ -24,8 +24,13 @@ export class WaterTank extends Fillable {
     this.progress_rate = 0;
     this.num_of_changes = 0;
     this.next_particulate = 0;
+    this.counter = 0;
+    this.tanks = [];
   }
 
+  setup_tank_arr(tank_arr){
+    this.tanks = tank_arr
+  }
   // code for getting flow rates to sync so the next snapshot is reached simultaneously
   water_rate_update() {
     this.differences = [];
@@ -80,16 +85,40 @@ export class WaterTank extends Fillable {
     // console.log("progress:",this.progress.toFixed(2),"progress_rate:",this.progress_rate, "num of changes:",this.num_of_changes, "pos/neg:", pos_neg)
   }
 
+  elegibility_duplicate_val(){
+    let elgibility = true;
+    for (let tank_num = 0; tank_num < 4; tank_num++){
+      elgibility = elegibility && (this.counter <= this.tanks.counter) // if all other tanks are ahead on counter move up
+    } // this is to catch any other case of duplicate values that do not occur in all tanks
+  }
+
+  elegibility_all_duplicate(){
+    let elgibility = true;
+    for (let tank_num = 0; tank_num < 4; tank_num++){ //checks if the next value of all tanks are identical to previous value
+      let tank = this.tanks[tank_num]
+      elgibility = elegibility && (tank.currentLevel == tank.valuesArr[tank.valueIdx])
+    }
+    if (elegibility === true){ // if all same sleep for 1 second
+      setTimeout(() => 1000);
+    }
+  }
+
+  draw_helper(){
+    this.currentLevel = this.valuesArr[this.valueIdx];
+    this.valueIdx += 1;
+    this.water_rate_update();
+    this.num_of_changes = this.water_change ? (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx])) / this.water_change : 0
+    this.counter += 1;
+    // this.progress_rate_update();
+  }
+
   draw() {
     if (this.valueIdx <= this.valuesArr.length-1) {
       // console.log(this.valuesArr.length)
       // if the next snapshot water level value is reached move onto the next snapshot
+      //TODO:<<<<<<<, FIX BELOW IF STATEMENT
       if (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.00000000001) { // TODO: only if all tanks are equal to the next one and if all next are same sleep
-        this.currentLevel = this.valuesArr[this.valueIdx];
-        this.valueIdx += 1;
-        this.water_rate_update();
-        this.num_of_changes = this.water_change ? (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx])) / this.water_change : 0
-        // this.progress_rate_update();
+        draw_helper()
         // if the current water level is greater than the next water level decrease by the calculated rate of change
       } else if (this.currentLevel > this.valuesArr[this.valueIdx]) {
         this.currentLevel -= this.water_change;

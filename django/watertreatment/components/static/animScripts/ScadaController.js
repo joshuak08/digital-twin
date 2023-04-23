@@ -1,4 +1,4 @@
-const Jtemp = (Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent))));
+// const Jtemp = (Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent))));
 // console.log(Jtemp);
 // console.log(Jtemp.filter((fields) => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0).map((fields) => fields[1]['fields']));
 // console.log( (Jtemp.filter(fields => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0))[0][1]['fields']['particulate'])
