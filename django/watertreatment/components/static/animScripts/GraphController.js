@@ -9,6 +9,7 @@ function combine_id_fields(json) {
 
 // Generate string of snapshot labels inline
 const labels = Array.from(Array(((data_array).length/4)), (_, index) => 'Snapshot ' + (index + 1));
+console.log(data_array)
 // Filter JSON for unique key and get all related values
 // { pk : { snapshot_num : water_vol  }, ... }
 const pks = {};
