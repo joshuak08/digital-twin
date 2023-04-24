@@ -28,15 +28,14 @@ class FilterSnapshotter(Snapshotter.Snapshotter):
         if not self.testing:
             path = os.getcwd()
             parent = os.path.abspath(os.path.join(path, os.pardir))
-            db_path = parent + "\django\watertreatment\db.sqlite3"
+            db_path = parent + "\watertreatment\db.sqlite3"
 
         # otherwise make new database in local directory
         else:
             db_path = os.getcwd() + "\db.sqlite3"
 
-        # name the table based on the current time, so different tables are uniquely identifiable
-        time_tag = datetime.datetime.now().strftime("%d%m%Y_%H%M%S")
-        table_name = "filters_" + time_tag
+        # name of the table
+        table_name = "components_simdatatable"
 
         # open connection to database
         connection = sqlite3.connect(db_path)
@@ -44,7 +43,10 @@ class FilterSnapshotter(Snapshotter.Snapshotter):
 
         # create a table, with a unique name, that stores the information of filters, and has primary key of the id of the fitler, and the snap_num
         # (as each filter should have only one entry for each snapshot)
-        cursor.execute("CREATE TABLE " + table_name +
+
+        cursor.execute("DROP TABLE IF EXISTS " + table_name)
+
+        cursor.execute("CREATE TABLE IF NOT EXISTS " + table_name +
                        "(id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean, PRIMARY KEY (id, snap_num))")
 
         # remove anything that isn't a sand filter from the dictionary

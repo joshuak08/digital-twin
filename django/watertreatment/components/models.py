@@ -15,15 +15,28 @@ class SimDataTable(models.Model):
     # elemID = models.IntegerField(db_column='elemID', blank=True, null=False, primary_key=True)  # Field name made lowercase.
     # name = models.TextField(blank=True, null=True)
     # params = models.TextField(blank=True, null=True)
-    components = models.TextField(db_column='components', blank=True, null=False, primary_key=True)
-    snapshots = models.IntegerField(blank=True, null=True)
-    waterLevel = models.IntegerField(blank=True, null=True)
-    sanddisp = models.IntegerField(blank=True, null=True)
+    id = models.TextField(db_column='id', blank=True, null=False, primary_key=True)
+    snap_num = models.IntegerField(blank=True, null=True)
+    water_vol = models.IntegerField(blank=True, null=True)
+    particulate = models.IntegerField(blank=True, null=True)
+    backwash = models.BooleanField(blank=True, null=True)
 
     class Meta:
         managed = False
         constraints = [
             models.UniqueConstraint(
-                fields=['components', 'snapshots'], name='component_snapshot_primary_key'
+                fields=['id', 'snap_num'], name='component_snapshot_primary_key'
             )
         ]
+
+class SimInput(models.Model):
+    # average_flow, average_tss, sim_length, initial_particulates, testing
+    average_flow = models.FloatField('Average Flow')
+    average_tss = models.FloatField('Amount of particulate in waste water')
+    sim_length = models.FloatField('Length of time for simulation in seconds')
+    # Want to try to create 4 different fields and merge them all into 1 list for particulates in each tank
+    initial_particulates = models.IntegerField('Amount of pre-existing particulate in tanks')
+    # If checked data will be displayed as 'on'/'off' instead of true or false
+    testing = models.BooleanField('Is this part of testing?')
+    class Meta:
+        managed = False
