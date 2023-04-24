@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Document, SimDataTable
+from .models import *
 from django.core import serializers
 import json
 

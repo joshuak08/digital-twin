@@ -2,7 +2,7 @@
 
 .vscode
 django-env
-.idea/*
+.idea
 
 
 ###### gitignore for Django ######

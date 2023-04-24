@@ -4,6 +4,7 @@ from components.views import *
 from components.models import *
 
 
+# Integration testing
 class TestUrls(TestCase):
     @classmethod
     def setUpTestData(cls):
