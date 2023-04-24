@@ -4,11 +4,12 @@ from django.shortcuts import render
 from .models import Document, SimDataTable
 from django.core import serializers
 import json
-from .forms import SimInputForm
 from django.http import HttpResponseRedirect
 import sys
 sys.path.append("../../simulation-system")
 import HelperFunctions
+# from django.views.generic import TemplateView
+# from chartjs.views.lines import BaseLineChartView
 
 """
 Works in a MVC Pattern 
@@ -72,7 +73,6 @@ def carousel(request):
 
 
 def form(request):
-
     if request.POST:
         form = SimInputForm(request.POST)
         data = form.__dict__['data'].dict()
@@ -93,3 +93,7 @@ def form(request):
     #         submitted = True
     #
     return render(request, 'components/test-form.html', {'title': "Form Testing", 'form': SimInputForm})
+
+def graph(request):
+    all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
+    return render(request, 'components/graph.html', {'title': "Graph", 'all_SimData': all_SimData})
