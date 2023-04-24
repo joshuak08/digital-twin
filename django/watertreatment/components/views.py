@@ -1,7 +1,13 @@
+import os
+
 from django.shortcuts import render
 from .models import Document, SimDataTable
 from django.core import serializers
 import json
+from django.http import HttpResponseRedirect
+import sys
+sys.path.append("../../simulation-system")
+import HelperFunctions
 # from django.views.generic import TemplateView
 # from chartjs.views.lines import BaseLineChartView
 
@@ -57,14 +63,36 @@ def revitModel(request):
 
 
 def simulation(request):
-    all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
+    all_SimData = serializers.serialize("json",
+                                        SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
     return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': all_SimData})
+
 
 def carousel(request):
     return render(request, 'components/carousel.html', {'title': "Carousel"})
 
+
 def form(request):
-    return render(request, 'components/form-testing.html', {'title': "Form Testing", })
+    if request.POST:
+        form = SimInputForm(request.POST)
+        data = form.__dict__['data'].dict()
+        if form.is_valid():
+            del data['csrfmiddlewaretoken']
+            if 'testing' not in data:
+                data['testing'] = False
+            else:
+                data['testing'] = True
+            print('From views.py current directory: ' + os.getcwd())
+            HelperFunctions.basic_simulation(float(data['average_flow']), int(data['average_tss']), int(data['sim_length']), data['testing'])
+            # HelperFunctions.initial_particulate_simulation(int(data['average_flow']), int(data['average_tss']), int(data['sim_length']), int(data['initial_particulates']), data['testing'])
+        # redirected to simulation page to run immediately with new table name and id
+        return HttpResponseRedirect('/simulation')
+    # else:
+    #     form = SimInputForm
+    #     if 'submitted' in request.GET:
+    #         submitted = True
+    #
+    return render(request, 'components/test-form.html', {'title': "Form Testing", 'form': SimInputForm})
 
 def graph(request):
     all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript

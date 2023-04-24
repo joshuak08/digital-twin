@@ -28,7 +28,7 @@ class FilterSnapshotter(Snapshotter.Snapshotter):
         if not self.testing:
             path = os.getcwd()
             parent = os.path.abspath(os.path.join(path, os.pardir))
-            db_path = parent + "\django\watertreatment\db.sqlite3"
+            db_path = parent + "\watertreatment\db.sqlite3"
 
         # otherwise make new database in local directory
         else:

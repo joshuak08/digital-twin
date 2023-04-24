@@ -11,5 +11,6 @@ urlpatterns = [
     path('revit-model/', views.revitModel, name="components-revit-model"),
 	path('simulation/', views.simulation, name="components-simulation"),
     path('carousel/', views.carousel, name="components-carousel"),
+    path('test-form/', views.form, name="components-test-form"),
     path('graph/', views.graph, name="components-graph"),
 ]
