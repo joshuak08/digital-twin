@@ -25,6 +25,6 @@ class SimDataTable(models.Model):
         managed = False
         constraints = [
             models.UniqueConstraint(
-                fields=['components', 'snapshots'], name='component_snapshot_primary_key'
+                fields=['id', 'snap_num'], name='component_snapshot_primary_key'
             )
         ]
