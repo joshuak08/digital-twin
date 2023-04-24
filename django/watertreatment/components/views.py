@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import Document, SimDataTable
 from django.core import serializers
 import json
+# from django.views.generic import TemplateView
+# from chartjs.views.lines import BaseLineChartView
 
 """
 Works in a MVC Pattern 
@@ -63,3 +65,7 @@ def carousel(request):
 
 def form(request):
     return render(request, 'components/form-testing.html', {'title': "Form Testing", })
+
+def graph(request):
+    all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
+    return render(request, 'components/graph.html', {'title': "Graph", 'all_SimData': all_SimData})
