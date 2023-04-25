@@ -64,7 +64,7 @@ function IOpipesBG(tank_num) {
 // draws backwash pipes
 function BWpipes(tank_num) {
   // ctx_layer1.fillStyle = '#5A5A5A'; // grey colour
-  ctx_layer1.fillStyle = '#303030'
+  ctx_layer1.fillStyle = '#5A5A5A'
   const pipeX = tankX - 30 + offsetBetweenTanks*tank_num;
   const pipeY = 0;
   const pipeHeight = tankY + pipeWidth;
