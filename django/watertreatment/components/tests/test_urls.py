@@ -106,11 +106,21 @@ class TestUrls(TestCase):
         self.assertTemplateUsed(response, 'components/new-base.html')
         self.assertTemplateUsed(response, 'components/simulation.html')
 
-    # Will test when forms merged into dev
-    # def testForms(self):
-    #     url = reverse('components-test-form')
-    #     response = self.client.get(url)
-    #     self.assertEqual(response.status_code, 200)
+
+    def testForms_at_correct_location(self):
+        url = '/input-form/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/input-form.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')
+
+
+    def testForms_url_available_by_name(self):
+        url = reverse('components-input-form')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/input-form.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')
 
     """
     Or write tests like this, both works

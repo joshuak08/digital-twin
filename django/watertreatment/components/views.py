@@ -2,6 +2,7 @@ import os
 
 from django.shortcuts import render
 from .models import *
+from .forms import *
 from django.core import serializers
 import json
 from django.http import HttpResponseRedirect
@@ -75,17 +76,12 @@ def form(request):
                 data['testing'] = False
             else:
                 data['testing'] = True
-            print('From views.py current directory: ' + os.getcwd())
-            HelperFunctions.basic_simulation(float(data['average_flow']), int(data['average_tss']), int(data['sim_length']), data['testing'])
-            # HelperFunctions.initial_particulate_simulation(int(data['average_flow']), int(data['average_tss']), int(data['sim_length']), int(data['initial_particulates']), data['testing'])
-        # redirected to simulation page to run immediately with new table name and id
-        return HttpResponseRedirect('/simulation')
-    # else:
-    #     form = SimInputForm
-    #     if 'submitted' in request.GET:
-    #         submitted = True
-    #
-    return render(request, 'components/test-form.html', {'title': "Form Testing", 'form': SimInputForm})
+            initial_particulate = [float(data['tank0']), float(data['tank1']), float(data['tank2']), float(data['tank3'])]
+            # HelperFunctions.basic_simulation(float(data['average_flow']), int(data['average_tss']), int(data['sim_length']), data['testing'])
+            HelperFunctions.initial_particulate_simulation(float(data['average_flow']), float(data['average_tss']), int(data['sim_length']), initial_particulate, data['testing'])
+            # redirected to simulation page to run immediately with new table name and id
+            return HttpResponseRedirect('/')
+    return render(request, 'components/input-form.html', {'title': "Form Testing", 'form': SimInputForm})
 
 def graph(request):
     all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
