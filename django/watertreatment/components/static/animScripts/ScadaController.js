@@ -11,6 +11,7 @@ export class ScadaController {
   }
 
   get_particulate_level(snapshot_num, tank_num) {
+    // console.log(tank_num, snapshot_num)
     return this.json_list_simdata.filter((fields) => fields[1]['pk'] === (tank_num) && fields[1]['fields']['snap_num'] === snapshot_num)[0][1]['fields']['particulate'];
   }
 

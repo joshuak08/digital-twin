@@ -87,20 +87,21 @@ function tankBG(tank_num) {
 
 // draws water background and initialises the tank objects and scada objects
 export function waterBG(tank_num, waterColour = 'LightBlue') {
-  tank_num += 8;
   const xCoord = tankX + offsetBetweenTanks*tank_num + 10; // 50 + 200 *tank_num + 10
   const waterWidth = tankWidth - 20;
   const waterHeight = tankHeight - 17;
   const bottomWaterY = tankY + 10 + waterHeight;
   drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, waterColour, '#C2B280');
-
   const scada_controller = new ScadaController(contexts[tank_num]);
-  tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tank_num, scada_controller));
+
+  if (tanks.length != 4) {
+    tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tank_num, scada_controller));
+  }
 }
 
 //passes tank array to tank specified via tank number (in array 'tanks')
 function passTankArr(tank_num){
-  tanks[tank_num].setup_tank_arr(tanks);
+  tanks[tank_num].setup_tank(tanks);
 }
 
 // creates background for 4 tanks
