@@ -30,6 +30,7 @@ export class WaterTank extends Fillable {
     this.num_of_changes = 0; // number of times the water vol is updated
     this.next_particulate = 0;
     this.counter = 0; // counter to keep updating water volumes in correct order
+    this.pause = 0;
   }
   // does setup for tanks
   setup_tank(tank_arr){
@@ -70,7 +71,11 @@ export class WaterTank extends Fillable {
   }
 
   update_water_colour() {
-    this.progress += this.progress_rate;
+    //console.log(this.tank_ID, this.tanks.map(tank => tank.num_of_changes), this.progress_rate.toFixed(2), Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]), this.progress.toFixed(5))
+    if (!(this.progress + this.progress_rate < 0 || this.progress + this.progress_rate > 1)){
+      this.progress += this.progress_rate;
+    }
+
     return String(this.interpolate_colour(this.progress));
   }
 
@@ -87,8 +92,7 @@ export class WaterTank extends Fillable {
       this.progress_rate = (Math.abs(old_scaled_particulate - new_scaled_particulate) / this.num_of_changes ) / 100.0 * pos_neg
     } else{
       //as the number of changes are 0 the largest number of changes is selected out of all tanks
-      this.progress_rate = Math.abs(old_scaled_particulate - new_scaled_particulate)/Math.max(...this.tanks.slice(1).map(tank => tank.num_of_changes))/100.0 * pos_neg
-      // if (this.tank_ID === 10 || this.tank_ID===9){console.log(this.progress_rate, this.progress, this.tank_ID)}
+      this.progress_rate = Math.abs(old_scaled_particulate - new_scaled_particulate)/Math.max(...this.tanks.map(tank => tank.num_of_changes))/100.0 * pos_neg
     }
   }
   // ==========colour stuff==========
@@ -101,17 +105,20 @@ export class WaterTank extends Fillable {
         elegibility = elegibility && (this.counter < Math.max(...this.tanks.map(tank => tank.counter))); // if all other tanks are ahead on counter move up
       } // this is to catch any other case of duplicate values that do not occur in all tanks
     }
-    // if (this.tank_ID === 9) {console.log(elegibility)}
     return elegibility;
   }
 
   elegibility_all_duplicate(){
     // just set 1 to sleep as its serial
-    let elgibility = true;
+    let elegibility = true;
     for (let tank_num = 0; tank_num < 4; tank_num++){ //checks if the next value of all tanks are identical to previous value
       let tank = this.tanks[tank_num]
-      elgibility = elegibility && (tank.currentLevel == tank.valuesArr[tank.valueIdx])
+      elegibility = elegibility && (tank.valuesArr[this.valueIdx-1] === tank.valuesArr[tank.valueIdx])
     }
+    if (elegibility === true && this.tank_ID===9) {
+      this.draw_helper()
+    }
+    // return elegibility
   }
 
   draw_helper(){
@@ -126,8 +133,9 @@ export class WaterTank extends Fillable {
 
   draw() {
     if (this.valueIdx <= this.valuesArr.length-1) {
-      //if the next snapshot water level value is reached move onto the next snapshot
+      this.elegibility_all_duplicate()
 
+      //if the next snapshot water level value is reached move onto the next snapshot
       if (this.elegibility_duplicate_val() && (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.00000000001)) { // TODO: only if all tanks are equal to the next one and if all next are same sleep
         this.draw_helper()
         // if the current water level is greater than the next water level decrease by the calculated rate of change
@@ -136,10 +144,11 @@ export class WaterTank extends Fillable {
         // if the current water level is less than the next water level decrease by the calculated rate of change
       } else if (this.currentLevel < this.valuesArr[this.valueIdx]) {
         this.currentLevel += this.water_change;
-      } else if (this.valuesArr[this.valueIdx-1] === this.valuesArr[this.valueIdx]){
+      } else if (this.valuesArr[this.valueIdx - 1] === this.valuesArr[this.valueIdx]) {
         this.progress_rate_update();
       }
-      // waterBG(this.tank_num)
+
+      // draw the shizzle
       waterBG(this.tank_numIdx, this.update_water_colour());
       // if the current snapshot isn't the last update then animate by drawing the water height (this is done via a black square to give illusion of water level dipping/increasing)
       this.ctx_layer2.fillStyle = this.colour;
