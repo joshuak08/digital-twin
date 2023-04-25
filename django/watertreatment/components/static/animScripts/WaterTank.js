@@ -13,7 +13,8 @@ export class WaterTank extends Fillable {
     this.json_list_simdata = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)); // raw json data from db
     this.json_list = Object.entries(this.json_list_simdata); // snapshot json in array
     this.valueIdx = 1; // next value in array index
-    this.valuesArr = Object.entries(this.json_list_simdata).filter((fields) => fields[1]['pk'] === (this.tank_ID)).map((fields) => fields[1]['fields']['water_vol']); // water vols for tank in db
+    this.valuesArr = Object.entries(this.json_list_simdata).filter((fields) => fields[1]['pk'] === (this.tank_ID)).map((fields) => (fields[1]['fields']['water_vol']*163/56)); // water vols for tank in db
+    this.backwashArr = Object.entries(this.json_list_simdata).filter((fields) => fields[1]['pk'] === (this.tank_ID)).map((fields) => (fields[1]['fields']['backwash']));
     this.currentLevel = this.valuesArr[0];
 
     this.ctx_layer2 = ctx_layer2; // the animation layer
@@ -71,7 +72,6 @@ export class WaterTank extends Fillable {
   }
 
   update_water_colour() {
-    //console.log(this.tank_ID, this.tanks.map(tank => tank.num_of_changes), this.progress_rate.toFixed(2), Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]), this.progress.toFixed(5))
     if (!(this.progress + this.progress_rate < 0 || this.progress + this.progress_rate > 1)){
       this.progress += this.progress_rate;
     }
@@ -122,7 +122,6 @@ export class WaterTank extends Fillable {
   }
 
   draw_helper(){
-    // console.log(this.currentLevel.toFixed(2), this.valueIdx, this.tank_ID)
     this.counter += 1;
     this.currentLevel = this.valuesArr[this.valueIdx];
     this.valueIdx += 1;
@@ -134,9 +133,8 @@ export class WaterTank extends Fillable {
   draw() {
     if (this.valueIdx <= this.valuesArr.length-1) {
       this.elegibility_all_duplicate()
-
       //if the next snapshot water level value is reached move onto the next snapshot
-      if (this.elegibility_duplicate_val() && (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.00000000001)) { // TODO: only if all tanks are equal to the next one and if all next are same sleep
+      if (this.elegibility_duplicate_val() && (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.5)) { // TODO: only if all tanks are equal to the next one and if all next are same sleep
         this.draw_helper()
         // if the current water level is greater than the next water level decrease by the calculated rate of change
       } else if (this.currentLevel > this.valuesArr[this.valueIdx]) {
@@ -154,7 +152,13 @@ export class WaterTank extends Fillable {
       this.ctx_layer2.fillStyle = this.colour;
       this.ctx_layer2.fillRect(this.x, this.y, this.w, this.h - this.currentLevel); // (this.h is the maximum water height)
       // calls the scada screen controller to sync the current water level of tank with the current water level data displayed on the scada screen
-      this.scada_controller.draw(this.tank_ID, (this.valueIdx-1), ['component name : '+'tank ' + this.tank_numIdx, 'live water vol: '+ this.currentLevel.toFixed(2), 'live particulate level:'+ this.particulate_range*(this.progress.toFixed(1))]);
+      this.scada_controller.draw(this.tank_ID, (this.valueIdx-1), ['component name : '+'tank ' + this.tank_numIdx, 'live water vol: '+ (this.currentLevel*56/163).toFixed(2) + ' m^3', 'live particulate:'+ this.particulate_range*(this.progress.toFixed(1))+' mg']);
+
+      if (this.backwashArr[this.valueIdx-1] === true && !(this.currentLevel.toFixed(0)%10 === 0)){
+        this.ctx_layer2.fillStyle = 'red';
+        this.ctx_layer2.font = "15px Impact";
+        this.ctx_layer2.fillText("BACKWASH", this.x+6, this.y + 15);
+      }
     }
   }
 }
