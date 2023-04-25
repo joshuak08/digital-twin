@@ -122,10 +122,18 @@ class TestUrls(TestCase):
         self.assertTemplateUsed(response, 'components/input-form.html')
         self.assertTemplateUsed(response, 'components/new-base.html')
 
-    """
-    Or write tests like this, both works
-    def testRevitModel(self):
-        url = reverse('components-revit-model')
-        response = resolve(url)
-        self.assertEqual(response.func, revitModel)
-    """
+
+    def testGraph_at_correct_location(self):
+        url = '/graph/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/graph.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')
+
+
+    def testGraph_url_available_by_name(self):
+        url = reverse('components-graph')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/graph.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')

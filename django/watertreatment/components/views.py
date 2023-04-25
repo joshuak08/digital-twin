@@ -71,17 +71,23 @@ def form(request):
         form = SimInputForm(request.POST)
         data = form.__dict__['data'].dict()
         if form.is_valid():
-            del data['csrfmiddlewaretoken']
-            if 'testing' not in data:
-                data['testing'] = False
-            else:
-                data['testing'] = True
-            initial_particulate = [float(data['tank0']), float(data['tank1']), float(data['tank2']), float(data['tank3'])]
+            data, initial_particulate = formDataManipulation(data)
             # HelperFunctions.basic_simulation(float(data['average_flow']), int(data['average_tss']), int(data['sim_length']), data['testing'])
             HelperFunctions.initial_particulate_simulation(float(data['average_flow']), float(data['average_tss']), int(data['sim_length']), initial_particulate, data['testing'])
             # redirected to simulation page to run immediately with new table name and id
             return HttpResponseRedirect('/')
     return render(request, 'components/input-form.html', {'title': "Form Testing", 'form': SimInputForm})
+
+
+def formDataManipulation(data):
+    if 'csrfmiddlewaretoken' in data:
+        del data['csrfmiddlewaretoken']
+    if 'testing' not in data:
+        data['testing'] = False
+    else:
+        data['testing'] = True
+    initial_particulate = [float(data['tank0']), float(data['tank1']), float(data['tank2']), float(data['tank3'])]
+    return data, initial_particulate
 
 def graph(request):
     all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
