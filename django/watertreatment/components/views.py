@@ -1,7 +1,7 @@
 import os
 
 from django.shortcuts import render
-from .models import Document, SimDataTable
+from .models import *
 from django.core import serializers
 import json
 from django.http import HttpResponseRedirect
@@ -24,11 +24,7 @@ def home(request):
     return render(request, 'components/home.html', context)
 
 
-def about(request):
-    return render(request, 'components/about.html', {'title': 'About'})
-
-
-def elements(request):
+def types(request):
     elements = Document.objects.all()
     types = {}
 
@@ -44,14 +40,12 @@ def elements(request):
 
 def elementsOfType(request, type):
     elements = Document.objects.filter(name=type)
-    ids = []
-    for i in elements:
-        ids.append(i.elemID)
+    ids = [i.elemID for i in elements]
     context = {'elements': ids, 'title': "Elements of type " + type, 'type': type}
     return render(request, 'components/elements-of-type.html', context)
 
 
-def element(request, type, ID):
+def elements(request, type, ID):
     element = Document.objects.get(elemID=ID)
     params = json.loads(element.params)
     context = {'elementID': ID, "params": params, 'type': type}
@@ -70,7 +64,6 @@ def simulation(request):
 
 def carousel(request):
     return render(request, 'components/carousel.html', {'title': "Carousel"})
-
 
 def form(request):
     if request.POST:
