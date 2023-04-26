@@ -64,7 +64,7 @@ function IOpipesBG(tank_num) {
 // draws backwash pipes
 function BWpipes(tank_num) {
   // ctx_layer1.fillStyle = '#5A5A5A'; // grey colour
-  ctx_layer1.fillStyle = '#5A5A5A'
+  ctx_layer1.fillStyle = '#5A5A5A';
   const pipeX = tankX - 30 + offsetBetweenTanks*tank_num;
   const pipeY = 0;
   const pipeHeight = tankY + pipeWidth;
@@ -100,8 +100,8 @@ export function waterBG(tank_num, waterColour = 'LightBlue') {
   }
 }
 
-//passes tank array to tank specified via tank number (in array 'tanks')
-function passTankArr(tank_num){
+// passes tank array to tank specified via tank number (in array 'tanks')
+function passTankArr(tank_num) {
   tanks[tank_num].setup_tank(tanks);
 }
 
