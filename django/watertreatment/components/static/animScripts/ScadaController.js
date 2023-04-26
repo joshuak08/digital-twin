@@ -1,7 +1,5 @@
 // const Jtemp = (Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent))));
 // console.log(Jtemp);
-// console.log(Jtemp.filter((fields) => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0).map((fields) => fields[1]['fields']));
-// console.log( (Jtemp.filter(fields => fields[1]['pk'] === (0) && fields[1]['fields']['snap_num'] === 0))[0][1]['fields']['particulate'])
 
 export class ScadaController {
   constructor(scada_context) {
@@ -20,13 +18,14 @@ export class ScadaController {
   }
 
   // returns the differences between the current and next snapshot water levels in tanks
-  change_rate_tank(current_snapshot, tankNum) {
+  change_rate_tank(next_snap_num, tankNum) {
     const json_list = this.json_list_simdata;
     // filter for next snapshots and current snapshot | (id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean)
-    // TODO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< done
-    const next_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === current_snapshot).map((fields) => fields[1]['fields']['water_vol']);
-    const current_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === current_snapshot-1).map((fields) => fields[1]['fields']['water_vol']);
-    return Math.abs(current_snapshot_data - next_snapshot_data);
+    const next_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === next_snap_num).map((fields) => fields[1]['fields']['water_vol']);
+    const current_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === next_snap_num-1).map((fields) => fields[1]['fields']['water_vol']);
+    const scaled_next = next_snapshot_data;/** 163/56*/
+    const scaled_curr = current_snapshot_data;/** 163/56*/
+    return Math.abs(scaled_curr - scaled_next);
   }
 
   // returns an array of form ["field : fieldValue"]
