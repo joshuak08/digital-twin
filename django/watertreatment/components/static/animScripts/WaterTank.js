@@ -24,12 +24,13 @@ export class WaterTank extends Fillable {
     this.waterHeight = waterHeight;
     this.differences = [];
 
+
     this.water_change = 0; // how much the water should change after each loop
     this.particulate_range = 500000
     this.progress = 0; // how much the particulate is progressing towards the next particulate level in db
     this.progress_rate = 0; // rate of change of particulate
     this.num_of_changes = 0; // number of times the water vol is updated
-    this.next_particulate = 0;
+
     this.counter = 0; // counter to keep updating water volumes in correct order
     this.pause = 0;
   }
@@ -53,7 +54,7 @@ export class WaterTank extends Fillable {
   // ==========colour stuff==========
   hex_to_rgba_formatted(colour) {// colour, alpha = 1
     const [r, g, b] = colour.match(/\w\w/g).map((x) => parseInt(x, 16));
-    return [r, g, b, 1];
+    return [r, g, b];
   }
   // turns rgba into valid input for context fillstyle
   format_rgba(colour){
@@ -61,8 +62,10 @@ export class WaterTank extends Fillable {
   };
   // takes value and converts it into a mix of 2 colours specified
   interpolate_colour(progress) {
-    const [r1, g1, b1, a1] = this.hex_to_rgba_formatted('#047a47');// sewage green
-    const [r2, g2, b2, a2] = this.hex_to_rgba_formatted('#ADD8E6');// water blue
+
+    const [r1, g1, b1] = this.hex_to_rgba_formatted('#047a47');// sewage green
+    const [r2, g2, b2] = this.hex_to_rgba_formatted('#ADD8E6');// water blue
+
     return this.format_rgba({
       r: Math.round(((r1 * progress) + (r2 * (1.0-progress)))),
       g: Math.round(((g1 * progress) + (g2 * (1.0-progress)))),

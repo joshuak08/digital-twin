@@ -25,6 +25,18 @@ class SimDataTable(models.Model):
         managed = False
         constraints = [
             models.UniqueConstraint(
-                fields=['components', 'snapshots'], name='component_snapshot_primary_key'
+                fields=['id', 'snap_num'], name='component_snapshot_primary_key'
             )
         ]
+
+class SimInput(models.Model):
+    # average_flow, average_tss, sim_length, initial_particulates, testing
+    average_flow = models.FloatField('Average Flow')
+    average_tss = models.FloatField('Amount of particulate in waste water')
+    sim_length = models.FloatField('Length of time for simulation in seconds')
+    # Want to try to create 4 different fields and merge them all into 1 list for particulates in each tank
+    initial_particulates = models.IntegerField('Amount of pre-existing particulate in tanks')
+    # If checked data will be displayed as 'on'/'off' instead of true or false
+    testing = models.BooleanField('Is this part of testing?')
+    class Meta:
+        managed = False

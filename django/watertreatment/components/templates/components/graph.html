@@ -1,0 +1,19 @@
+{% extends "components/new-base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="webpage-content">
+    {{ all_SimData| json_script:"all_SimData" }}
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <div class="anim_scada">
+        <div class="main_anim">
+            <canvas id="chart" width="1200" height="600"></canvas>
+
+        </div>
+    </div>
+    <script type="module" src="{% static 'animScripts/GraphController.js' %}"></script>
+
+</html>
+</div>
+{% endblock content %} 
