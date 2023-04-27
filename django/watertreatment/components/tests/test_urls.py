@@ -15,6 +15,7 @@ class TestUrls(TestCase):
         url = '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/home.html')
         self.assertTemplateUsed(response, 'components/new-base.html')
 
     def testHome_url_available_by_name(self):
