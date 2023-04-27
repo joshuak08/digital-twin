@@ -12,7 +12,7 @@ function combine_id_fields(json) {
 const labels = Array.from(Array(((data_array).length/4)), (_, index) => 'Snapshot ' + (index + 1));
 // Filter JSON for unique key and get all related values
 // { pk : { snapshot_num : water_vol  }, ... }
-let pks = {
+const pks = {
   'water_vol': {},
   'particulate': {},
 };
@@ -32,10 +32,10 @@ const particulate_values = [];
 // (IMPORTANT) Tank IDs are: 9, 10, 11, 12
 for (let i = 9; i < 13; i++) {
   tank_values.push(Object.values(pks['water_vol'][i]));
-  particulate_values.push(Object.values(pks['particulate'][i]))
+  particulate_values.push(Object.values(pks['particulate'][i]));
 }
 
-console.log(particulate_values)
+console.log(particulate_values);
 // Create 4 lines charts for each tank
 new Chart(ctx1, {
   type: 'line',
