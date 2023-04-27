@@ -73,52 +73,27 @@ class TestHomePage(StaticLiveServerTestCase):
 
     def clickAboutUs(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[1]/a")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/about")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
+
     def clickOurServices(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[2]/a")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/service")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
+
     def clickPrivacyPolicy(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[3]/a")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/privacy")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
+        
     def clickProgram(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[4]/a")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
 
     def test_footer_help(self):
         self.driver.get(self.live_server_url)
@@ -130,52 +105,37 @@ class TestHomePage(StaticLiveServerTestCase):
 
     def clickNews(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[1]/a")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/news")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
 
     def clickSolutions(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[2]/a")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/solutions")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
 
     def clickContact(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[3]/a")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/contact")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
 
     def clickJoinUs(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[4]/a")
+        self.newPage(parentWindow, element)
+        self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/careers")
+        self.backToHome(parentWindow)
+
+    def newPage(self, parentWindow, element):
         self.assertEqual(len(self.driver.window_handles), 1)
         self.driver.execute_script("arguments[0].click();", element)
         self.assertEqual(len(self.driver.window_handles), 2)
         for handle in self.driver.window_handles:
             if handle != parentWindow:
                 self.driver.switch_to.window(handle)
-        self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/careers")
+
+    def backToHome(self, parentWindow):
         self.driver.close()
         self.driver.switch_to.window(parentWindow)
         self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
@@ -190,40 +150,19 @@ class TestHomePage(StaticLiveServerTestCase):
 
     def clickFacebook(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[3]/div/a[1]")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.facebook.com/nijhuisindustries")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
 
     def clickTwitter(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[3]/div/a[2]")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://twitter.com/NijhuisInd")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
 
     def clickGithub(self, parentWindow):
         element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[3]/div/a[5]")
-        self.assertEqual(len(self.driver.window_handles), 1)
-        self.driver.execute_script("arguments[0].click();", element)
-        self.assertEqual(len(self.driver.window_handles), 2)
-        for handle in self.driver.window_handles:
-            if handle != parentWindow:
-                self.driver.switch_to.window(handle)
+        self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin")
-        self.driver.close()
-        self.driver.switch_to.window(parentWindow)
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/")
+        self.backToHome(parentWindow)
 
