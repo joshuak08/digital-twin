@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29e051f5-75be-4117-8dfd-1723c7ee045e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/2022-WaterTreatmentDigitalTwin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2022-WaterTreatmentDigitalTwin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/tests/test_forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/tests/test_forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/tests/test_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/tests/test_urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/tests/test_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/tests/test_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django/watertreatment/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +71,9 @@
       <workItem from="1681905295641" duration="5820000" />
       <workItem from="1682085770373" duration="4016000" />
       <workItem from="1682417598440" duration="1942000" />
-      <workItem from="1682447490326" duration="13369000" />
+      <workItem from="1682447490326" duration="14255000" />
+      <workItem from="1682524216266" duration="2968000" />
+      <workItem from="1682536462160" duration="8291000" />
     </task>
     <servers />
   </component>
