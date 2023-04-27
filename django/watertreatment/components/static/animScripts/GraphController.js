@@ -35,7 +35,6 @@ for (let i = 9; i < 13; i++) {
   particulate_values.push(Object.values(pks['particulate'][i]));
 }
 
-console.log(particulate_values);
 // Create 4 lines charts for each tank
 new Chart(ctx1, {
   type: 'line',
