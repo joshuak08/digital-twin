@@ -121,9 +121,10 @@ function drawBG() {
 function animate() {
   // makes the tanks draw on canvases
 
-  tanks.forEach((tank) => tank.draw())
   tanks.forEach((tank) => tank.calculate_rates())
   tanks.forEach((tank) => tank.progress_rate_update())
+  tanks.forEach((tank) => tank.draw())
+
   requestAnimationFrame(animate);
 }
 
