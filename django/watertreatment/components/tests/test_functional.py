@@ -166,3 +166,6 @@ class TestHomePage(StaticLiveServerTestCase):
         self.assertEqual(self.driver.current_url, "https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin")
         self.backToHome(parentWindow)
 
+""" 
+TODO: write tests for inputting forms, clicking submit then, changing from simulation to graphs 
+"""

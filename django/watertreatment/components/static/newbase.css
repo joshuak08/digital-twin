@@ -158,6 +158,7 @@ nav .logo p{
 
 nav ul{
     float: right;
+    padding-right: 10px;
 }
 
 nav li{
@@ -168,7 +169,7 @@ nav li{
 nav li a {
     font-size: 20px;
     text-transform: uppercase;
-    padding: 0px 30px;
+    padding: 0px 15px;
     color: white;
     text-decoration: none;
 }
