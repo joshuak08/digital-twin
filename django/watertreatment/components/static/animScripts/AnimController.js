@@ -120,9 +120,10 @@ function drawBG() {
 // animation loop
 function animate() {
   // makes the tanks draw on canvases
-  for (let tank_num=0; tank_num<4; tank_num++) {
-    tanks[tank_num].draw();
-  }
+
+  tanks.forEach((tank) => tank.draw())
+  tanks.forEach((tank) => tank.calculate_rates())
+  tanks.forEach((tank) => tank.progress_rate_update())
   requestAnimationFrame(animate);
 }
 

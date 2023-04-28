@@ -1,6 +1,3 @@
-// const Jtemp = (Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent))));
-// console.log(Jtemp);
-
 export class ScadaController {
   constructor(scada_context) {
     // this.json_list_simdata = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
@@ -23,9 +20,9 @@ export class ScadaController {
     // filter for next snapshots and current snapshot | (id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean)
     const next_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === next_snap_num).map((fields) => fields[1]['fields']['water_vol']);
     const current_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === next_snap_num-1).map((fields) => fields[1]['fields']['water_vol']);
-    const scaled_next = next_snapshot_data;/** 163/56*/
-    const scaled_curr = current_snapshot_data;/** 163/56*/
-    return Math.abs(scaled_curr - scaled_next);
+    const scaled_next = next_snapshot_data
+    const scaled_curr = current_snapshot_data
+    return Math.abs(scaled_curr - scaled_next)* 163/56.0;
   }
 
   // returns an array of form ["field : fieldValue"]
@@ -43,9 +40,7 @@ export class ScadaController {
   draw(component_name, snapshot_num, component_specific_data) {
     // filters for correct tank and snapshot. (the field that contains the water volume, snapshot number, particulate, etc.)
     const snapshot_data = this.json_list_simdata.filter((fields) => fields[1]['pk'] === (component_name) && fields[1]['fields']['snap_num'] === snapshot_num)[0][1]['fields'];
-    // const snapshot_data = ((Object.entries(this.json_list_simdata)).filter((fields) => fields[1]['pk'] === (component_name) && fields[1]['fields']['snap_num'] === snapshot_num))[0][1];
-
-    this.scada_context.font = '20px serif';// sets font and font size
+    this.scada_context.font = '17px IMPACT';// sets font and font size
     const text_pieces = this.format_scada_text(snapshot_data, component_specific_data);// gets the pieces of text to be drawn onto scada canvas
     this.clearScada();// clears the canvas for new data
     for (let field_num=0; field_num < text_pieces.length; field_num++) {// actually draws the stuff on the canvas
@@ -53,5 +48,3 @@ export class ScadaController {
     }
   }
 }
-
-// (id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean)

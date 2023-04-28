@@ -67,6 +67,38 @@ new Chart(ctx1, {
       },
     ],
   },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'water volume (m ³)',
+          font: {size: 15}
+        },
+      },
+      x: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'snapshot no.',
+          font: {size: 15}
+        }
+      }
+    },
+    responsive: true,
+    showTooltips: true,
+    plugins:{
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+    }
+  },
 });
 
 new Chart(ctx2, {
@@ -75,30 +107,48 @@ new Chart(ctx2, {
     labels: labels,
     datasets: [
       {
-        label: 'Tank 1 particulate Levels',
+        label: 'Tank 1 Particulate Levels',
         borderColor: 'rgb(75, 192, 192)', // green
         data: particulate_values[0],
         tension: 0.1, // curving of line
       },
       {
-        label: 'Tank 2 particulate Levels',
+        label: 'Tank 2 Particulate Levels',
         borderColor: 'rgb(255, 99, 132)', // red
         data: particulate_values[1],
         tension: 0.1,
       },
       {
-        label: 'Tank 3 particulate Levels',
+        label: 'Tank 3 Particulate Levels',
         borderColor: 'rgb(255, 205, 86)', // yellow
         data: particulate_values[2],
         tension: 0.1,
       },
       {
-        label: 'Tank 4 particulate Levels',
+        label: 'Tank 4 Particulate Levels',
         borderColor: 'rgb(153, 102, 255)', // purple
         data: particulate_values[3],
         tension: 0.1,
       },
     ],
   },
+  options:{
+    scales:{
+      y:{
+        beginAtZero: true,
+        title:{
+          display: true,
+          text: 'particulate (mg)'
+        },
+      },
+      x:{
+        beginAtZero: true,
+        title:{
+          display: true,
+          text: 'snapshot no.'
+        }
+      },
+    }
+  }
 });
 
