@@ -29,6 +29,7 @@ export class WaterTank extends Fillable {
     this.progress = 0; // how much the particulate is progressing towards the next particulate level in db
     this.progress_rate = 0; // rate of change of particulate
     this.num_of_changes = 0; // number of times the water vol is updated
+    this.num_of_prev_chngs = 0;
 
     this.counter = 0; // counter to keep updating water volumes in correct order
   }
@@ -74,6 +75,9 @@ export class WaterTank extends Fillable {
     if (!(this.progress + this.progress_rate < 0 || this.progress + this.progress_rate > 1)) {
       this.progress += this.progress_rate;
     }
+  }
+
+  get_current_colour(){
     return String(this.interpolate_colour(this.progress));
   }
 
@@ -111,16 +115,26 @@ export class WaterTank extends Fillable {
       const tank = this.tanks[tank_num];
       elegibility = elegibility && (tank.valuesArr[this.valueIdx-1] === tank.valuesArr[tank.valueIdx]);
     }
-    // if (elegibility === true && this.tank_ID===9) {
-    //   // this.calc_helper();
-    // }
+
     if (elegibility === true){
-      for (let tank_num = 0; tank_num < 4; tank_num++) { // checks if the next value of all tanks are identical to previous value
-        const tank = this.tanks[tank_num];
-        tank.calc_helper()
-        tank.progress = this.scada_controller.get_particulate_level(tank.valueIdx - 1, tank.tank_ID) * 100 / parseFloat(tank.particulate_range);
-      }
+      console.log("all same detected")
+      // for (let tank_num = 0; tank_num < 4; tank_num++) { // checks if the next value of all tanks are identical to previous value
+      //   const tank = this.tanks[tank_num];
+      //   tank.calc_helper()
+      //   tank.progress = this.scada_controller.get_particulate_level(tank.valueIdx - 1, tank.tank_ID) * 100 / parseFloat(tank.particulate_range);
+      // }
+
+        const target_progress = this.scada_controller.get_particulate_level(this.valueIdx, this.tank_ID) * 100 / parseFloat(this.particulate_range);
+        // this.progress_rate_update();
+        this.num_of_changes = this.valueIdx-1 ? this.num_of_prev_chngs : 163
+        if (Math.abs(this.progress - target_progress) > 0.000000000000001){
+          this.update_water_colour()
+        } else {
+          this.progress = target_progress
+          this.calc_helper()
+        }
     }
+    return elegibility
   }
 
   check_update_elegibility(){
@@ -133,26 +147,31 @@ export class WaterTank extends Fillable {
     this.currentLevel = this.valuesArr[this.valueIdx];
     this.valueIdx += 1;
     this.water_rate_update();
+    this.num_of_prev_chngs = this.num_of_changes;
     this.num_of_changes = this.water_change ? (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx])) / parseFloat(this.water_change) : 0;
   }
 
   calculate_rates() {
-    if (this.valueIdx <= this.valuesArr.length - 1) {
-      this.elegibility_all_duplicate();
-      // if the next snapshot water level value is reached move onto the next snapshot
-      if (this.elegibility_duplicate_val() && this.check_update_elegibility()) {
-        this.calc_helper();
-        // if the current water level is greater than the next water level decrease by the calculated rate of change
-      } else if (this.currentLevel > this.valuesArr[this.valueIdx]) {
-        this.currentLevel -= this.water_change;
-        if (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.5) {
-          this.water_change *= 0.5
-        }
-        // if the current water level is less than the next water level decrease by the calculated rate of change
-      } else if (this.currentLevel < this.valuesArr[this.valueIdx]) {
-        this.currentLevel += this.water_change;
-        if (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.5) {
-          this.water_change *= 0.5
+    if (!this.elegibility_all_duplicate()){
+      if (this.valueIdx <= this.valuesArr.length - 1) {
+        this.elegibility_all_duplicate();
+        // if the next snapshot water level value is reached move onto the next snapshot
+        if (this.elegibility_duplicate_val() && this.check_update_elegibility()) {
+          this.calc_helper();
+          // if the current water level is greater than the next water level decrease by the calculated rate of change
+        } else if (this.currentLevel > this.valuesArr[this.valueIdx]) {
+          this.currentLevel -= this.water_change;
+          this.update_water_colour()
+          if (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.5) {
+            this.water_change *= 0.5
+          }
+          // if the current water level is less than the next water level decrease by the calculated rate of change
+        } else if (this.currentLevel < this.valuesArr[this.valueIdx]) {
+          this.currentLevel += this.water_change;
+          this.update_water_colour()
+          if (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx]) < 0.5) {
+            this.water_change *= 0.5
+          }
         }
       }
     }
@@ -160,7 +179,7 @@ export class WaterTank extends Fillable {
 
   draw() {
     // draw the shizzle
-    waterBG(this.tank_numIdx, this.update_water_colour());
+    waterBG(this.tank_numIdx, this.get_current_colour());
     // if the current snapshot isn't the last update then animate by drawing the water height (this is done via a black square to give illusion of water level dipping/increasing)
     this.ctx_layer2.fillStyle = this.colour;
     this.ctx_layer2.fillRect(this.x, this.y, this.w, this.h - this.currentLevel); // (this.h is the maximum water height)
