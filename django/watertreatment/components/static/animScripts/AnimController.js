@@ -25,6 +25,7 @@ const offsetBetweenTanks = (layer1Width/4);
 const pipeWidth = 12;
 
 const tanks = [];
+let end = false;
 // ==========================================//
 function drawTankShape(ctx, bottomTankY, triangleTipOffset, xCoord, yCoord, width, height, fillStyle1, fillStyle2) {
   ctx.fillStyle = fillStyle1;
@@ -117,15 +118,21 @@ function drawBG() {
   }
 }
 
+export function end_anim(){
+  end = true;
+  return 0;
+}
+
 // animation loop
 function animate() {
   // makes the tanks draw on canvases
+  tanks.forEach((tank) => tank.progress_rate_update());
+  tanks.forEach((tank) => tank.calculate_rates());
+  tanks.forEach((tank) => tank.draw());
 
-  tanks.forEach((tank) => tank.calculate_rates())
-  tanks.forEach((tank) => tank.progress_rate_update())
-  tanks.forEach((tank) => tank.draw())
-
-  requestAnimationFrame(animate);
+  if(!end) {
+    requestAnimationFrame(animate)
+  };
 }
 
 drawBG();
