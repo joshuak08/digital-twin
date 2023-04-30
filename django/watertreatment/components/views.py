@@ -75,7 +75,7 @@ def form(request):
             # HelperFunctions.basic_simulation(float(data['average_flow']), int(data['average_tss']), int(data['sim_length']), data['testing'])
             HelperFunctions.initial_particulate_simulation(float(data['average_flow']), float(data['average_tss']), int(data['sim_length']), initial_particulate, data['testing'])
             # redirected to simulation page to run immediately with new table name and id
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/simulation/')
     return render(request, 'components/input-form.html', {'title': "Form Testing", 'form': SimInputForm})
 
 
@@ -86,7 +86,10 @@ def formDataManipulation(data):
         data['testing'] = False
     else:
         data['testing'] = True
-    initial_particulate = [float(data['tank0']), float(data['tank1']), float(data['tank2']), float(data['tank3'])]
+    initial_particulate = [0 if data['tank0'] == '' else float(data['tank0']), 
+                           0 if data['tank1'] == '' else float(data['tank1']), 
+                           0 if data['tank2'] == '' else float(data['tank2']), 
+                           0 if data['tank3'] == '' else float(data['tank3'])]
     return data, initial_particulate
 
 def graph(request):

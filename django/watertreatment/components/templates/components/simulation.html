@@ -5,7 +5,7 @@
     <h2>
         <span>Simulation Visualiser</span>
         <a href="{% url 'components-graph' %}">
-            <button class="btn btn-primary fa-pull-right">Graph Display</button>
+            <button class="btn btn-primary fa-pull-right" id="change-to-graph">Graph Display</button>
         </a>
     </h2>
     {{ all_SimData| json_script:"all_SimData" }}

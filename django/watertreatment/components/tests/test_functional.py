@@ -5,7 +5,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 
@@ -165,6 +165,34 @@ class TestHomePage(StaticLiveServerTestCase):
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin")
         self.backToHome(parentWindow)
+
+    def testForms(self):
+        self.driver.get(self.live_server_url + "/input-form/")
+        tank0 = self.driver.find_element(By.ID, "id_tank0")
+        tank1 = self.driver.find_element(By.ID, "id_tank1")
+        tank2 = self.driver.find_element(By.ID, "id_tank2")
+        tank3 = self.driver.find_element(By.ID, "id_tank3")
+        average_flow = self.driver.find_element(By.ID, "id_average_flow")
+        average_tss = self.driver.find_element(By.ID, "id_average_tss")
+        sim_length = self.driver.find_element(By.ID, "id_sim_length")
+        testing = self.driver.find_element(By.ID, "id_testing")
+        submit = self.driver.find_element(By.ID, "submit_button")
+
+        tank0.send_keys(1)
+        tank1.send_keys(1)
+        tank2.send_keys(1)
+        tank3.send_keys(1)
+        average_flow.send_keys(0.2)
+        average_tss.send_keys(252)
+        sim_length.send_keys(20)
+        testing.send_keys("off")
+        submit.click()
+
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/simulation/")
+        self.driver.find_element(By.ID,"change-to-graph").click()
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/graph/")
+        self.driver.find_element(By.ID,"change-to-simulation").click()
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/simulation/")
 
 """ 
 TODO: write tests for inputting forms, clicking submit then, changing from simulation to graphs 
