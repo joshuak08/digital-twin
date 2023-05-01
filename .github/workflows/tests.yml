@@ -58,6 +58,18 @@ jobs:
           python -m unittest SystemTests
           python -m unittest HelperFunctionTests
       
-
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v4.3.0
+        with:
+          python-version: '3.9'
+          
+      - name: Install 3.9 Packages
+        run: |
+          echo Installing 3.9 Packages
+      
+      - name: Run 3.9 Tests
+        run: |
+          cd django/watertreatment
+          python manage.py test components.tests
       # Runs a set of commands using the runners shell
 
