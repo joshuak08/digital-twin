@@ -1,9 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
 from components.views import *
-import json
 
-
+# Tests for views methods
 class TestViews(TestCase):
     def test_home_GET(self):
         response = self.client.get(reverse('components-home'))

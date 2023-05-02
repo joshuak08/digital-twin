@@ -1,14 +1,10 @@
 from selenium import webdriver
-from selenium.webdriver import *
 from components.models import *
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-import time
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 
+# Functional Testing using selenium
 class TestHomePage(StaticLiveServerTestCase):
     host = "127.0.0.1"
     port = 8080
@@ -193,7 +189,3 @@ class TestHomePage(StaticLiveServerTestCase):
         self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/graph/")
         self.driver.find_element(By.ID,"change-to-simulation").click()
         self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/simulation/")
-
-""" 
-TODO: write tests for inputting forms, clicking submit then, changing from simulation to graphs 
-"""
