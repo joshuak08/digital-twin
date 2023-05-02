@@ -163,9 +163,9 @@ class TestSandFilterBehaviour(unittest.TestCase):
         filter = SandFilter.SandFilter(2, 1, [sink1, sink2], 8, 1, 1.5)
         dummy_pipe = TestPipe("Dummy Pipe")
         filter.set_input(dummy_pipe)
-        filter.particulate_mass = 499999
+        filter.particulate_mass = 11339999
         self.assertFalse(filter.backwash)
-        filter.push(10, 252)
+        filter.push(1, 252)
         self.assertTrue(filter.backwash)
         self.assertEqual(filter.output, sink2)
         self.assertGreater(sink2.total_flow, 0)
