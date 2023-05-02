@@ -3,8 +3,6 @@ from django.forms import ModelForm, forms
 from django import forms
 
 
-# from .models import SimInput
-
 
 # Create Sim Input form
 class SimInputForm(forms.Form):
@@ -26,16 +24,3 @@ class SimInputForm(forms.Form):
                                                 MaxValueValidator(0.5, message="Please enter a value smaller than 0.5")])
     average_tss = forms.FloatField(label='Amount of particulate in waste water (mg/l), [Average is 252]')
     sim_length = forms.IntegerField(label='Length of time for simulation (s)')
-    # If checked data will be displayed as 'on'/'off' instead of true or false
-    # testing = forms.BooleanField(label='Is this part of testing?')
-    # class Meta:
-    #     model = SimInput
-    #     fields = '__all__'
-
-    # def clean_length(self):
-    #     length = self.cleaned_data.get('sim_length')
-    #     if length < 0:
-    #         print('asdf')
-    #         raise forms.ValidationError('Please enter positive asdf value.')
-    #         print('asldkfj')
-    #     return length
