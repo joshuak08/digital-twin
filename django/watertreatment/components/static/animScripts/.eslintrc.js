@@ -15,5 +15,6 @@ module.exports = {
     'max-len': 'off',
     'require-jsdoc': 'off',
     'new-cap': 'off',
+    "parser": "@babel/eslint-parser"
   },
 };
