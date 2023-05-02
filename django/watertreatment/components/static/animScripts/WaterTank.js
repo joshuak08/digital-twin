@@ -23,7 +23,7 @@ export class WaterTank extends Fillable {
 
     this.water_change = 0; // how much the water should change after each loop
     this.particulate_range = 11340000/*500000*/;
-    this.progress = this.round_precision(starting_progress, 10**3);// this.scada_controller.get_particulate_level(this.valueIdx - 1, this.tank_ID)/parseFloat(this.particulate_range); // how much the particulate is progressing towards the next particulate level in db
+    this.progress = this.round_precision(starting_progress, 10**10);// this.scada_controller.get_particulate_level(this.valueIdx - 1, this.tank_ID)/parseFloat(this.particulate_range); // how much the particulate is progressing towards the next particulate level in db
     this.progress_rate = 0; // rate of change of particulate
     this.num_of_changes = 0; // number of times the water vol is updated
     this.num_of_prev_chngs = 0;
@@ -157,6 +157,8 @@ export class WaterTank extends Fillable {
         // if the next snapshot water level value is reached move onto the next snapshot
         if (this.elegibility_duplicate_val() && this.check_update_elegibility() ) {
           if (!this.testing) {
+            const target_progress = this.get_particulate_level(this.valueIdx, this.tank_ID) / parseFloat(this.particulate_range);
+            this.progress = target_progress
             this.calc_helper();
           };
           // if the current water level is greater than the next water level decrease by the calculated rate of change
