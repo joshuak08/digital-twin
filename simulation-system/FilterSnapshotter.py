@@ -48,8 +48,7 @@ class FilterSnapshotter(Snapshotter.Snapshotter):
 
         cursor.execute("CREATE TABLE IF NOT EXISTS " + table_name +
                        "(id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean, PRIMARY KEY (id, snap_num))")
-        
-        
+
         # remove anything that isn't a sand filter from the dictionary
         filtered_components = dict(
             filter(filter_for_filters, self.system_data.items()))

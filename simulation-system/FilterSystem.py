@@ -54,7 +54,7 @@ class FilterSystem(SimulationSystem.SimulationSystem):
             1, [filter_3], 0.5, self.tick_length, 0.1, "pipe")
         in_4 = self.add_component(
             1, [filter_4], 0.5, self.tick_length, 0.1, "pipe")
-        
+
         filter_1.set_input(in_1)
         filter_2.set_input(in_2)
         filter_3.set_input(in_3)
