@@ -1,5 +1,5 @@
 import GenericPipe
-import math
+
 
 # Q = av where Q is the flow rate, a = cross-sectional area, v = velocity of water
 

@@ -7,7 +7,7 @@ from django.core import serializers
 import json
 from django.http import HttpResponseRedirect
 import sys
-sys.path.append("../../simulation-system")
+sys.path.append("simulation-system")
 import HelperFunctions
 
 """
