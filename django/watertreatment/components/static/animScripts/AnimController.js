@@ -2,30 +2,35 @@ import {WaterTank} from './WaterTank.js';
 import {ScadaController} from './ScadaController.js';
 
 // ============ constant values ============//
-const ctx_layer1 = document.getElementById('canvas_layer1').getContext('2d');
-const ctx_layer2 = document.getElementById('canvas_layer2_anim').getContext('2d');
 
-const scada1CTX = document.getElementById('scada1').getContext('2d');
-const scada2CTX = document.getElementById('scada2').getContext('2d');
-const scada3CTX = document.getElementById('scada3').getContext('2d');
-const scada4CTX = document.getElementById('scada4').getContext('2d');
-const contexts = [scada1CTX, scada2CTX, scada3CTX, scada4CTX];
+    const ctx_layer1 = document.getElementById('canvas_layer1').getContext('2d');
+    const ctx_layer2 = document.getElementById('canvas_layer2_anim').getContext('2d');
 
-const layer1Width = 800;
-const layer1Height = 600;
+    const scada1CTX = document.getElementById('scada1').getContext('2d');
+    const scada2CTX = document.getElementById('scada2').getContext('2d');
+    const scada3CTX = document.getElementById('scada3').getContext('2d');
+    const scada4CTX = document.getElementById('scada4').getContext('2d');
+    const contexts = [scada1CTX, scada2CTX, scada3CTX, scada4CTX];
 
-const tankY = layer1Height/3;
-const tankX = ((layer1Width/4)/2)/2;
+    const layer1Width = 800;
+    const layer1Height = 600;
 
-const tankWidth = 2*tankX;
-const tankHeight = 180;
-const bottomTankY = tankY+tankHeight;
+    const tankY = layer1Height / 3;
+    const tankX = ((layer1Width / 4) / 2) / 2;
 
-const offsetBetweenTanks = (layer1Width/4);
-const pipeWidth = 12;
+    const tankWidth = 2 * tankX;
+    const tankHeight = 180;
+    const bottomTankY = tankY + tankHeight;
 
-const tanks = [];
-let end = false;
+    const offsetBetweenTanks = (layer1Width / 4);
+    const pipeWidth = 12;
+
+    const tanks = [];
+    let end = false;
+
+    drawBG();
+    animate();
+
 // ==========================================//
 function drawTankShape(ctx, bottomTankY, triangleTipOffset, xCoord, yCoord, width, height, fillStyle1, fillStyle2) {
   ctx.fillStyle = fillStyle1;
@@ -94,10 +99,14 @@ export function waterBG(tank_num, waterColour = 'LightBlue') {
   const waterHeight = tankHeight - 17;
   const bottomWaterY = tankY + 10 + waterHeight;
   drawTankShape(ctx_layer2, bottomWaterY, 15, xCoord, tankY+10, waterWidth, waterHeight, waterColour, '#C2B280');
-  const scada_controller = new ScadaController(contexts[tank_num]);
+  const json_sim_data = Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
+  const scada_controller = new ScadaController(contexts[tank_num], json_sim_data);
 
   if (tanks.length != 4) {
-    tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tank_num, scada_controller));
+    let data = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
+    let starting_particulate = json_sim_data.filter((fields) => fields[1]['pk'] === (tank_num+9) && fields[1]['fields']['snap_num'] === 0)[0][1]['fields']['particulate'];
+    let starting_progress = starting_particulate/parseFloat(500000)
+    tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tank_num, scada_controller, json_sim_data, starting_progress));
   }
 }
 
@@ -126,7 +135,7 @@ export function end_anim(){
 // animation loop
 function animate() {
   // makes the tanks draw on canvases
-  tanks.forEach((tank) => tank.progress_rate_update());
+  tanks.forEach((tank) => tank.update_progress_rate());
   tanks.forEach((tank) => tank.calculate_rates());
   tanks.forEach((tank) => tank.draw());
 
@@ -135,7 +144,5 @@ function animate() {
   };
 }
 
-drawBG();
-animate();
 
 
