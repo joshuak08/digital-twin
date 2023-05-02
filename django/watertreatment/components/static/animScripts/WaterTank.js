@@ -189,7 +189,7 @@ export class WaterTank extends Fillable {
     this.scada_controller.draw(this.tank_ID, (this.valueIdx), ['component: ' + 'tank ' + this.tank_ID, 'live water vol: ' + (this.currentLevel*56/163.0).toFixed(2) + ' m³', 'live particulate: ' + (this.particulate_range * this.progress).toFixed() + ' mg', 'snap: '+(this.valueIdx-1)+'->'+this.valueIdx, '――――――――――――――']);
 
     this.ctx_layer2.font = '13px Impact';
-    this.ctx_layer2.clearRect(this.x+this.w+13, this.h-this.currentLevel+this.y-10, 50, 20);
+    this.ctx_layer2.clearRect(this.x+this.w+13, this.h-this.currentLevel+this.y-20, 50, 40);
     this.ctx_layer2.fillText((this.currentLevel*56/163.0).toFixed(2)+'m³', this.x+this.w+15, this.h-this.currentLevel+this.y+5);
 
     if (this.backwashArr[this.valueIdx - 1] === true) {
