@@ -70,11 +70,12 @@ def form(request):
         data = form.__dict__['data'].dict()
         if form.is_valid():
             data, initial_particulate = formDataManipulation(data)
-            # HelperFunctions.basic_simulation(float(data['average_flow']), int(data['average_tss']), int(data['sim_length']), data['testing'])
             HelperFunctions.initial_particulate_simulation(float(data['average_flow']), float(data['average_tss']), int(data['sim_length']), initial_particulate, data['testing'])
             # redirected to simulation page to run immediately with new table name and id
             return HttpResponseRedirect('/simulation/')
-    return render(request, 'components/input-form.html', {'title': "Form Testing", 'form': SimInputForm})
+        else:
+            return render(request, 'components/input-form.html', {'title': "Forms", 'form': form})
+    return render(request, 'components/input-form.html', {'title': "Forms", 'form': SimInputForm})
 
 
 def formDataManipulation(data):
