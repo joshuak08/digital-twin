@@ -103,7 +103,6 @@ export function waterBG(tank_num, waterColour = 'LightBlue') {
   const scada_controller = new ScadaController(contexts[tank_num], json_sim_data);
 
   if (tanks.length != 4) {
-    let data = JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent));
     let starting_particulate = json_sim_data.filter((fields) => fields[1]['pk'] === (tank_num+9) && fields[1]['fields']['snap_num'] === 0)[0][1]['fields']['particulate'];
     let starting_progress = starting_particulate/parseFloat(500000)
     tanks.push(new WaterTank(xCoord, tankY + 10, waterWidth, waterHeight, '#303030', ctx_layer2, tank_num, scada_controller, json_sim_data, starting_progress));
