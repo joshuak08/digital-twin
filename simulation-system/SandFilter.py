@@ -62,7 +62,7 @@ class SandFilter(GenericPipe.GenericPipe):
         self.capacity += flow_in
 
         # if it's caught a certain amount of particulate it goes into backwash
-        if self.particulate_mass > 11340000:  # arbitrary boundary to start backwash - 500g of particulate collected
+        if self.particulate_mass > 11340000 and not self.backwash:  # arbitrary boundary to start backwash - 11kg of particulate collected
             self.backwash = True
             self.output = self.backwash_pipe
             self.input.toggle_valve()
@@ -82,7 +82,7 @@ class SandFilter(GenericPipe.GenericPipe):
             self.backwash_pipe.push(0, flow_tss)
 
         # push flow to current output based on water velocity and the size of the pipe being pushed to
-        flow_out = self.water_velocity() * self.output.cs_area * self.tick_length
+        flow_out = min(self.water_velocity() * self.output.cs_area * self.tick_length, self.capacity)
 
         # pushes flow out to the output pipe
         self.output.push(flow_out, flow_tss)

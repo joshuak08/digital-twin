@@ -23,6 +23,7 @@ class SplitterPipe(GenericPipe.GenericPipe):
     # if an output is closed it is not brought into these calculations
 
     def get_output_ratios(self):
+        self.output_ratios = []
         total_radius = 0
         for i in self.outputs:
             if i.valve == False:
@@ -57,10 +58,9 @@ class SplitterPipe(GenericPipe.GenericPipe):
             self.flow_in_current_round = 0
 
             self.capacity += (flow_in - flow_out)
+            
 
-        # if the pipe is not able to push out the flow pushed into it then bad things happen
-        if self.capacity > self.max_volume:
-            raise Exception("capacity is greater than max volume :(")
+            # raise Exception("capacity is greater than max volume :(")
     # ================================== #
 
     # important information for a pipe is how much liquid it has in it and whether or not it has been closed
