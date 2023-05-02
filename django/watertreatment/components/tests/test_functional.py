@@ -17,7 +17,7 @@ class TestHomePage(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         options = webdriver.ChromeOptions()
-        # options.add_argument("--headless")
+        options.add_argument("--headless")
         options.add_argument("--incognito")
         options.add_argument("--window-size=1920,1080")
         cls.driver = webdriver.Chrome("chromedriver.exe", options=options)
