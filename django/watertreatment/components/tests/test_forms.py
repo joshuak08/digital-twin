@@ -1,10 +1,7 @@
-from django.test import TestCase, Client
-from django.urls import reverse
-from components.views import form
-from components.models import SimInput
+from django.test import TestCase
 from components.forms import SimInputForm
 
-
+# Tests for input forms
 class TestForms(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -42,5 +39,3 @@ class TestForms(TestCase):
     def testFormRedirect(self):
         response = self.client.post('/input-form/', self.form.data)
         self.assertEqual(response.status_code, 302)
-
-# TODO: Figure out what more tests needed for forms and whole application
