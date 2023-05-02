@@ -48,6 +48,7 @@ html {font-family: Arials, Helvetica, sans-serif;}
     width:1200px;
     height:600px;
     z-index:-1;
+    border: solid #95BECC 10px;
 }
 
 #chart2 {
@@ -56,7 +57,9 @@ html {font-family: Arials, Helvetica, sans-serif;}
     width:1200px;
     height:600px;
     z-index:-2;
+    border: solid #74c474 10px;
 }
+
 /*=========================================*/
 /** {box-sizing: border-box;}*/
 /*===== handles scada css =====*/

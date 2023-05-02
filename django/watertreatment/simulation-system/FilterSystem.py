@@ -54,21 +54,13 @@ class FilterSystem(SimulationSystem.SimulationSystem):
         in_4 = self.add_component(
             1, [filter_4], 0.5, self.tick_length, 0.1, "pipe")
 
-        # initialising left side of pipe split
-        left_end = self.add_component(
-            1, [in_1], 3, self.tick_length, 0.1, "pipe")
-        left_start = self.add_component(
-            1, [left_end, in_2], 3, self.tick_length, 0.1, "pipe")
+        filter_1.set_input(in_1)
+        filter_2.set_input(in_2)
+        filter_3.set_input(in_3)
+        filter_4.set_input(in_4)
 
-        # initialising right side of pipe split
-        right_end = self.add_component(
-            1, [in_4], 3, self.tick_length, 0.1, "pipe")
-        right_start = self.add_component(
-            1, [right_end, in_3], 3, self.tick_length, 0.1, "pipe")
-
-        # initialsing main intake pipe for the system
         main_in = self.add_component(
-            1, [left_start, right_start], 3, self.tick_length, 0.1, "pipe")
+            1, [in_1, in_2, in_3, in_4], 3, self.tick_length, 0.1, "pipe")
 
         # initialising source for the system
         self.source = self.add_component(
