@@ -171,7 +171,6 @@ class TestHomePage(StaticLiveServerTestCase):
         average_flow = self.driver.find_element(By.ID, "id_average_flow")
         average_tss = self.driver.find_element(By.ID, "id_average_tss")
         sim_length = self.driver.find_element(By.ID, "id_sim_length")
-        testing = self.driver.find_element(By.ID, "id_testing")
         submit = self.driver.find_element(By.ID, "submit_button")
 
         tank0.send_keys(1)
@@ -181,7 +180,6 @@ class TestHomePage(StaticLiveServerTestCase):
         average_flow.send_keys(0.2)
         average_tss.send_keys(252)
         sim_length.send_keys(20)
-        testing.send_keys("off")
         submit.click()
 
         self.assertEqual(self.driver.current_url, "http://127.0.0.1:8080/simulation/")
