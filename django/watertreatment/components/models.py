@@ -32,13 +32,13 @@ class SimDataTable(models.Model):
 # All the attributes to run the simulation
 class SimInput(models.Model):
     # Want to try to create 4 different fields and merge them all into 1 list for particulates in each tank
-    tank0 = models.FloatField('Amount of pre-existing particulate in tank 1', blank=True, default=0)
-    tank1 = models.FloatField('Amount of pre-existing particulate in tank 2', blank=True, default=0)
-    tank2 = models.FloatField('Amount of pre-existing particulate in tank 3', blank=True, default=0)
-    tank3 = models.FloatField('Amount of pre-existing particulate in tank 4', blank=True, default=0)
-    average_flow = models.FloatField('Average Flow')
-    average_tss = models.FloatField('Amount of particulate in waste water')
-    sim_length = models.IntegerField('Length of time for simulation in seconds')
+    tank0 = models.FloatField('Amount of pre-existing particulate in tank 1 (mg)', blank=True, default=0)
+    tank1 = models.FloatField('Amount of pre-existing particulate in tank 2 (mg)', blank=True, default=0)
+    tank2 = models.FloatField('Amount of pre-existing particulate in tank 3 (mg)', blank=True, default=0)
+    tank3 = models.FloatField('Amount of pre-existing particulate in tank 4 (mg)', blank=True, default=0)
+    average_flow = models.FloatField('Average Flow (m^3/s)')
+    average_tss = models.FloatField('Amount of particulate in waste water (mg/l)')
+    sim_length = models.IntegerField('Length of time for simulation (s)')
     # If checked data will be displayed as 'on'/'off' instead of true or false
     testing = models.BooleanField('Is this part of testing?')
     class Meta:
