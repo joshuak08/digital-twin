@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29e051f5-75be-4117-8dfd-1723c7ee045e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/AnimController.js" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/AnimController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/GraphController.js" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/GraphController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/ScadaController.js" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/ScadaController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/WaterTank.js" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/animScripts/WaterTank.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/static/newbase.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/components/templates/components/graph.html" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/components/templates/components/graph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django/watertreatment/dummyDBgen.py" beforeDir="false" afterPath="$PROJECT_DIR$/django/watertreatment/dummyDBgen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/tests.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/tests.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

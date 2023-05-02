@@ -47,8 +47,6 @@ jobs:
       - name: Install 3.9 Packages
         run: |
           echo Installing 3.9 Packages
-          python -m pip install django
-          python -m pip install selenium
       
       - name: Run 3.9 Tests
         run: |
@@ -59,17 +57,14 @@ jobs:
           python -m unittest SimulationTests.TestSandFilterBehaviour
           python -m unittest SystemTests
           python -m unittest HelperFunctionTests
-      
-      - name: Setup Python 3.9
-        uses: actions/setup-python@v4.3.0
-        with:
-          python-version: '3.9'
-          
-      - name: Install 3.9 Packages
+
+      - name: Install Django and Selenium
         run: |
-          echo Installing 3.9 Packages
+          python -m pip install django
+          python -m pip install selenium
+          sudo apt install google-chrome-stable
       
-      - name: Run 3.9 Tests
+      - name: Run Django Tests
         run: |
           cd django/watertreatment
           python manage.py test components.tests
