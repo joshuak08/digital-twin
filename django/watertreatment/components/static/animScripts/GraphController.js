@@ -74,7 +74,7 @@ new Chart(ctx1, {
         title: {
           display: true,
           text: 'water volume (m ³)',
-          font: {size: 15}
+          font: {size: 15},
         },
       },
       x: {
@@ -82,22 +82,22 @@ new Chart(ctx1, {
         title: {
           display: true,
           text: 'snapshot no.',
-          font: {size: 15}
-        }
-      }
+          font: {size: 15},
+        },
+      },
     },
     responsive: true,
     showTooltips: true,
-    plugins:{
+    plugins: {
       tooltips: {
         mode: 'index',
         intersect: false,
       },
       hover: {
         mode: 'nearest',
-        intersect: true
+        intersect: true,
       },
-    }
+    },
   },
 });
 
@@ -132,23 +132,23 @@ new Chart(ctx2, {
       },
     ],
   },
-  options:{
-    scales:{
-      y:{
+  options: {
+    scales: {
+      y: {
         beginAtZero: true,
-        title:{
+        title: {
           display: true,
-          text: 'particulate (mg)'
+          text: 'particulate (mg)',
         },
       },
-      x:{
+      x: {
         beginAtZero: true,
-        title:{
+        title: {
           display: true,
-          text: 'snapshot no.'
-        }
+          text: 'snapshot no.',
+        },
       },
-    }
-  }
+    },
+  },
 });
 

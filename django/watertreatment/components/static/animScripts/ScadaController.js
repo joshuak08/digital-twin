@@ -20,8 +20,8 @@ export class ScadaController {
     // filter for next snapshots and current snapshot | (id integer, snap_num integer, water_vol integer, particulate integer, backwash boolean)
     const next_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === next_snap_num).map((fields) => fields[1]['fields']['water_vol']);
     const current_snapshot_data = json_list.filter((fields) => fields[1]['pk'] === (tankNum) && fields[1]['fields']['snap_num'] === next_snap_num-1).map((fields) => fields[1]['fields']['water_vol']);
-    const scaled_next = next_snapshot_data
-    const scaled_curr = current_snapshot_data
+    const scaled_next = next_snapshot_data;
+    const scaled_curr = current_snapshot_data;
     return Math.abs(scaled_curr - scaled_next)* 163/56.0;
   }
 
