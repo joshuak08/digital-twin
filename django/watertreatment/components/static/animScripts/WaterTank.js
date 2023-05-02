@@ -22,7 +22,7 @@ export class WaterTank extends Fillable {
     this.differences = [];
 
     this.water_change = 0; // how much the water should change after each loop
-    this.particulate_range = 11340000/*500000*/;
+    this.particulate_range = 11340000/* 500000*/;
     this.progress = this.round_precision(starting_progress, 10**3);// this.scada_controller.get_particulate_level(this.valueIdx - 1, this.tank_ID)/parseFloat(this.particulate_range); // how much the particulate is progressing towards the next particulate level in db
     this.progress_rate = 0; // rate of change of particulate
     this.num_of_changes = 0; // number of times the water vol is updated
