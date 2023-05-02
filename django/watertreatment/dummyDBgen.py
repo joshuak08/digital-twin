@@ -44,10 +44,10 @@ dummyDB = DataBaser()
 dummyDB.drop_table()
 dummyDB.access_table()
 # ["tank0","tank0","tank1","tank1","tank2","tank2","tank3","tank3"], [0, 1, 0, 1, 0, 1, 0, 1], [152, 20, 20, 125, 0, 100, 40, 80], [5, 5, 5, 5, 5, 5, 5, 5]
-dummyDB.store_elems([0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3],  # component id
-                    [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3],  # snap_num
-                    [56, 0, 30, 10, 0, 50, 30, 20, 32, 5, 30, 56, 0, 10, 30, 0],  # water_vol
+dummyDB.store_elems([9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12],  # component id
+                    [0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4],  # snap_num
+                    [0, 56, 15, 42, 10, 0, 56, 15, 42, 10, 0, 56, 15, 42, 10, 0, 56, 15, 42, 10],  # water_vol
                     # [92800, 23921, 293083, 308351, 83458, 341822, 485693, 114396, 92800, 23921, 293083, 308351],  # particulate
-                    [0, 500000, 0, 250000, 0, 500000, 0, 250000, 0, 500000, 0, 250000, 0, 500000, 0, 250000],  # particulate
-                    [False, True, True, False, False, True, True, False, False, True, True, False, False, True, True, False])  # backwash
+                    [0, 500000, 0, 250000, 0, 0, 500000, 0, 250000, 0, 0, 500000, 0, 250000, 0, 0, 500000, 0, 250000, 0],  # particulate
+                    [False, True, True, False, False, False, True, True, False, False, False, True, True, False, False, False, True, True, False, False])  # backwash
 dummyDB.close_connection()

@@ -5,9 +5,62 @@ html {font-family: Arials, Helvetica, sans-serif;}
     box-sizing: border-box;
 }
 /*from old css containing scada*/
+/*=======================================*/
+/*centering graph canvases on top of each other and buttons*/
+.graph_buttons{
+}
+.water_button{
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #ADD8E6;
+}
 
+.water_button:hover{
+    background-color: #95BECC;
+}
+
+.particulate_button{
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #90EE90;
+}
+.particulate_button:hover{
+    background-color: #74c474;
+}
+
+.chart_main{
+    text-align: center;
+    position:relative;
+    /*width:1200px;*/
+    /*height:600px;*/
+}
+.chart_wrapper {
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    width:1200px;
+}
+
+#chart1 {
+    visibility: visible;
+    position:absolute;
+    width:1200px;
+    height:600px;
+    z-index:-1;
+}
+
+#chart2 {
+    visibility: hidden;
+    position: relative;
+    width:1200px;
+    height:600px;
+    z-index:-2;
+}
+/*=========================================*/
 /** {box-sizing: border-box;}*/
 /*===== handles scada css =====*/
+.main_chart {flex-basis:1200px;}
 .anim_scada{
     display: flex;
     justify-content: center;

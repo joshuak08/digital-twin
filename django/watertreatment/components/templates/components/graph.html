@@ -1,25 +1,36 @@
 {% extends "components/new-base.html" %}
 {% load static %}
 {% block content %}
+{{ all_SimData| json_script:"all_SimData" }}
 
 <div class="webpage-content">
-    <h2>
-        <span>Graph Information</span>
+    <h2 id="sim_vis_title">Simulation : water graph</h2>
+    <div class="graph_buttons">
+        <button type="button" class="water_button" value="chart1" onclick="graph_swap(this.value)">water graph</button>
+        <button type="button" class="particulate_button" value="chart2" onclick="graph_swap(this.value)">particulate graph</button>
         <a href="{% url 'components-simulation' %}">
             <button class="btn btn-primary fa-pull-right" id="change-to-simulation">Simulation Visualiser</button>
         </a>
-    </h2>
-    {{ all_SimData| json_script:"all_SimData" }}
-<html>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
-    <div class="anim_scada">
-        <div class="main_anim">
-            <canvas id="chart" width="1200" height="600"></canvas>
-
+    </div>
+    <div class="chart_main">
+        <div class="chart_wrapper">
+            <canvas id="chart1" width="1200" height="600"></canvas>
+            <canvas id="chart2" width="1200" height="600"></canvas>
         </div>
     </div>
-    <script type="module" src="{% static 'animScripts/GraphController.js' %}"></script>
 
-</html>
+    <script>
+        function graph_swap(chart_type1) {
+            document.getElementById("sim_vis_title").innerHTML = chart_type1 === "chart1" ? "Simulation: water graph" : "simulation: particulate graph"
+            let chart_type2 = chart_type1 === "chart1" ? "chart2" : "chart1"
+            let chart_A = document.getElementById(chart_type1);
+            let chart_B = document.getElementById(chart_type2);
+            chart_A.style.visibility = "visible";
+            chart_B.style.visibility = "hidden";
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <script type="module" src="{% static 'animScripts/GraphController.js' %}"></script>
 </div>
 {% endblock content %} 
