@@ -15,6 +15,7 @@ class TestUrls(TestCase):
         url = '/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/home.html')
         self.assertTemplateUsed(response, 'components/new-base.html')
 
     def testHome_url_available_by_name(self):
@@ -106,16 +107,34 @@ class TestUrls(TestCase):
         self.assertTemplateUsed(response, 'components/new-base.html')
         self.assertTemplateUsed(response, 'components/simulation.html')
 
-    # Will test when forms merged into dev
-    # def testForms(self):
-    #     url = reverse('components-test-form')
-    #     response = self.client.get(url)
-    #     self.assertEqual(response.status_code, 200)
 
-    """
-    Or write tests like this, both works
-    def testRevitModel(self):
-        url = reverse('components-revit-model')
-        response = resolve(url)
-        self.assertEqual(response.func, revitModel)
-    """
+    def testForms_at_correct_location(self):
+        url = '/input-form/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/input-form.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')
+
+
+    def testForms_url_available_by_name(self):
+        url = reverse('components-input-form')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/input-form.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')
+
+
+    def testGraph_at_correct_location(self):
+        url = '/graph/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/graph.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')
+
+
+    def testGraph_url_available_by_name(self):
+        url = reverse('components-graph')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'components/graph.html')
+        self.assertTemplateUsed(response, 'components/new-base.html')

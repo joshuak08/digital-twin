@@ -2,8 +2,12 @@
 {% load static %}
 {% block content %}
 <div class="webpage-content">
-    <h2>Simulation</h2>
-    {{ title }}
+    <h2>
+        <span>Simulation Visualiser</span>
+        <a href="{% url 'components-graph' %}">
+            <button class="btn btn-primary fa-pull-right" id="change-to-graph">Graph Display</button>
+        </a>
+    </h2>
     {{ all_SimData| json_script:"all_SimData" }}
 
     <div class="anim_scada">
