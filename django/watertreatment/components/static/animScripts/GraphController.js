@@ -81,7 +81,7 @@ new Chart(ctx1, {
         beginAtZero: true,
         title: {
           display: true,
-          text: 'snapshot no.',
+          text: 'Snapshot (5 seconds)',
           font: {size: 15},
         },
       },
@@ -145,7 +145,7 @@ new Chart(ctx2, {
         beginAtZero: true,
         title: {
           display: true,
-          text: 'snapshot no.',
+          text: 'Snapshot (5 seconds)',
         },
       },
     },
