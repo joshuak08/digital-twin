@@ -1,0 +1,29 @@
+{% extends "components/new-base.html" %}
+{% load static %}
+{% block content %}
+    <div class="webpage-content">
+        <h1>Input Parameter for simulations</h1>
+        <p>Please fill in all fields to run the simulation and be displayed</p>
+        {% if submitted %}
+            <p>Success!</p>
+        {% else %}
+{#        <p>Amount of pre-existing particulate in</p>#}
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <span>
+                    <p style="color: black">{{ field.label_tag }} {{ field }} </p>
+                </span>
+                {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+
+            <input type="submit" value="Submit" class="btn btn-secondary" id="submit_button">
+
+        </form>
+        {% endif %}
+    </div>
+
+{% endblock content %}

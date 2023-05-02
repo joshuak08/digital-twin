@@ -50,12 +50,23 @@ jobs:
       
       - name: Run 3.9 Tests
         run: |
-          cd simulation
+          cd simulation-system
           python -m unittest SimulationTests.TestSinkBehaviour
           python -m unittest SimulationTests.TestSplitterBehaviour
           python -m unittest SimulationTests.TestSourceBehaviour
           python -m unittest SimulationTests.TestSandFilterBehaviour
-      
+          python -m unittest SystemTests
+          python -m unittest HelperFunctionTests
 
+      - name: Install Django and Selenium
+        run: |
+          python -m pip install django
+          python -m pip install selenium
+          sudo apt install google-chrome-stable
+      
+      - name: Run Django Tests
+        run: |
+          cd django/watertreatment
+          python manage.py test components.tests
       # Runs a set of commands using the runners shell
 

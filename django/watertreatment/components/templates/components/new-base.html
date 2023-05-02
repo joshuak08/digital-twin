@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'newbase.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <title>Water Treatment Digital Twin</title>
+
+    {# Set title if passed as an argument in views #}
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Water Treatment Digital Twin</title>
+    {% endif %}
+
+</head>
+<body>
+        <nav>
+            <img class="logopic" src="{% static 'logo2.png' %}"/>
+            <div class="logo">
+                <p>Water Treatment Digital Twin</p>
+            </div>
+            <ul>
+                <li><a href="{% url 'components-home' %}">Home</a></li>
+                <li><a href="{% url 'components-types' %}">Elements</a></li>
+{#                <li><a href="#">Insights</a> </li>#}
+                <li><a href="{% url 'components-input-form' %}">Inputs</a> </li>
+                <li><a href="{% url 'components-revit-model' %}">Model</a></li>
+                <li><a href="{% url 'components-simulation' %}">Simulation</a></li>
+                <li><a href="{% url 'components-graph' %}">Graphs</a><li>
+            </ul>
+        </nav>
+        <div class="nav-after"></div>
+{% block content %}
+{% endblock %}
+    <div class="bottom-footer">
+        <div class="bottom-container">
+            <div class="bottom-row">
+                <div class="bottom-footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="https://www.nijhuisindustries.com/uk/about" target="_blank" rel="noopener noreferrer">About Us</a></li>
+                        <li><a href="https://www.nijhuisindustries.com/uk/service" target="_blank" rel="noopener noreferrer">Our Services</a></li>
+                        <li><a href="https://www.nijhuisindustries.com/uk/privacy" target="_blank" rel="noopener noreferrer">Privary Policy</a></li>
+                        <li><a href="https://www.nijhuisindustries.com/uk" target="_blank" rel="noopener noreferrer">Program</a></li>
+                    </ul>
+                </div>
+                <div class="bottom-footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="https://www.nijhuisindustries.com/uk/news" target="_blank" rel="noopener noreferrer">News</a></li>
+                        <li><a href="https://www.nijhuisindustries.com/uk/solutions" target="_blank" rel="noopener noreferrer">Solutions</a></li>
+                        <li><a href="https://www.nijhuisindustries.com/uk/contact" target="_blank" rel="noopener noreferrer">Contact</a></li>
+                        <li><a href="https://www.nijhuisindustries.com/uk/careers" target="_blank" rel="noopener noreferrer">Join Us</a></li>
+                    </ul>
+                </div>
+                <div class="bottom-footer-col">
+                    <h4>Social Links</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/nijhuisindustries" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/NijhuisInd" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/nijhuis-industries/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/user/nijhuisindustries" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+</body>
+</html>

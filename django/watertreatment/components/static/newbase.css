@@ -1,0 +1,367 @@
+html {font-family: Arials, Helvetica, sans-serif;}
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+/*from old css containing scada*/
+/*=======================================*/
+/*centering graph canvases on top of each other and buttons*/
+.graph_buttons{
+}
+.water_button{
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #ADD8E6;
+}
+
+.water_button:hover{
+    background-color: #95BECC;
+}
+
+.particulate_button{
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #90EE90;
+}
+.particulate_button:hover{
+    background-color: #74c474;
+}
+
+.chart_main{
+    text-align: center;
+    position:relative;
+    /*width:1200px;*/
+    /*height:600px;*/
+}
+.chart_wrapper {
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    width:1200px;
+}
+
+#chart1 {
+    visibility: visible;
+    position:absolute;
+    width:1200px;
+    height:600px;
+    z-index:-1;
+    border: solid #95BECC 10px;
+}
+
+#chart2 {
+    visibility: hidden;
+    position: relative;
+    width:1200px;
+    height:600px;
+    z-index:-2;
+    border: solid #74c474 10px;
+}
+
+/*=========================================*/
+/** {box-sizing: border-box;}*/
+/*===== handles scada css =====*/
+.main_chart {flex-basis:1200px;}
+.anim_scada{
+    display: flex;
+    justify-content: center;
+    z-index: 0;
+}
+
+.Scada, .main{
+    display:flex;
+    flex-direction: column;
+}
+
+.main_anim {flex-basis:800px;}
+
+.Scada {
+    flex-basis:400px;
+    background: #f0f0f0;
+    margin: 0 10px 10px 10px;
+}
+/*=======for perfectly overlapping canvas please don't mess with it=======*/
+canvas {border: solid #5B6DCD 10px;}
+
+#canvas_layer1 {
+    position: absolute;
+	background: #f0f0f0;
+}
+
+#canvas_layer2_anim {
+    position: relative;
+}
+/* ====================================================================== */
+
+.logopic{
+    float: left;
+    height: 100px;
+    object-fit: cover;
+    padding-right: 20px;
+}
+
+.nav-after {
+    padding-top: 100px;
+}
+
+.bottom-container{
+	max-width: 1170px;
+	margin:auto;
+}
+.bottom-row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.bottom-footer{
+	background-color: #24262b;
+    padding: 70px 0;
+	float: left;
+	width: 100%;
+}
+.bottom-footer-col{
+   width: 33.33%;
+   padding: 0 15px;
+}
+.bottom-footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.bottom-footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.bottom-footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.bottom-footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.bottom-footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.bottom-footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.bottom-footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+responsive
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+  }
+}
+
+nav {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    padding: 0px 0px;
+    position: fixed;
+    background-color: #041858;
+    z-index: 1;
+}
+
+nav .logo p{
+    font-size: 30px;
+    font-weight: bold;
+    float: left;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+}
+
+nav ul{
+    float: right;
+    padding-right: 10px;
+}
+
+nav li{
+    display: inline-block;
+    list-style: none;
+}
+
+nav li a {
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 0px 15px;
+    color: white;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    color: #ff8c69;
+    /*transition: all;*/
+}
+
+.hero-header{
+	background: url('water treatment plant 4.jpg') top right no-repeat;
+	background-size: cover;
+    /*opacity: 0.5;*/
+}
+
+.row {
+    display: flex;
+	width: 100%;
+}
+
+.column {
+    flex: 33.33%;
+    padding: 5px;
+}
+
+/*Carousell tutorial css source code*/
+
+/*.carousel-wrapper {*/
+/*  height: 400px;*/
+/*  position: relative;*/
+/*  width: 800px;*/
+/*  display: block;*/
+/*  margin: 50px auto ;*/
+/*  border: 2px solid black;*/
+/*}*/
+
+/*.carousel-item {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  padding: 25px 50px;*/
+/*  opacity: 1;*/
+/*  transition: all 0.5s ease-in-out;*/
+/*}*/
+/*.arrow{*/
+/*  border: solid black;*/
+/*  border-width: 0 3px 3px 0;*/
+/*  display: inline-block;*/
+/*  padding: 12px;*/
+/*}*/
+/*.arrow-prev {*/
+/*  left: 30px;*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  transform: translateY(-50%) rotate(135deg);*/
+
+/*}*/
+/*.arrow-next {*/
+/*  right: 30px;*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  transform: translateY(-50%) rotate(-45deg);*/
+/*}*/
+
+/*[id^= "item"] {*/
+/*  display: none;*/
+/*}*/
+/*.item-1 {*/
+/*  z-index: 2;*/
+/*  opacity: 1;*/
+/*  background: url('aerial.png');*/
+/*  background-size: cover;*/
+/*}*/
+/*.item-2 {*/
+/*  background: url('side1.png');*/
+/*  background-size: cover;*/
+/*}*/
+/*.item-3 {*/
+/*  background: url('side2.png');*/
+/*  background-size: cover;*/
+/*}*/
+
+/**:target ~ .item-1{*/
+/*  opacity: 0;*/
+/*}*/
+/*#item-1:target ~ .item-1 {*/
+/*  opacity: 1;*/
+
+/*}*/
+/*#item-2:target ~ .item-2, #item-3:target ~ .item-3 {*/
+/*  z-index: 3;*/
+/*  opacity: 1;*/
+/*}*/
+
+
+/*Bootstrap carousel tutorial*/
+.carousel-item {
+    height: 32rem;
+    background: #777;
+    color: white;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+}
+
+.carousel-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 50px;
+}
+
+.overlay-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.5;
+}
+
+.carousel-inner>.carousel-item>img {
+    display: block;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    line-height: 1;
+    margin:auto;
+    width: auto;
+}
+
+.webpage-content {
+    margin: 10px;
+}
