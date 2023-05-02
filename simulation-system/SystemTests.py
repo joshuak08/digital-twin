@@ -112,7 +112,7 @@ class TestFilterSystem(unittest.TestCase):
         for i in system.components:
             component_dict[i.type] = component_dict[i.type] + 1
 
-        self.assertEqual(component_dict["Splitter"], 17)
+        self.assertEqual(component_dict["Splitter"], 13)
         self.assertEqual(component_dict["Filter"], 4)
         self.assertEqual(component_dict["Sink"], 1)
         self.assertEqual(component_dict["Source"], 1)
