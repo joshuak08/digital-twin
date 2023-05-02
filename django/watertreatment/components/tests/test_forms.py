@@ -23,7 +23,7 @@ class TestForms(TestCase):
         form = SimInputForm(data={})
 
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 3)
+        self.assertEqual(len(form.errors), 7)
 
     def test_empty_form(self):
         form = SimInputForm(data={})
@@ -34,7 +34,6 @@ class TestForms(TestCase):
         self.assertIn("average_flow", form.fields)
         self.assertIn("average_tss", form.fields)
         self.assertIn("sim_length", form.fields)
-        self.assertIn("testing", form.fields)
 
     def testFormRedirect(self):
         response = self.client.post('/input-form/', self.form.data)
