@@ -1,4 +1,4 @@
-from django.test import TestCase, Client, utils
+from django.test import TestCase
 from django.urls import resolve, reverse
 from components.views import *
 from components.models import *

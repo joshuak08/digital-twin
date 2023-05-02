@@ -9,8 +9,6 @@ from django.http import HttpResponseRedirect
 import sys
 sys.path.append("../../simulation-system")
 import HelperFunctions
-# from django.views.generic import TemplateView
-# from chartjs.views.lines import BaseLineChartView
 
 """
 Works in a MVC Pattern 
