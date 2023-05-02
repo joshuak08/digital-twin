@@ -62,7 +62,7 @@ class SandFilter(GenericPipe.GenericPipe):
         self.capacity += flow_in
 
         # if it's caught a certain amount of particulate it goes into backwash
-        if self.particulate_mass > 500000:  # arbitrary boundary to start backwash - 500g of particulate collected
+        if self.particulate_mass > 11340000:  # arbitrary boundary to start backwash - 500g of particulate collected
             self.backwash = True
             self.output = self.backwash_pipe
             self.input.toggle_valve()
@@ -97,5 +97,5 @@ class SandFilter(GenericPipe.GenericPipe):
     # important information for a sand filter is the current volume of liquid in it, the amount of particulate currently capture, and whether or not it is backwashing
     def snapshot(self, snap_num):
         data = (self.id_num, snap_num, self.capacity,
-                self.particulate_mass, self.backwash)
+                round(self.particulate_mass), self.backwash)
         return data

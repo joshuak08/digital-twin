@@ -10,7 +10,6 @@ export class ScadaController {
   }
 
 
-
   // returns an array of form ["field : fieldValue"]
   format_scada_text(snapshot_data, component_specific_data) {
     const text = [];
