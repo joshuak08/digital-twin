@@ -47,6 +47,8 @@ jobs:
       - name: Install 3.9 Packages
         run: |
           echo Installing 3.9 Packages
+          python -m pip install django
+          python -m pip install selenium
       
       - name: Run 3.9 Tests
         run: |
