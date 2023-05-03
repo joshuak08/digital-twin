@@ -5,30 +5,30 @@ import {end_anim} from './AnimController.js';
 export class WaterTank extends Fillable {
   constructor(xCoord, yCoord, waterWidth, waterHeight, colour, ctx_layer2, tank_num, scada_controller, json_list_simdata, starting_progress, testing=false) {
     super(xCoord, yCoord, waterWidth, waterHeight, colour);
-    //tank attributes
+    // tank attributes
     this.tank_numIdx = tank_num;
     this.idx_offset = 9; // offset of tank id from tank index in tank array
     this.tank_ID = tank_num + this.idx_offset; // tank id in db
     this.tanks = [];
-    //value attributse
+    // value attributse
     this.json_list_simdata = (json_list_simdata); // snapshot json in array
     this.valueIdx = 1; // next value in array index
     this.valuesArr = json_list_simdata.filter((fields) => fields[1]['pk'] === (this.tank_ID)).map((fields) => (fields[1]['fields']['water_vol']*163/56)); // water vols for tank in db
     this.backwashArr = json_list_simdata.filter((fields) => fields[1]['pk'] === (this.tank_ID)).map((fields) => (fields[1]['fields']['backwash']));
     this.currentLevel = this.valuesArr[0];
-    //canvas attributes
+    // canvas attributes
     this.ctx_layer2 = ctx_layer2; // the animation layer
     this.colour = colour; // dark grey
     this.scada_controller = scada_controller;
     this.differences = [];
-    //drawing value attributes
+    // drawing value attributes
     this.water_change = 0; // how much the water should change after each loop
     this.particulate_range = 11340000/* 500000*/;
     this.progress = this.round_precision(starting_progress, 10**10);// this.scada_controller.get_particulate_level(this.valueIdx - 1, this.tank_ID)/parseFloat(this.particulate_range); // how much the particulate is progressing towards the next particulate level in db
     this.progress_rate = 0; // rate of change of particulate
     this.num_of_changes = 0; // number of times the water vol is updated
     this.num_of_prev_chngs = 0;
-    //rate of change and synchroniser attributes
+    // rate of change and synchroniser attributes
     this.counter = 0; // counter to keep updating water volumes in correct order
     this.increment = 0.05;
     this.testing = testing;
@@ -147,7 +147,7 @@ export class WaterTank extends Fillable {
   // this moves along the simulation animation also updates water rate
   calc_helper() {
     this.counter += 1;
-    //ensures current progress and water levels are correct due to floating point addition being weird e.g. 0.1 + 0.2 = 0.30000000000000004
+    // ensures current progress and water levels are correct due to floating point addition being weird e.g. 0.1 + 0.2 = 0.30000000000000004
     this.currentLevel = this.valuesArr[this.valueIdx];
     this.progress = this.get_particulate_level(this.valueIdx, this.tank_ID) / parseFloat(this.particulate_range);
 

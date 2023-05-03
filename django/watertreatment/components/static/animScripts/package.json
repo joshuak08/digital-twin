@@ -4,6 +4,7 @@
   "description": "",
   "main": "AnimController.js",
   "dependencies": {
+    "@babel/eslint-parser": "^7.21.8",
     "acorn": "^8.8.2",
     "acorn-jsx": "^5.3.2",
     "ajv": "^6.12.6",
