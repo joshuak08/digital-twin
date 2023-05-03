@@ -37,6 +37,7 @@ jobs:
           cd django/watertreatment/components/static/animScripts
           npm ci
           npm install --save-dev @babel/preset-env
+          npm install @babel/eslint-parser
           npm install --save-dev jest
 
       - name: Install Python dependencies
