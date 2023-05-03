@@ -35,7 +35,7 @@ check_empty_db_else_begin()
 function check_empty_db_else_begin(){
     try {
       const json_sim_data = Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
-      const grab_value = json_sim_data.filter((fields) => fields[1]['pk'] === (9) && fields[1]['fields']['snap_num'] === 1)[0][1]['fields']['particulate'];
+      json_sim_data.filter((fields) => fields[1]['pk'] === (9) && fields[1]['fields']['snap_num'] === 1)[0][1]['fields']['particulate'];
       drawBG();
       animate();
     } catch(err){

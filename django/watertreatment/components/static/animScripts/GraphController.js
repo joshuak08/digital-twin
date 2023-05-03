@@ -38,7 +38,7 @@ for (let i = 9; i < 13; i++) {
 // Create 4 lines charts for each tank
 try {
   const json_sim_data = Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
-  const grab_value = json_sim_data.filter((fields) => fields[1]['pk'] === (9) && fields[1]['fields']['snap_num'] === 1)[0][1]['fields']['particulate'];
+  json_sim_data.filter((fields) => fields[1]['pk'] === (9) && fields[1]['fields']['snap_num'] === 1)[0][1]['fields']['particulate'];
   new Chart(ctx1, {
   type: 'line',
   data: {
