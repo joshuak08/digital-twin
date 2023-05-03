@@ -29,20 +29,20 @@ const tanks = [];
 let end = false;
 
 
-check_empty_db_else_begin()
+check_empty_db_else_begin();
 
 // ==========================================//
-function check_empty_db_else_begin(){
-    try {
-      const json_sim_data = Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
-      json_sim_data.filter((fields) => fields[1]['pk'] === (9) && fields[1]['fields']['snap_num'] === 1)[0][1]['fields']['particulate'];
-      drawBG();
-      animate();
-    } catch(err){
-      ctx_layer1.font = '30px Arial';
-      ctx_layer1.fillStyle = 'red';
-      ctx_layer1.fillText("Please create a simulation in the inputs tab.", 115, 300);
-    }
+function check_empty_db_else_begin() {
+  try {
+    const json_sim_data = Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
+    json_sim_data.filter((fields) => fields[1]['pk'] === (9) && fields[1]['fields']['snap_num'] === 1)[0][1]['fields']['particulate'];
+    drawBG();
+    animate();
+  } catch (err) {
+    ctx_layer1.font = '30px Arial';
+    ctx_layer1.fillStyle = 'red';
+    ctx_layer1.fillText('Please create a simulation in the inputs tab.', 115, 300);
+  }
 }
 
 function drawTankShape(ctx, bottomTankY, triangleTipOffset, xCoord, yCoord, width, height, fillStyle1, fillStyle2) {
