@@ -11,7 +11,7 @@ function combine_id_fields(json) {
 // Generate string of snapshot labels inline
 const labels = Array.from(Array(((data_array).length/4)), (_, index) => 'Snapshot ' + (index + 1));
 // Filter JSON for unique key and get all related values
-// { pk : { snapshot_num : water_vol  }, ... }
+
 const pks = {
   'water_vol': {},
   'particulate': {},
@@ -36,119 +36,127 @@ for (let i = 9; i < 13; i++) {
 }
 
 // Create 4 lines charts for each tank
-new Chart(ctx1, {
-  type: 'line',
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Tank 1 Water Levels',
-        borderColor: 'rgb(75, 192, 192)', // green
-        data: tank_values[0],
-        tension: 0.1, // curving of line
-      },
-      {
-        label: 'Tank 2 Water Levels',
-        borderColor: 'rgb(255, 99, 132)', // red
-        data: tank_values[1],
-        tension: 0.1,
-      },
-      {
-        label: 'Tank 3 Water Levels',
-        borderColor: 'rgb(255, 205, 86)', // yellow
-        data: tank_values[2],
-        tension: 0.1,
-      },
-      {
-        label: 'Tank 4 Water Levels',
-        borderColor: 'rgb(153, 102, 255)', // purple
-        data: tank_values[3],
-        tension: 0.1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: 'water volume (m ³)',
-          font: {size: 15},
+try {
+  const json_sim_data = Object.entries(JSON.parse(JSON.parse(document.getElementById('all_SimData').textContent)));
+  json_sim_data.filter((fields) => fields[1]['pk'] === (9) && fields[1]['fields']['snap_num'] === 1)[0][1]['fields']['particulate'];
+  new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Tank 1 Water Levels',
+          borderColor: 'rgb(75, 192, 192)', // green
+          data: tank_values[0],
+          tension: 0.1, // curving of line
+        },
+        {
+          label: 'Tank 2 Water Levels',
+          borderColor: 'rgb(255, 99, 132)', // red
+          data: tank_values[1],
+          tension: 0.1,
+        },
+        {
+          label: 'Tank 3 Water Levels',
+          borderColor: 'rgb(255, 205, 86)', // yellow
+          data: tank_values[2],
+          tension: 0.1,
+        },
+        {
+          label: 'Tank 4 Water Levels',
+          borderColor: 'rgb(153, 102, 255)', // purple
+          data: tank_values[3],
+          tension: 0.1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'water volume (m ³)',
+            font: {size: 15},
+          },
+        },
+        x: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Snapshot (5 seconds)',
+            font: {size: 15},
+          },
         },
       },
-      x: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: 'Snapshot (5 seconds)',
-          font: {size: 15},
+      responsive: true,
+      showTooltips: true,
+      plugins: {
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true,
         },
       },
     },
-    responsive: true,
-    showTooltips: true,
-    plugins: {
-      tooltips: {
-        mode: 'index',
-        intersect: false,
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true,
+  });
+  new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Tank 1 Particulate Levels',
+          borderColor: 'rgb(75, 192, 192)', // green
+          data: particulate_values[0],
+          tension: 0.1, // curving of line
+        },
+        {
+          label: 'Tank 2 Particulate Levels',
+          borderColor: 'rgb(255, 99, 132)', // red
+          data: particulate_values[1],
+          tension: 0.1,
+        },
+        {
+          label: 'Tank 3 Particulate Levels',
+          borderColor: 'rgb(255, 205, 86)', // yellow
+          data: particulate_values[2],
+          tension: 0.1,
+        },
+        {
+          label: 'Tank 4 Particulate Levels',
+          borderColor: 'rgb(153, 102, 255)', // purple
+          data: particulate_values[3],
+          tension: 0.1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'particulate (mg)',
+          },
+        },
+        x: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Snapshot (5 seconds)',
+          },
+        },
       },
     },
-  },
-});
+  });
+} catch (err) {
+  ctx1.font = '30px Arial';
+  ctx1.fillStyle = 'red';
+  ctx1.fillText('Please create a simulation in the inputs tab.', 300, 300);
+}
 
-new Chart(ctx2, {
-  type: 'line',
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Tank 1 Particulate Levels',
-        borderColor: 'rgb(75, 192, 192)', // green
-        data: particulate_values[0],
-        tension: 0.1, // curving of line
-      },
-      {
-        label: 'Tank 2 Particulate Levels',
-        borderColor: 'rgb(255, 99, 132)', // red
-        data: particulate_values[1],
-        tension: 0.1,
-      },
-      {
-        label: 'Tank 3 Particulate Levels',
-        borderColor: 'rgb(255, 205, 86)', // yellow
-        data: particulate_values[2],
-        tension: 0.1,
-      },
-      {
-        label: 'Tank 4 Particulate Levels',
-        borderColor: 'rgb(153, 102, 255)', // purple
-        data: particulate_values[3],
-        tension: 0.1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: 'particulate (mg)',
-        },
-      },
-      x: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: 'Snapshot (5 seconds)',
-        },
-      },
-    },
-  },
-});
 

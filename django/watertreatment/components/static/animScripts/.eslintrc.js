@@ -16,5 +16,8 @@ module.exports = {
     'require-jsdoc': 'off',
     'new-cap': 'off',
   },
-
+  'parser': '@babel/eslint-parser',
+  'parserOptions': {
+    'requireConfigFile': false,
+  },
 };

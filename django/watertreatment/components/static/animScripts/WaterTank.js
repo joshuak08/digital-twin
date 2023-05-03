@@ -3,37 +3,37 @@ import {waterBG} from './AnimController.js';
 import {end_anim} from './AnimController.js';
 
 export class WaterTank extends Fillable {
-  constructor(xCoord, yCoord, waterWidth, waterHeight, colour, ctx_layer2, tank_num, scada_controller, json_list_simdata, starting_progress, testing=false, probe = undefined) {
+  constructor(xCoord, yCoord, waterWidth, waterHeight, colour, ctx_layer2, tank_num, scada_controller, json_list_simdata, starting_progress, testing=false) {
     super(xCoord, yCoord, waterWidth, waterHeight, colour);
+    // tank attributes
     this.tank_numIdx = tank_num;
     this.idx_offset = 9; // offset of tank id from tank index in tank array
     this.tank_ID = tank_num + this.idx_offset; // tank id in db
     this.tanks = [];
-
+    // value attributse
     this.json_list_simdata = (json_list_simdata); // snapshot json in array
     this.valueIdx = 1; // next value in array index
     this.valuesArr = json_list_simdata.filter((fields) => fields[1]['pk'] === (this.tank_ID)).map((fields) => (fields[1]['fields']['water_vol']*163/56)); // water vols for tank in db
     this.backwashArr = json_list_simdata.filter((fields) => fields[1]['pk'] === (this.tank_ID)).map((fields) => (fields[1]['fields']['backwash']));
     this.currentLevel = this.valuesArr[0];
-
+    // canvas attributes
     this.ctx_layer2 = ctx_layer2; // the animation layer
     this.colour = colour; // dark grey
     this.scada_controller = scada_controller;
     this.differences = [];
-
+    // drawing value attributes
     this.water_change = 0; // how much the water should change after each loop
-
-    this.particulate_range = 11340000/* 500000*/;
-    this.progress = this.round_precision(starting_progress, 10**10);// this.scada_controller.get_particulate_level(this.valueIdx - 1, this.tank_ID)/parseFloat(this.particulate_range); // how much the particulate is progressing towards the next particulate level in db
-
+    this.particulate_range = 11340000;
+    this.progress = this.round_precision(starting_progress, 10**10);
     this.progress_rate = 0; // rate of change of particulate
     this.num_of_changes = 0; // number of times the water vol is updated
     this.num_of_prev_chngs = 0;
-
+    // rate of change and synchroniser attributes
     this.counter = 0; // counter to keep updating water volumes in correct order
     this.increment = 0.1;
     this.testing = testing;
     this.end = false;
+    this.testoutput = [];
   }
   // does setup for tanks
   setup_tank(tank_arr) {
@@ -90,10 +90,7 @@ export class WaterTank extends Fillable {
   }
 
   update_water_colour() {
-    if (!(this.progress + this.progress_rate < 0 || this.progress + this.progress_rate > 1)) {
-      this.progress += this.progress_rate;
-      this.progress = this.round_precision(this.progress);
-    }
+    this.progress += this.progress_rate;
   }
 
   get_current_colour() {
@@ -101,9 +98,11 @@ export class WaterTank extends Fillable {
   }
   // ===================================
   update_progress_rate() {
-    const old_particulate = this.get_particulate_level(this.valueIdx - 1, this.tank_ID);
-    const new_particulate = this.get_particulate_level(this.valueIdx, this.tank_ID);
-    this.progress_rate = this.round_precision((new_particulate - old_particulate)/parseFloat(this.particulate_range) * this.increment);
+    if (!this.end) {
+      const old_particulate = this.get_particulate_level(this.valueIdx - 1, this.tank_ID);
+      const new_particulate = this.get_particulate_level(this.valueIdx, this.tank_ID);
+      this.progress_rate = this.round_precision((new_particulate - old_particulate) / parseFloat(this.particulate_range) * this.increment);
+    }
   }
 
   // checks the elegibility of progressing on to next water vol depending on if identical values are present
@@ -121,15 +120,18 @@ export class WaterTank extends Fillable {
     let elegibility = true;
     for (let tank_num = 0; tank_num < 4; tank_num++) { // checks if the next value of all tanks are identical to previous value
       const tank = this.tanks[tank_num];
-      // console.log(tank.valuesArr)
       elegibility = elegibility && (tank.valuesArr[this.valueIdx-1] === tank.valuesArr[tank.valueIdx]);
     }
+
     if (elegibility === true) {
       const target_progress = this.get_particulate_level(this.valueIdx, this.tank_ID) / parseFloat(this.particulate_range);
+      if (this.testing === true) {
+        this.update_water_colour();
+      }
       // this accounts for duplicates values at the start as there is no previous number of changes
       this.num_of_changes = this.valueIdx-1 ? this.num_of_prev_chngs : 163;
       // update water colour while duplicate value particulate aren't the same
-      if (!(Math.abs(this.progress - target_progress) > 0.000000000000001)) {
+      if (!(Math.abs(this.progress - target_progress) > 0.0000001)) {
         this.progress = target_progress;
         this.calc_helper();
       }
@@ -145,8 +147,15 @@ export class WaterTank extends Fillable {
   // this moves along the simulation animation also updates water rate
   calc_helper() {
     this.counter += 1;
+    // ensures current progress and water levels are correct due to floating point addition being weird e.g. 0.1 + 0.2 = 0.30000000000000004
     this.currentLevel = this.valuesArr[this.valueIdx];
-    this.valueIdx += ((this.valueIdx < this.valuesArr.length-1)? 1 :this.testing ? this.end = true : end_anim());
+    this.progress = this.get_particulate_level(this.valueIdx, this.tank_ID) / parseFloat(this.particulate_range);
+
+    if (this.testing) { // if testing store current values at boundary
+      this.testoutput.push([this.round_precision(this.currentLevel* 56 / 163.0, 10 ** 2), this.progress*this.particulate_range, this.tank_ID, this.valueIdx]);
+    };
+    this.valueIdx += ((this.valueIdx < this.valuesArr.length-1)? 1 : this.testing ? this.end=1 : end_anim());
+
     this.update_water_rate();
     this.num_of_prev_chngs = this.num_of_changes;
     this.num_of_changes = this.water_change ? (Math.abs(this.currentLevel - this.valuesArr[this.valueIdx])) / parseFloat(this.water_change) : 0;
@@ -158,11 +167,7 @@ export class WaterTank extends Fillable {
       if (!this.elegibility_all_duplicate()) {
         // if the next snapshot water level value is reached move onto the next snapshot
         if (this.elegibility_duplicate_val() && this.check_update_elegibility() ) {
-          if (!this.testing) {
-            const target_progress = this.get_particulate_level(this.valueIdx, this.tank_ID) / parseFloat(this.particulate_range);
-            this.progress = target_progress;
-            this.calc_helper();
-          };
+          this.calc_helper();
           // if the current water level is greater than the next water level decrease by the calculated rate of change
         } else if (this.currentLevel > this.valuesArr[this.valueIdx]) {
           this.currentLevel -= this.water_change;
@@ -175,16 +180,16 @@ export class WaterTank extends Fillable {
   }
 
   draw() {
-    // draw the shizzle
+    // draws frames of the tanks with changes applied
     waterBG(this.tank_numIdx, this.get_current_colour());
     // if the current snapshot isn't the last update then animate by drawing the water height (this is done via a black square to give illusion of water level dipping/increasing)
     this.ctx_layer2.fillStyle = this.colour;
     this.ctx_layer2.fillRect(this.x, this.y, this.w, this.h - this.currentLevel); // (this.h is the maximum water height)
     // calls the scada screen controller to sync the current water level of tank with the current water level data displayed on the scada screen
-    this.scada_controller.draw(this.tank_ID, (this.valueIdx), ['component: ' + 'tank ' + this.tank_ID, 'live water vol: ' + (this.currentLevel*56/163.0).toFixed(2) + ' m³', 'live particulate: ' + (this.particulate_range * this.progress).toFixed() + ' mg', 'snap: '+(this.valueIdx-1)+'->'+this.valueIdx, '――――――――――――――']);
+    this.scada_controller.draw(this.tank_ID, (this.valueIdx), ['Component: ' + 'Tank ' + this.tank_ID, 'Live Water Volume: ' + (this.currentLevel*56/163.0).toFixed(2) + ' m³', 'Live Particulate: ' + (this.particulate_range * this.progress).toFixed() + ' mg', 'Snapshot no: '+(this.valueIdx-1)+'->'+this.valueIdx, '――――――――――――――']);
 
     this.ctx_layer2.font = '13px Impact';
-    this.ctx_layer2.clearRect(this.x+this.w+13, this.h-this.currentLevel+this.y-10, 50, 20);
+    this.ctx_layer2.clearRect(this.x+this.w+13, this.h-this.currentLevel+this.y-20, 50, 40);
     this.ctx_layer2.fillText((this.currentLevel*56/163.0).toFixed(2)+'m³', this.x+this.w+15, this.h-this.currentLevel+this.y+5);
 
     if (this.backwashArr[this.valueIdx - 1] === true) {
