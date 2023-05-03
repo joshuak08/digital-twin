@@ -17,6 +17,9 @@ View - templates (.html)
 Controller - views.py 
 """
 
+global simulation_data
+simulation_data = {}
+
 
 def home(request):
     context = {}
@@ -56,9 +59,7 @@ def revitModel(request):
 
 
 def simulation(request):
-    all_SimData = serializers.serialize("json",
-                                        SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
-    return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': all_SimData})
+    return render(request, 'components/simulation.html', {'title': "Simulation", 'all_SimData': simulation_data})
 
 
 def carousel(request):
@@ -70,7 +71,8 @@ def form(request):
         data = form.__dict__['data'].dict()
         if form.is_valid():
             data, initial_particulate = formDataManipulation(data)
-            HelperFunctions.initial_particulate_simulation(float(data['average_flow']), float(data['average_tss']), int(data['sim_length']), initial_particulate, data['testing'])
+            global simulation_data
+            simulation_data = HelperFunctions.initial_particulate_simulation(float(data['average_flow']), float(data['average_tss']), int(data['sim_length']), initial_particulate, data['testing'])
             # redirected to simulation page to run immediately with new table name and id
             return HttpResponseRedirect('/simulation/')
         else:
@@ -92,5 +94,4 @@ def formDataManipulation(data):
     return data, initial_particulate
 
 def graph(request):
-    all_SimData = serializers.serialize("json", SimDataTable.objects.all())  # converts QuerySet into data types understandable by javascript
-    return render(request, 'components/graph.html', {'title': "Graph", 'all_SimData': all_SimData})
+    return render(request, 'components/graph.html', {'title': "Graph", 'all_SimData': simulation_data})

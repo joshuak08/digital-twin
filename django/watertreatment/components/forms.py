@@ -22,5 +22,5 @@ class SimInputForm(forms.Form):
     average_flow = forms.FloatField(label='Average Flow (m^3/s)',
                                     validators=[MinValueValidator(0, message="Please enter a valid value larger than 0."),
                                                 MaxValueValidator(0.5, message="Please enter a value smaller than 0.5")])
-    average_tss = forms.FloatField(label='Amount of particulate in waste water (mg/l), [Average is 252]')
-    sim_length = forms.IntegerField(label='Length of time for simulation (s)')
+    average_tss = forms.FloatField(label='Amount of particulate in waste water (mg/l), [Average is 252]', validators=[MinValueValidator(0, message="Please enter a valid value larger than 0.")])
+    sim_length = forms.IntegerField(label='Length of time for simulation (s)', validators=[MinValueValidator(0, message="Please enter a valid value larger than 0.")])
