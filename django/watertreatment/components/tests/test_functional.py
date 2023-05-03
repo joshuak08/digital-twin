@@ -68,25 +68,25 @@ class TestHomePage(StaticLiveServerTestCase):
         self.clickProgram(parentWindow)
 
     def clickAboutUs(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[1]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[1]/ul/li[1]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/about")
         self.backToHome(parentWindow)
 
     def clickOurServices(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[2]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[1]/ul/li[2]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/service")
         self.backToHome(parentWindow)
 
     def clickPrivacyPolicy(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[3]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[1]/ul/li[3]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/privacy")
         self.backToHome(parentWindow)
         
     def clickProgram(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[1]/ul/li[4]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[1]/ul/li[4]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk")
         self.backToHome(parentWindow)
@@ -100,25 +100,25 @@ class TestHomePage(StaticLiveServerTestCase):
         self.clickJoinUs(parentWindow)
 
     def clickNews(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[1]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[2]/ul/li[1]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/news")
         self.backToHome(parentWindow)
 
     def clickSolutions(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[2]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[2]/ul/li[2]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/solutions")
         self.backToHome(parentWindow)
 
     def clickContact(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[3]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[2]/ul/li[3]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/contact")
         self.backToHome(parentWindow)
 
     def clickJoinUs(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[2]/ul/li[4]/a")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[2]/ul/li[4]/a")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.nijhuisindustries.com/uk/careers")
         self.backToHome(parentWindow)
@@ -145,19 +145,19 @@ class TestHomePage(StaticLiveServerTestCase):
         self.clickGithub(parentWindow)
 
     def clickFacebook(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[3]/div/a[1]")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[3]/div/a[1]")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://www.facebook.com/nijhuisindustries")
         self.backToHome(parentWindow)
 
     def clickTwitter(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[3]/div/a[2]")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[3]/div/a[2]")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://twitter.com/NijhuisInd")
         self.backToHome(parentWindow)
 
     def clickGithub(self, parentWindow):
-        element = self.driver.find_element(By.XPATH, "/html/body/div[4]/div/div/div[3]/div/a[5]")
+        element = self.driver.find_element(By.XPATH, "/html/body/div[5]/div/div/div[3]/div/a[5]")
         self.newPage(parentWindow, element)
         self.assertEqual(self.driver.current_url, "https://github.com/spe-uob/2022-WaterTreatmentDigitalTwin")
         self.backToHome(parentWindow)
