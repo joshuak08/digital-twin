@@ -23,7 +23,7 @@ This will consist of:
 ## 1.2.1 Continuous Deployment (C/D)
 C/D has been configured using Google Cloud Build triggers. This listens on the main branch. During every commit, a Docker image is built, 
 pushes to the Google Cloud repository. The application is then built using the latest Docker image. Click the link below to view the web application. 
-  - https://beta-release-vb27oaoulq-ew.a.run.app
+  - https://water-treatment-twin-vb27oaoulq-ew.a.run.app
 
 ## 1.3 Planning
 

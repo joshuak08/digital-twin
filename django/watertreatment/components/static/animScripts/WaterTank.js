@@ -23,14 +23,14 @@ export class WaterTank extends Fillable {
     this.differences = [];
     // drawing value attributes
     this.water_change = 0; // how much the water should change after each loop
-    this.particulate_range = 11340000/* 500000*/;
-    this.progress = this.round_precision(starting_progress, 10**10);// this.scada_controller.get_particulate_level(this.valueIdx - 1, this.tank_ID)/parseFloat(this.particulate_range); // how much the particulate is progressing towards the next particulate level in db
+    this.particulate_range = 11340000;
+    this.progress = this.round_precision(starting_progress, 10**10);
     this.progress_rate = 0; // rate of change of particulate
     this.num_of_changes = 0; // number of times the water vol is updated
     this.num_of_prev_chngs = 0;
     // rate of change and synchroniser attributes
     this.counter = 0; // counter to keep updating water volumes in correct order
-    this.increment = 0.05;
+    this.increment = 0.1;
     this.testing = testing;
     this.end = false;
     this.testoutput = [];
@@ -186,7 +186,7 @@ export class WaterTank extends Fillable {
     this.ctx_layer2.fillStyle = this.colour;
     this.ctx_layer2.fillRect(this.x, this.y, this.w, this.h - this.currentLevel); // (this.h is the maximum water height)
     // calls the scada screen controller to sync the current water level of tank with the current water level data displayed on the scada screen
-    this.scada_controller.draw(this.tank_ID, (this.valueIdx), ['component: ' + 'tank ' + this.tank_ID, 'live water vol: ' + (this.currentLevel*56/163.0).toFixed(2) + ' m³', 'live particulate: ' + (this.particulate_range * this.progress).toFixed() + ' mg', 'snap: '+(this.valueIdx-1)+'->'+this.valueIdx, '――――――――――――――']);
+    this.scada_controller.draw(this.tank_ID, (this.valueIdx), ['Component: ' + 'Tank ' + this.tank_ID, 'Live Water Volume: ' + (this.currentLevel*56/163.0).toFixed(2) + ' m³', 'Live Particulate: ' + (this.particulate_range * this.progress).toFixed() + ' mg', 'Snapshot no: '+(this.valueIdx-1)+'->'+this.valueIdx, '――――――――――――――']);
 
     this.ctx_layer2.font = '13px Impact';
     this.ctx_layer2.clearRect(this.x+this.w+13, this.h-this.currentLevel+this.y-20, 50, 40);
