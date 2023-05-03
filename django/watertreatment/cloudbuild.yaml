@@ -22,6 +22,7 @@ steps:
         "--platform",
         "managed",
         "--allow-unauthenticated",
+        "--port=8000"
       ]
 
 # Need to find another way for Google App Engine for it to interact with creating new database
