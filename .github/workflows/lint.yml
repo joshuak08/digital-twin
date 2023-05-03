@@ -36,8 +36,8 @@ jobs:
         run: |
           cd django/watertreatment/components/static/animScripts
           npm ci
-         npm install --save-dev @babel/preset-env
-         npm install --save-dev jest
+          npm install --save-dev @babel/preset-env
+          npm install --save-dev jest
 
       - name: Install Python dependencies
         run: |
