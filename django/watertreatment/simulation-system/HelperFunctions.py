@@ -13,11 +13,8 @@ def basic_simulation(average_flow, average_tss, sim_length, testing):
         1, average_flow, average_tss, snapshotter, rounds, 5, True)
     system.simulate()
 
-    # write results to a database
-    table_name = snapshotter.to_database()
-
-    # return the name of the table to be used by the server
-    return table_name
+    # return a json with simulation data
+    return snapshotter.to_json()
 
 
 def initial_particulate_simulation(average_flow, average_tss, sim_length, initial_particulates, testing):
@@ -40,8 +37,5 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
     # run the simulation
     system.simulate()
 
-    # write results to a database
-    table_name = snapshotter.to_database()
-
-    # return the name of the table to be used by the server
-    return table_name
+    # return a json with simulation data
+    return snapshotter.to_json()
