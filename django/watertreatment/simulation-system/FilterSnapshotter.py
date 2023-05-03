@@ -68,17 +68,17 @@ class FilterSnapshotter(Snapshotter.Snapshotter):
         return table_name
 
     def to_json(self):
-        filtered_components = dict(filter(filter_for_filters, self.system_data.items()))
-        
+        filtered_components = dict(
+            filter(filter_for_filters, self.system_data.items()))
+
         data = []
 
         for i in filtered_components:
             data = data + filtered_components[i][1]
-        
+
         json_list = []
         for i in data:
-            json_list.append({"model":"components.simtable", "pk":i[0], "fields":{"snap_num":i[1], "water_vol":i[2], "particulate":i[3], "backwash":i[4]}})
-        
+            json_list.append({"model": "components.simtable", "pk": i[0], "fields": {
+                             "snap_num": i[1], "water_vol": i[2], "particulate": i[3], "backwash": i[4]}})
 
         return json.dumps(json_list)
-
