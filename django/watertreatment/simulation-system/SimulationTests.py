@@ -1,7 +1,6 @@
 import unittest
 import math
 
-import GenericPipe
 import SplitterPipe
 import SandFilter
 import Sink

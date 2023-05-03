@@ -56,6 +56,7 @@ jobs:
           eslint_extensions: js
 
           # autopep8
-          autopep8_dir: django/watertreatment/components/static/simulation-system
+
+          autopep8_dir: django/watertreatment/simulation-system
           autopep8: true
           autopep8_extensions: py

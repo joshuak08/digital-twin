@@ -50,7 +50,7 @@ jobs:
       
       - name: Run 3.9 Tests
         run: |
-          cd simulation-system
+          cd django/watertreatment/simulation-system
           python -m unittest SimulationTests.TestSinkBehaviour
           python -m unittest SimulationTests.TestSplitterBehaviour
           python -m unittest SimulationTests.TestSourceBehaviour
