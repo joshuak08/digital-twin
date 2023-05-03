@@ -1,6 +1,7 @@
 import FilterSnapshotter
 import FilterSystem
 
+
 def basic_simulation(average_flow, average_tss, sim_length, testing):
 
     # sim_length is given in seconds, each round is a second, so conversion is direct
@@ -11,7 +12,7 @@ def basic_simulation(average_flow, average_tss, sim_length, testing):
     system = FilterSystem.FilterSystem(
         1, average_flow, average_tss, snapshotter, rounds, 5, True)
     system.simulate()
-    
+
     # return a json with simulation data
     return snapshotter.to_json()
 
@@ -34,7 +35,7 @@ def initial_particulate_simulation(average_flow, average_tss, sim_length, initia
             filter += 1
 
     # run the simulation
-    system.simulate()    
+    system.simulate()
 
     # return a json with simulation data
     return snapshotter.to_json()
